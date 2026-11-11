@@ -3,12 +3,12 @@
   "ordering_strategy": "borda",
   "punctuation_model": "/Users/vaibhavparmar/Documents/nlp-zero-to-hero/models/punctuation",
   "ordering_model": "/Users/vaibhavparmar/Documents/nlp-zero-to-hero/models/ordering",
-  "translation_model": null,
+  "translation_model": "models/translation/indictrans2-indic-en-200M",
   "memory_limit_gb": 1.5,
   "timings_seconds": {
-    "punctuation": 1.05,
-    "ordering": 10.72,
-    "translation": null
+    "punctuation": 2.31,
+    "ordering": 130.53,
+    "translation": 102.17
   },
   "files": {
     "sample-1": {
@@ -16,6 +16,42 @@
       "null_tokens_removed": 5,
       "sentences": 52,
       "groups": 11
+    },
+    "sample-2": {
+      "words": 768,
+      "null_tokens_removed": 5,
+      "sentences": 55,
+      "groups": 11
+    },
+    "sample-3": {
+      "words": 742,
+      "null_tokens_removed": 6,
+      "sentences": 49,
+      "groups": 10
+    },
+    "sample-4": {
+      "words": 1118,
+      "null_tokens_removed": 4,
+      "sentences": 53,
+      "groups": 11
+    },
+    "sample-5": {
+      "words": 1026,
+      "null_tokens_removed": 9,
+      "sentences": 55,
+      "groups": 11
+    },
+    "sample-6": {
+      "words": 507,
+      "null_tokens_removed": 11,
+      "sentences": 80,
+      "groups": 16
+    },
+    "sample-7": {
+      "words": 846,
+      "null_tokens_removed": 27,
+      "sentences": 99,
+      "groups": 20
     }
   }
 }
