@@ -1,5 +1,7 @@
 # Hindi Text Restoration and Translation
 
+**Repository:** https://github.com/Vaibhavvv2524/nlp-zero-to-hero
+
 End-to-end solution for the Hindi NLP assignment:
 
 1. **Restore punctuation and sentence boundaries** in unpunctuated, shuffled
@@ -44,7 +46,8 @@ nlp-zero-to-hero/
 |   |-- pipeline.py              # end-to-end assignment pipeline
 |   `-- evaluate.py              # metrics + reports
 |-- notebooks/
-|   `-- colab_end_to_end.ipynb   # full run on a Colab GPU
+|   |-- colab_end_to_end.ipynb   # full run on a Colab GPU
+|   `-- pipeline_demo.ipynb      # executed local demo with visible outputs
 |-- scripts/colab_setup.sh       # dependency installer
 |-- baseline/                    # earlier rule-based version (kept for comparison)
 |-- lessons/                     # early generic NLP exercises
@@ -244,13 +247,16 @@ it exists only to show the comparison.
 
 ## Submission checklist
 
-- [ ] Push this folder to a GitHub repository (public or as required).
+- [x] Push this folder to a GitHub repository:
+      https://github.com/Vaibhavvv2524/nlp-zero-to-hero
 - [ ] Share the Colab notebook link with outputs visible.
 - [ ] Run all notebook cells top to bottom on a T4 GPU.
-- [ ] Attach or commit `outputs/`, `reports/evaluation.json` and
+- [x] Attach or commit `outputs/`, `reports/evaluation.json` and
       `reports/run_summary.json`.
-- [ ] Confirm `reports/evaluation.json` shows all three stages marked `"ok"`
+- [x] Confirm `reports/evaluation.json` shows all three stages marked `"ok"`
       (translation evaluation may be `"skipped"` if IITB is unavailable).
+- [x] Attach the executed local demo notebook (`notebooks/pipeline_demo.ipynb`)
+      with visible outputs.
 
 ## Troubleshooting
 
