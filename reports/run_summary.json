@@ -1,0 +1,21 @@
+{
+  "group_size": 5,
+  "ordering_strategy": "borda",
+  "punctuation_model": "/Users/vaibhavparmar/Documents/nlp-zero-to-hero/models/punctuation",
+  "ordering_model": "/Users/vaibhavparmar/Documents/nlp-zero-to-hero/models/ordering",
+  "translation_model": null,
+  "memory_limit_gb": 1.5,
+  "timings_seconds": {
+    "punctuation": 1.05,
+    "ordering": 10.72,
+    "translation": null
+  },
+  "files": {
+    "sample-1": {
+      "words": 747,
+      "null_tokens_removed": 5,
+      "sentences": 52,
+      "groups": 11
+    }
+  }
+}

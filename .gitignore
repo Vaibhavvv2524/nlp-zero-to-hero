@@ -1,0 +1,15 @@
+.venv/
+.venv.backup-*/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+.env
+models/
+.pytest_cache/
+.cache/
+data/processed/*
+!data/processed/.gitkeep
+*.log
+*.zip
+/tmp/

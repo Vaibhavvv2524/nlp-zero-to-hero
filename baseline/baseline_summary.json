@@ -1,0 +1,55 @@
+{
+  "group_size": 5,
+  "synthetic_order_kendall_tau": 1.0,
+  "files": [
+    {
+      "file": "sample-1.txt",
+      "words": 747,
+      "nulls": 5,
+      "sentences": 49,
+      "groups": 10
+    },
+    {
+      "file": "sample-2.txt",
+      "words": 768,
+      "nulls": 5,
+      "sentences": 49,
+      "groups": 10
+    },
+    {
+      "file": "sample-3.txt",
+      "words": 742,
+      "nulls": 6,
+      "sentences": 46,
+      "groups": 10
+    },
+    {
+      "file": "sample-4.txt",
+      "words": 1118,
+      "nulls": 4,
+      "sentences": 72,
+      "groups": 15
+    },
+    {
+      "file": "sample-5.txt",
+      "words": 1026,
+      "nulls": 9,
+      "sentences": 67,
+      "groups": 14
+    },
+    {
+      "file": "sample-6.txt",
+      "words": 507,
+      "nulls": 11,
+      "sentences": 33,
+      "groups": 7
+    },
+    {
+      "file": "sample-7.txt",
+      "words": 846,
+      "nulls": 27,
+      "sentences": 53,
+      "groups": 11
+    }
+  ]
+}

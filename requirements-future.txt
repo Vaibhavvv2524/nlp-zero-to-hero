@@ -1,0 +1,28 @@
+# Not installed yet. Uncomment and install progressively when needed.
+
+# DEEP LEARNING
+torch
+gensim
+
+# TRANSFORMERS AND MODERN NLP
+transformers
+tokenizers
+datasets
+sentence-transformers
+sentencepiece
+accelerate
+evaluate
+
+# ADVANCED RESEARCH
+statsmodels
+imbalanced-learn
+plotly
+
+# LLM FINE-TUNING
+peft
+safetensors
+
+# DEPLOYMENT
+streamlit
+fastapi
+uvicorn

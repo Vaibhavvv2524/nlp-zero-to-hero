@@ -1,0 +1,41 @@
+{
+  "base_model": "bert-base-multilingual-cased",
+  "adapter_dir": "/Users/vaibhavparmar/Documents/nlp-zero-to-hero/models/ordering/adapter",
+  "epochs": 1,
+  "batch_size": 16,
+  "learning_rate": 0.0002,
+  "train_pairs": 4000,
+  "trainable_parameters": 591362,
+  "total_parameters": 178446340,
+  "validation_metrics": {
+    "eval_loss": 0.5826866030693054,
+    "eval_accuracy": 0.677,
+    "eval_macro_precision": 0.6785744427837748,
+    "eval_macro_recall": 0.6778133692845099,
+    "eval_macro_f1": 0.676818982721322,
+    "eval_runtime": 84.0287,
+    "eval_samples_per_second": 35.702,
+    "eval_steps_per_second": 1.119,
+    "epoch": 1.0
+  },
+  "test_metrics": {
+    "test_loss": 0.6112298965454102,
+    "test_accuracy": 0.6543333333333333,
+    "test_macro_precision": 0.6560293855919634,
+    "test_macro_recall": 0.6542982907992403,
+    "test_macro_f1": 0.6533596205073384,
+    "test_runtime": 83.924,
+    "test_samples_per_second": 35.747,
+    "test_steps_per_second": 1.12,
+    "epoch": 1.0
+  },
+  "memory_limit": {
+    "device": "cpu/mps",
+    "limit_gb": null,
+    "total_gb": null
+  },
+  "memory_at_end": {
+    "device": "mps",
+    "allocated_gb": 0.6709
+  }
+}

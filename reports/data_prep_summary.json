@@ -1,0 +1,105 @@
+{
+  "dataset": "wikimedia/wikipedia",
+  "config": "20231101.hi",
+  "seed": 42,
+  "articles": 3000,
+  "splits": {
+    "train": 2700,
+    "val": 150,
+    "test": 150
+  },
+  "punctuation": {
+    "train": {
+      "articles": 2700,
+      "examples": 25000,
+      "labels": {
+        "none": {
+          "count": 1653107,
+          "share": 0.90947
+        },
+        "comma": {
+          "count": 59324,
+          "share": 0.03264
+        },
+        "sentence_end": {
+          "count": 104840,
+          "share": 0.05768
+        },
+        "question": {
+          "count": 236,
+          "share": 0.00013
+        },
+        "exclamation": {
+          "count": 153,
+          "share": 8e-05
+        }
+      }
+    },
+    "val": {
+      "articles": 150,
+      "examples": 2317,
+      "labels": {
+        "none": {
+          "count": 154119,
+          "share": 0.91378
+        },
+        "comma": {
+          "count": 5045,
+          "share": 0.02991
+        },
+        "sentence_end": {
+          "count": 9446,
+          "share": 0.05601
+        },
+        "question": {
+          "count": 16,
+          "share": 9e-05
+        },
+        "exclamation": {
+          "count": 35,
+          "share": 0.00021
+        }
+      }
+    },
+    "test": {
+      "articles": 150,
+      "examples": 2208,
+      "labels": {
+        "none": {
+          "count": 144618,
+          "share": 0.90895
+        },
+        "comma": {
+          "count": 5085,
+          "share": 0.03196
+        },
+        "sentence_end": {
+          "count": 9350,
+          "share": 0.05877
+        },
+        "question": {
+          "count": 29,
+          "share": 0.00018
+        },
+        "exclamation": {
+          "count": 23,
+          "share": 0.00014
+        }
+      }
+    }
+  },
+  "ordering": {
+    "train": {
+      "articles": 2700,
+      "pairs": 40000
+    },
+    "val": {
+      "articles": 150,
+      "pairs": 3000
+    },
+    "test": {
+      "articles": 150,
+      "pairs": 3000
+    }
+  }
+}

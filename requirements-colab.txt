@@ -1,0 +1,30 @@
+# GPU / Colab dependencies for the full assignment pipeline.
+# PyTorch is preinstalled on Colab, so it is intentionally not pinned here.
+# Install with:  pip install --upgrade -r requirements-colab.txt
+#
+# These pins are the combination verified end-to-end (Python 3.12, torch 2.15):
+# - transformers 5 removes modules that the IndicTrans2 remote code and
+#   IndicTransToolkit import, so stay on 4.44.x.
+# - peft >= 0.14 needs torch APIs missing from some macOS/torch builds.
+# - datasets 4/5 need huggingface-hub >= 1.31, which transformers 4.44 does
+#   not support.
+transformers==4.44.2
+tokenizers==0.19.1
+datasets==3.6.0
+huggingface-hub>=0.24,<1.0
+accelerate>=0.34,<2.0
+peft==0.13.2
+sentencepiece>=0.1.99
+sacremoses
+sacrebleu
+protobuf
+scikit-learn
+scipy
+numpy
+pandas
+tqdm
+
+# IndicTrans2 preprocessing is installed separately by scripts/colab_setup.sh,
+# because it may need a source build:
+#   pip install IndicTransToolkit
+#   or: pip install --editable ./IndicTransToolkit --no-build-isolation

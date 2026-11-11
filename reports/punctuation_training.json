@@ -1,0 +1,65 @@
+{
+  "base_model": "bert-base-multilingual-cased",
+  "adapter_dir": "/Users/vaibhavparmar/Documents/nlp-zero-to-hero/models/punctuation/adapter",
+  "epochs": 2,
+  "batch_size": 16,
+  "learning_rate": 0.0003,
+  "train_windows": 4000,
+  "trainable_parameters": 593669,
+  "total_parameters": 177860362,
+  "validation_metrics": {
+    "eval_loss": 0.4399503171443939,
+    "eval_accuracy": 0.8589912086565111,
+    "eval_boundary_precision": 0.7640093786635405,
+    "eval_boundary_recall": 0.8956844420010995,
+    "eval_boundary_f1": 0.8246235606731621,
+    "eval_f1_none": 0.921813771225975,
+    "eval_f1_comma": 0.27356931473154233,
+    "eval_f1_sentence_end": 0.8238279515320688,
+    "eval_f1_question": 0.0,
+    "eval_f1_exclamation": 0.0,
+    "eval_runtime": 55.316,
+    "eval_samples_per_second": 41.887,
+    "eval_steps_per_second": 1.32,
+    "epoch": 2.0
+  },
+  "test_metrics": {
+    "test_loss": 0.39927026629447937,
+    "test_accuracy": 0.8687678753646934,
+    "test_boundary_precision": 0.8156553398058253,
+    "test_boundary_recall": 0.9167917064520529,
+    "test_boundary_f1": 0.8632714661871428,
+    "test_f1_none": 0.9267701951844992,
+    "test_f1_comma": 0.2997634756628906,
+    "test_f1_sentence_end": 0.8627173213135866,
+    "test_f1_question": 0.0,
+    "test_f1_exclamation": 0.0,
+    "test_runtime": 54.7481,
+    "test_samples_per_second": 40.33,
+    "test_steps_per_second": 1.26,
+    "epoch": 2.0
+  },
+  "label_counts": {
+    "none": 1653107,
+    "comma": 59324,
+    "sentence_end": 104840,
+    "question": 236,
+    "exclamation": 153
+  },
+  "class_weights": [
+    0.21990832686424255,
+    6.127907752990723,
+    3.4674932956695557,
+    20.0,
+    20.0
+  ],
+  "memory_limit": {
+    "device": "cpu/mps",
+    "limit_gb": null,
+    "total_gb": null
+  },
+  "memory_at_end": {
+    "device": "mps",
+    "allocated_gb": 0.6687
+  }
+}
