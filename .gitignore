@@ -13,3 +13,6 @@ data/processed/*
 *.log
 *.zip
 /tmp/
+
+# Keep generated study-guide PDFs local
+docs/*.pdf
