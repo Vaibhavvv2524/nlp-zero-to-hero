@@ -90,6 +90,37 @@ The three lesson notebooks are for learning. They are not part of the final Hind
 
 The full run takes roughly **30–60 minutes** on a free Colab T4. Training works without `HF_TOKEN`; translation needs it because the translation model is gated.
 
+### I want to demo the project to someone
+
+**Show the input and output.** Open these files in your editor:
+
+- Input: `data/raw/sample-1.txt`
+- Hindi output: `outputs/sample-1.sentences_hi.txt`
+- Hindi groups: `outputs/sample-1.groups_hi.txt`
+- English output: `outputs/sample-1.sentences_en.txt`
+- English groups: `outputs/sample-1.groups_en.txt`
+
+The input is Hindi text without punctuation and with shuffled sentences. The outputs are the recovered Hindi sentences and their English translations.
+
+**Run it live on your computer:**
+
+```bash
+source .venv/bin/activate
+python -m src.pipeline --limit 1 --no-translate
+```
+
+This runs the saved local models and rewrites the `outputs/sample-1.*` files. Remove `--no-translate` if the local translation model and `HF_TOKEN` are available.
+
+**If someone asks to see the model:** the trained adapters are local and are not committed to GitHub. Show these folders:
+
+```text
+models/punctuation/adapter/
+models/ordering/adapter/
+models/translation/indictrans2-indic-en-200M/
+```
+
+`adapter_config.json` shows the LoRA setup, and `training_summary.json` shows the training settings. For a public run, use the full Colab build. For saved evidence, show the executed demo.
+
 ---
 
 ## What you get
@@ -180,6 +211,19 @@ The data preparation does this:
 
 The sample files are only used for prediction, not training.
 
+### Test with a small Wikipedia sample
+
+To check the Wikipedia download and data preparation without building the full dataset:
+
+```bash
+source .venv/bin/activate
+python -m src.data_prep --num-articles 20 --max-train-windows 500 --max-train-pairs 1000 --max-eval-pairs 100 --eval-articles 5
+```
+
+This streams Hindi Wikipedia and writes new files to `data/processed/` and `reports/data_prep_summary.json`. It does not train the models. It replaces the current processed data, so run the full preparation again before a full training run.
+
+For the real training setup, use the full Colab build.
+
 ---
 
 ## What is in the repository
@@ -204,6 +248,12 @@ The generated `data/processed/` files and the trained `models/` are intentionall
 ---
 
 ## Run on your own computer
+
+Activate the prepared Python environment first:
+
+```bash
+source .venv/bin/activate
+```
 
 Install the local requirements:
 
