@@ -15,6 +15,8 @@ A beginner-friendly NLP project that takes Hindi text with missing punctuation a
 
 **Executed demo:** https://colab.research.google.com/github/Vaibhavvv2524/nlp-zero-to-hero/blob/main/notebooks/pipeline_demo.ipynb
 
+**Google Drive folder:** [View all five notebooks](https://drive.google.com/drive/folders/17Bsj-876gBjDddhPN3TBfLotKVueOjY7?usp=sharing)
+
 ---
 
 ## What it does, in plain words
@@ -55,7 +57,7 @@ These numbers come from a smaller local training run, not the full training reci
 
 ## Notebooks
 
-All five notebooks are in the `notebooks/` folder and are also available through GitHub and Google Colab.
+All five notebooks are in the `notebooks/` folder and are also available through GitHub, Google Colab, and the [Google Drive folder](https://drive.google.com/drive/folders/17Bsj-876gBjDddhPN3TBfLotKVueOjY7?usp=sharing).
 
 | # | Notebook | What it is | Best for |
 | ---: | --- | --- | --- |
