@@ -133,6 +133,8 @@ def load_wikipedia(num_articles, scan_multiplier=3):
 
 def make_punctuation_windows(article, split, rng):
     """Slide a word window over an article and shuffle the sentences inside."""
+    # A window is a group of whole sentences. We keep adding sentences until
+    # the window is close to WINDOW_WORDS, then shuffle the sentence blocks.
     sentences = article["sentences"]
     examples = []
     index = 0
@@ -151,6 +153,8 @@ def make_punctuation_windows(article, split, rng):
                 break
 
         if MIN_WORDS <= total <= MAX_WORDS and len(chunk) >= 2:
+            # Shuffling removes accidental sentence-order information from the
+            # punctuation examples, matching the assignment input.
             order = list(range(len(chunk)))
             rng.shuffle(order)
             words = []
@@ -168,6 +172,7 @@ def make_punctuation_windows(article, split, rng):
                 }
             )
 
+        # Move forward by STRIDE_WORDS so neighbouring windows overlap.
         advance = 0
         next_index = index
         while next_index < end and advance < STRIDE_WORDS:
@@ -243,6 +248,8 @@ def main(argv=None):
     ordering_stats = {}
     eval_articles = []
 
+    # The same article split is used for punctuation and ordering, so no
+    # article can leak between train, validation and test.
     for split in ("train", "val", "test"):
         split_articles = subset(articles, splits[split])
         rng = random.Random(args.seed + {"train": 0, "val": 1, "test": 2}[split])

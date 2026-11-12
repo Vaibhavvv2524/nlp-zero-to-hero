@@ -101,6 +101,8 @@ class IndicTrans2Translator:
         import torch
 
         texts = list(texts)
+        # Keep empty strings as empty outputs so the result list still lines up
+        # with the caller's sentence indices.
         indexed = [
             (index, text)
             for index, text in enumerate(texts)
@@ -113,6 +115,7 @@ class IndicTrans2Translator:
         for start in range(0, len(indexed), batch_size):
             chunk = indexed[start : start + batch_size]
             batch = [text for _, text in chunk]
+            # The toolkit adds IndicTrans2 language tags and normalises text.
             prepared = self.processor.preprocess_batch(
                 batch, src_lang=self.src_lang, tgt_lang=self.tgt_lang
             )
@@ -139,6 +142,7 @@ class IndicTrans2Translator:
                 skip_special_tokens=True,
                 clean_up_tokenization_spaces=True,
             )
+            # Postprocessing removes tags and fixes spacing/tokenisation.
             translations = self.processor.postprocess_batch(
                 decoded, lang=self.tgt_lang
             )

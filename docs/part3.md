@@ -26,8 +26,8 @@ nlp-zero-to-hero/
 |   |-- pipeline.py              # end-to-end orchestration
 |   `-- evaluate.py              # metrics and reports
 |-- notebooks/
-|   |-- colab_end_to_end.ipynb   # 28-cell full Colab recipe
-|   |-- pipeline_demo.ipynb      # 13-cell executed local demo
+|   |-- colab_end_to_end.ipynb   # 59-cell beginner Colab course
+|   |-- pipeline_demo.ipynb      # 22-cell executed local demo
 |   `-- lesson_01..03.ipynb      # early generic NLP exercises
 |-- baseline/                    # legacy rule-based version (comparison only)
 |-- lessons/                     # preprocessing and TF-IDF exercises
@@ -474,7 +474,7 @@ For consecutive sentences in a Wikipedia article:
 (B, A, 0)   # the reverse is wrong
 ```
 
-This gives a 50/50 label distribution, so accuracy is meaningful and no class weighting is needed. The model sees both directions of the same pair, which also teaches symmetry.
+Before capping, this gives a 50/50 label distribution, so accuracy is meaningful and no class weighting is needed. The model sees both directions of the same pair, which also teaches symmetry. Capping to the requested number of pairs uses a seeded shuffle, so the final split is *approximately* 50/50 rather than exact: the verified train split has 20,052 positive and 19,948 negative pairs (50.13% positive).
 
 ### 19.4 Model
 

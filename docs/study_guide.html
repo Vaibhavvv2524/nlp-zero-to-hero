@@ -212,6 +212,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <li><a href="#a4-what-we-explicitly-rejected">A.4 What we explicitly rejected</a></li>
 <li><a href="#a5-how-the-approach-satisfies-the-assignment-constraints">A.5 How the approach satisfies the assignment constraints</a></li>
 <li><a href="#a6-why-this-approach-is-defensible-in-a-viva">A.6 Why this approach is defensible in a viva</a></li>
+<li><a href="#a7-pros-and-cons-of-the-chosen-approach">A.7 Pros and cons of the chosen approach</a></li>
+<li><a href="#a8-how-to-actually-test-the-approach">A.8 How to actually test the approach</a></li>
+<li><a href="#a9-the-approach-in-one-page">A.9 The approach in one page</a></li>
 </ul>
 </li>
 <li><a href="#part-i-nlp-foundations-from-zero">Part I — NLP foundations from zero</a><ul>
@@ -393,8 +396,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </ul>
 </li>
 <li><a href="#part-iii-the-notebooks-cell-by-cell">Part III — The notebooks, cell by cell</a><ul>
-<li><a href="#24-colab_end_to_endipynb-the-full-recipe">24. colab_end_to_end.ipynb — the full recipe</a><ul>
-<li><a href="#241-cell-map">24.1 Cell map</a></li>
+<li><a href="#24-colab_end_to_endipynb-the-full-beginner-course">24. colab_end_to_end.ipynb — the full beginner course</a><ul>
+<li><a href="#241-section-map">24.1 Section map</a></li>
 <li><a href="#242-cell-by-cell-notes">24.2 Cell-by-cell notes</a></li>
 <li><a href="#243-how-to-run-it">24.3 How to run it</a></li>
 </ul>
@@ -453,6 +456,35 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <li><a href="#appendix-e-dependency-error-table">Appendix E. Dependency error table</a></li>
 <li><a href="#appendix-f-references-and-further-study">Appendix F. References and further study</a></li>
 <li><a href="#appendix-g-study-plan">Appendix G. Study plan</a></li>
+<li><a href="#appendix-h-abbreviations-and-full-forms">Appendix H. Abbreviations and full forms</a><ul>
+<li><a href="#h1-core-nlp-and-machine-learning">H.1 Core NLP and machine learning</a></li>
+<li><a href="#h2-models-and-translation-systems">H.2 Models and translation systems</a></li>
+<li><a href="#h3-evaluation-metrics">H.3 Evaluation metrics</a></li>
+<li><a href="#h4-hardware-formats-and-tooling">H.4 Hardware, formats, and tooling</a></li>
+<li><a href="#h5-licenses-and-organizations">H.5 Licenses and organizations</a></li>
+<li><a href="#h6-roman-numerals-and-section-labels">H.6 Roman numerals and section labels</a></li>
+<li><a href="#h7-symbols-and-notation">H.7 Symbols and notation</a></li>
+</ul>
+</li>
+<li><a href="#appendix-i-how-to-actually-test-it">Appendix I. How to actually test it</a><ul>
+<li><a href="#i1-the-four-test-levels">I.1 The four test levels</a></li>
+<li><a href="#i2-one-time-setup">I.2 One-time setup</a></li>
+<li><a href="#i3-test-0-environment-and-pins">I.3 Test 0 — environment and pins</a></li>
+<li><a href="#i4-test-1-data-integrity">I.4 Test 1 — data integrity</a></li>
+<li><a href="#i5-test-2-punctuation-adapter">I.5 Test 2 — punctuation adapter</a></li>
+<li><a href="#i6-test-3-ordering-adapter-and-decoders">I.6 Test 3 — ordering adapter and decoders</a></li>
+<li><a href="#i7-test-4-translation-adapter">I.7 Test 4 — translation adapter</a></li>
+<li><a href="#i8-test-5-end-to-end-artifacts">I.8 Test 5 — end-to-end artifacts</a></li>
+<li><a href="#i9-test-6-failure-behavior">I.9 Test 6 — failure behavior</a></li>
+<li><a href="#i10-test-7-determinism">I.10 Test 7 — determinism</a></li>
+<li><a href="#i11-test-8-the-executed-notebook">I.11 Test 8 — the executed notebook</a></li>
+<li><a href="#i12-test-9-memory-budget">I.12 Test 9 — memory budget</a></li>
+<li><a href="#i13-test-10-report-consistency">I.13 Test 10 — report consistency</a></li>
+<li><a href="#i14-expected-values-for-the-verified-local-run">I.14 Expected values for the verified local run</a></li>
+<li><a href="#i15-testing-on-your-own-data">I.15 Testing on your own data</a></li>
+<li><a href="#i16-what-to-show-a-reviewer">I.16 What to show a reviewer</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -661,11 +693,11 @@ outputs/sample-N.{sentences_hi,groups_hi,sentences_en,groups_en}.txt
 </tr>
 <tr>
 <td><strong>BERT</strong></td>
-<td>A transformer encoder pretrained to fill in masked words; good at understanding text.</td>
+<td>Bidirectional Encoder Representations from Transformers: a transformer encoder pretrained to fill in masked words; good at understanding text.</td>
 </tr>
 <tr>
 <td><strong>mBERT</strong></td>
-<td>The multilingual version of BERT, pretrained on many languages including Hindi.</td>
+<td>Multilingual BERT: the multilingual version of BERT, pretrained on many languages including Hindi.</td>
 </tr>
 <tr>
 <td><strong>LoRA</strong></td>
@@ -705,7 +737,7 @@ outputs/sample-N.{sentences_hi,groups_hi,sentences_en,groups_en}.txt
 </tr>
 <tr>
 <td><strong>BLEU / chrF</strong></td>
-<td>Metrics for machine translation quality.</td>
+<td>Bilingual Evaluation Understudy / character n-gram F-score: metrics for machine translation quality.</td>
 </tr>
 <tr>
 <td><strong>Kendall's tau</strong></td>
@@ -713,6 +745,9 @@ outputs/sample-N.{sentences_hi,groups_hi,sentences_en,groups_en}.txt
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p><strong>Acronyms.</strong> The full form of every initialism used in this guide, from BERT and LoRA to BLEU, fp16, MPS, and JSONL, is listed in <strong>Appendix H</strong>. The table above defines the concepts; Appendix H defines the abbreviations.</p>
+</blockquote>
 <div class='pagebreak'></div>
 
 <h1 id="part-05-the-approach-we-chose-read-this-first">Part 0.5 — The approach we chose (read this first)</h1>
@@ -931,6 +966,160 @@ We deliberately <em>decomposed</em> the assignment into three specialized stages
 <li><strong>The memory claim is architectural, not wishful.</strong> The code physically releases each model before loading the next.</li>
 <li><strong>The data story is clean.</strong> Natural Wikipedia supervision, article-level splits, and no synthetic labels.</li>
 </ul>
+<h2 id="a7-pros-and-cons-of-the-chosen-approach">A.7 Pros and cons of the chosen approach</h2>
+<p>The design is a trade, not a free win. The table states both sides and how each weakness is contained.</p>
+<div class='decision'>
+
+**Pros**
+
+1. **Fits the constraints.** Two small BERT-based stages plus one 200M translator, loaded one at a time, stay within the 1.5 GB budget and contain no LLM.
+2. **Uses supervision that already exists.** Wikipedia supplies punctuation and natural sentence order, so no synthetic labels or LLM-generated data are needed.
+3. **Every stage is independently measurable.** Boundary F1, pair macro F1/Kendall's tau, and BLEU/chrF localize failures instead of hiding them in one score.
+4. **Cheap adaptation.** LoRA trains about 0.33% of parameters, keeps optimizer state small, and produces adapters of roughly 2.4 MB.
+5. **Reuse and simplicity.** One multilingual backbone serves two tasks; only one new model family is introduced for translation.
+6. **Failure isolation.** If ordering is weak, punctuation and translation still produce a valid partial result; if the translator is unavailable, the first two stages still run.
+7. **Deterministic structure.** The pipeline never rewrites input words, so the word stream is auditable and the output can be aligned exactly.
+8. **Replaceable parts.** Each stage can be retrained, swapped, or evaluated without touching the other two.
+
+**Cons**
+
+1. **Error propagation.** A bad sentence boundary corrupts ordering; a bad order corrupts translation context. There is no joint correction.
+2. **The ordering stage is the weak link.** Pairwise accuracy is 0.6543 and Borda tau is only 0.2007; full-document order is not solved.
+3. **Quadratic pair cost.** Ordering n sentences requires n(n−1)/2 model calls; 99 sentences means 4,851 pairs.
+4. **Multiple artifacts.** Three models or adapters, a tokenizer, a toolkit, and a local translation mirror must all be present and compatible.
+5. **No joint optimization.** Each stage is trained on its own objective, so the pipeline is not globally optimal.
+6. **Subset adapters in this repository.** The shipped models were trained on 4,000 windows/pairs, not the full 25,000/40,000, which caps the measured quality.
+7. **Distribution mismatch.** Models learn Wikipedia prose; dialogue and poetry are over-segmented or misordered.
+8. **Rare punctuation is not learned.** Question and exclamation marks have 236 and 153 training examples, so their F1 is zero.
+
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Weakness</th>
+<th>Containment in this project</th>
+<th>What would remove it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Error propagation</td>
+<td>per-stage metrics, honest reporting, groups of five keep local order</td>
+<td>joint reranking or end-to-end training</td>
+</tr>
+<tr>
+<td>Weak ordering</td>
+<td>Borda is the best of three decoders; TF-IDF ablation quantifies the gain</td>
+<td>stronger pair model, longer context, better decoder</td>
+</tr>
+<tr>
+<td>Quadratic cost</td>
+<td>only sentence pairs, not word pairs; small model; batched scoring</td>
+<td>approximate ranking or chunked ordering</td>
+</tr>
+<tr>
+<td>Many artifacts</td>
+<td>pinned environment, setup script, executed notebook</td>
+<td>container image or single packaged model</td>
+</tr>
+<tr>
+<td>Subset adapters</td>
+<td>documented full-data recipe, separate subset/full claims</td>
+<td>full-data training run</td>
+</tr>
+<tr>
+<td>Distribution mismatch</td>
+<td>stated limitation; samples show the failure</td>
+<td>in-domain data and evaluation</td>
+</tr>
+<tr>
+<td>Rare punctuation</td>
+<td>class weights plus explicit zero-F1 reporting</td>
+<td>targeted data collection or augmentation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="a8-how-to-actually-test-the-approach">A.8 How to actually test the approach</h2>
+<p>You test the approach at four levels, from cheap to expensive. Appendix I gives the exact commands, assertions, and expected values.</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>What it proves</th>
+<th>Command</th>
+<th>Pass condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Environment</td>
+<td>the pinned stack imports and the GPU backend is visible</td>
+<td><code>python setup_check.py</code></td>
+<td>no import errors; device reported</td>
+</tr>
+<tr>
+<td>2. Data</td>
+<td>windows, labels, pairs, and splits are correct and leak-free</td>
+<td><code>python -m src.data_prep ...</code> then inspect JSONL</td>
+<td>expected counts; no article overlaps</td>
+</tr>
+<tr>
+<td>3. Stage quality</td>
+<td>each model beats its baseline on held-out data</td>
+<td><code>python -m src.evaluate ...</code></td>
+<td>boundary F1 &gt; 0.85; pair acc &gt; 0.5; Borda tau &gt; TF-IDF tau</td>
+</tr>
+<tr>
+<td>4. End to end</td>
+<td>outputs are aligned, non-empty, and reproducible</td>
+<td><code>python -m src.pipeline ...</code></td>
+<td>4 files per input; sentence/group counts match; no <code>NULL</code>; Hindi and English align</td>
+</tr>
+</tbody>
+</table>
+<p>A quick manual test after any change is:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>compileall<span class="w"> </span>-q<span class="w"> </span>src
+python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--limit<span class="w"> </span><span class="m">1</span><span class="w"> </span>--output-dir<span class="w"> </span>/tmp/pipeline-smoke
+diff<span class="w"> </span>&lt;<span class="o">(</span>wc<span class="w"> </span>-l<span class="w"> </span>&lt;<span class="w"> </span>outputs/sample-1.sentences_hi.txt<span class="o">)</span><span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>&lt;<span class="o">(</span>wc<span class="w"> </span>-l<span class="w"> </span>&lt;<span class="w"> </span>outputs/sample-1.sentences_en.txt<span class="o">)</span>
+</code></pre></div>
+
+<p>The <code>diff</code> must print nothing: Hindi and English sentence counts must match. Appendix I turns these checks into an automated script.</p>
+<div class='pagebreak'></div>
+
+<h2 id="a9-the-approach-in-one-page">A.9 The approach in one page</h2>
+<p>If you need the whole design in one screen, this is it.</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>What is the approach?</strong></td>
+<td>Three supervised stages: (1) mBERT + LoRA labels every word with <code>none/comma/sentence_end/question/exclamation</code>; (2) mBERT + LoRA scores every sentence pair, and Borda turns the scores into an order; (3) IndicTrans2 200M translates each ordered sentence. The pipeline loads one model at a time and groups every five sentences.</td>
+</tr>
+<tr>
+<td><strong>Why did we use it?</strong></td>
+<td>It is the only decomposition that satisfies all constraints at once: no LLM, 1.5 GB memory, Hindi support, natural Wikipedia supervision, per-stage evaluation, and exact word/sentence alignment. A single end-to-end model has no aligned training data and cannot be evaluated stage by stage.</td>
+</tr>
+<tr>
+<td><strong>What are the pros?</strong></td>
+<td>Fits the budget; uses existing supervision; each stage is measurable and replaceable; LoRA trains ~0.33% of parameters; errors are isolated; outputs are deterministic and auditable.</td>
+</tr>
+<tr>
+<td><strong>What are the cons?</strong></td>
+<td>Errors propagate across stages; ordering is the weak link (Borda tau 0.2007); pairwise scoring is O(n²); three artifacts must stay compatible; shipped adapters are subset adapters; Wikipedia prose does not match dialogue.</td>
+</tr>
+<tr>
+<td><strong>How do you test it?</strong></td>
+<td>(0) <code>python setup_check.py</code>; (1) rerun <code>src.data_prep</code> and assert counts/splits/label alignment; (2) run <code>src.evaluate</code> and require boundary F1 ≥ 0.85, pair accuracy &gt; 0.5, Borda tau &gt; TF-IDF tau, BLEU ≥ 30; (3) run <code>src.pipeline</code> and assert 4 files per input, equal Hindi/English sentence and group counts, no <code>NULL</code>; (4) rerun twice and <code>diff</code> the outputs; (5) run the executed notebook. Exact commands are in Appendix I.</td>
+</tr>
+</tbody>
+</table>
 <div class='callout'>
 <strong>If you remember one thing:</strong> the project succeeds because it chooses the <em>right decomposition</em> for the constraints. mBERT labels words, a pairwise model ranks sentences, a decoder turns rankings into an order, and IndicTrans2 translates. Each stage is small, measurable, and replaceable.
 </div>
@@ -2070,8 +2259,8 @@ F1        = 2 * precision * recall / (precision + recall)
 |   |-- pipeline.py              # end-to-end orchestration
 |   `-- evaluate.py              # metrics and reports
 |-- notebooks/
-|   |-- colab_end_to_end.ipynb   # 28-cell full Colab recipe
-|   |-- pipeline_demo.ipynb      # 13-cell executed local demo
+|   |-- colab_end_to_end.ipynb   # 59-cell beginner Colab course
+|   |-- pipeline_demo.ipynb      # 22-cell executed local demo
 |   `-- lesson_01..03.ipynb      # early generic NLP exercises
 |-- baseline/                    # legacy rule-based version (comparison only)
 |-- lessons/                     # preprocessing and TF-IDF exercises
@@ -2574,7 +2763,7 @@ window token accuracy: 0.849
 (B, A, 0)   # the reverse is wrong
 </code></pre></div>
 
-<p>This gives a 50/50 label distribution, so accuracy is meaningful and no class weighting is needed. The model sees both directions of the same pair, which also teaches symmetry.</p>
+<p>Before capping, this gives a 50/50 label distribution, so accuracy is meaningful and no class weighting is needed. The model sees both directions of the same pair, which also teaches symmetry. Capping to the requested number of pairs uses a seeded shuffle, so the final split is <em>approximately</em> 50/50 rather than exact: the verified train split has 20,052 positive and 19,948 negative pairs (50.13% positive).</p>
 <h3 id="194-model">19.4 Model</h3>
 <p><code>AutoModelForSequenceClassification.from_pretrained(BASE_MODEL, num_labels=2)</code> loads mBERT and adds a linear head on the <code>[CLS]</code> vector. The input format is:</p>
 <div class="codehilite"><pre><span></span><code>[CLS] sentence A [SEP] sentence B [SEP]
@@ -3158,194 +3347,158 @@ python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class=
 <div class='pagebreak'></div>
 
 <h1 id="part-iii-the-notebooks-cell-by-cell">Part III — The notebooks, cell by cell</h1>
-<h2 id="24-colab_end_to_endipynb-the-full-recipe">24. <code>colab_end_to_end.ipynb</code> — the full recipe</h2>
+<h2 id="24-colab_end_to_endipynb-the-full-beginner-course">24. <code>colab_end_to_end.ipynb</code> — the full beginner course</h2>
 <div class='approach'>
-<strong>APPROACH CHOSEN.</strong> Put the entire full-scale workflow in one notebook: install, prepare data, train both adapters, evaluate, run the pipeline, and save artifacts. The notebook is the executable version of the README recipe, not a separate demo.
+<strong>APPROACH CHOSEN.</strong> Put the entire full-scale workflow in one notebook: install, prepare data, train both adapters, evaluate, run the pipeline, and save artifacts. The notebook is the executable version of the README recipe, but it also teaches the concepts behind each step instead of only listing commands.
 </div>
 
-<p>This notebook has 28 cells: markdown explanations interleaved with code. It is designed for a Colab T4 GPU.</p>
-<h3 id="241-cell-map">24.1 Cell map</h3>
+<p>This notebook has 59 cells: short explanations and examples interleaved with code. It is designed for a Colab T4 GPU and assumes no prior NLP experience. The first sections explain the problem, the later sections train and evaluate the models, and the final sections run the assignment pipeline and check the artifacts.</p>
+<h3 id="241-section-map">24.1 Section map</h3>
 <table>
 <thead>
 <tr>
-<th style="text-align: right;">Cell</th>
-<th>Type</th>
+<th style="text-align: right;">Cells</th>
+<th>Section</th>
 <th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">0</td>
-<td>markdown</td>
-<td>title, stage table, GPU instruction</td>
+<td style="text-align: right;">0‑2</td>
+<td>Big picture and prerequisites</td>
+<td>What the project does, what the three stages are, and what the reader needs before starting.</td>
 </tr>
 <tr>
-<td style="text-align: right;">1</td>
-<td>markdown</td>
-<td>project location instructions</td>
+<td style="text-align: right;">3‑5</td>
+<td>0. Project location</td>
+<td>Clone the public repo if needed, <code>os.chdir</code> into it, and add it to <code>sys.path</code>.</td>
 </tr>
 <tr>
-<td style="text-align: right;">2</td>
-<td>code</td>
-<td><code>os.chdir</code> to project, <code>sys.path</code> setup</td>
+<td style="text-align: right;">6‑8</td>
+<td>0.1 GPU check</td>
+<td>Print torch/CUDA information and stop with a clear message if no GPU is present.</td>
 </tr>
 <tr>
-<td style="text-align: right;">3</td>
-<td>code</td>
-<td>torch/CUDA diagnostics</td>
+<td style="text-align: right;">9‑12</td>
+<td>1. Install packages</td>
+<td>Run <code>scripts/colab_setup.sh</code>, then import the installed libraries to prove the environment works.</td>
 </tr>
 <tr>
-<td style="text-align: right;">4</td>
-<td>markdown</td>
-<td>dependency install explanation</td>
+<td style="text-align: right;">13‑14</td>
+<td>1.1 Hugging Face access</td>
+<td>Read an optional <code>HF_TOKEN</code> secret for the gated IndicTrans2 translation stage.</td>
 </tr>
 <tr>
-<td style="text-align: right;">5</td>
-<td>code</td>
-<td><code>!bash scripts/colab_setup.sh</code></td>
+<td style="text-align: right;">15‑16</td>
+<td>2. Settings and seed</td>
+<td>Import project constants, call <code>set_seed(42)</code>, and cap GPU memory with <code>limit_gpu_memory(1.5)</code>.</td>
 </tr>
 <tr>
-<td style="text-align: right;">6</td>
-<td>markdown</td>
-<td>imports, seeds, memory-cap explanation</td>
+<td style="text-align: right;">17‑26</td>
+<td>3. Data</td>
+<td>Explain inputs, targets and labels; show a raw assignment file; build the datasets; print the summary; run the data-only self-check.</td>
 </tr>
 <tr>
-<td style="text-align: right;">7</td>
-<td>code</td>
-<td>imports, <code>set_seed</code>, <code>limit_gpu_memory(1.5)</code></td>
+<td style="text-align: right;">27‑34</td>
+<td>4. Punctuation</td>
+<td>Show subword tokenization, explain mBERT + LoRA and class weights, train stage 1, print the training summary, and list common fixes.</td>
 </tr>
 <tr>
-<td style="text-align: right;">8</td>
-<td>markdown</td>
-<td>data-preparation explanation</td>
+<td style="text-align: right;">35‑38</td>
+<td>5. Ordering</td>
+<td>Explain pairwise classification and the Borda/clusters/beam decoders, train stage 2, and print the training summary.</td>
 </tr>
 <tr>
-<td style="text-align: right;">9</td>
-<td>code</td>
-<td><code>!python -m src.data_prep --num-articles 3000 --max-train-pairs 40000</code></td>
+<td style="text-align: right;">39‑44</td>
+<td>6. Evaluation</td>
+<td>Explain held-out metrics, run <code>src.evaluate</code>, print the report, and run the pre-pipeline self-check.</td>
 </tr>
 <tr>
-<td style="text-align: right;">10</td>
-<td>code</td>
-<td>read and print data summary; show a sample</td>
+<td style="text-align: right;">45‑49</td>
+<td>7. Pipeline</td>
+<td>Run the three stages on the seven assignment files, inspect groups, and explain what good output looks like.</td>
 </tr>
 <tr>
-<td style="text-align: right;">11</td>
-<td>markdown</td>
-<td>stage 1 explanation (labels, LoRA, class weights)</td>
+<td style="text-align: right;">50‑51</td>
+<td>8. Memory and timing</td>
+<td>Read <code>run_summary.json</code> and explain the cost of each stage.</td>
 </tr>
 <tr>
-<td style="text-align: right;">12</td>
-<td>code</td>
-<td><code>!python -m src.punctuation.train --epochs 3 --batch-size 8 ...</code></td>
+<td style="text-align: right;">52‑53</td>
+<td>9. Final self-check</td>
+<td>Run every verifier check against the full run.</td>
 </tr>
 <tr>
-<td style="text-align: right;">13</td>
-<td>code</td>
-<td>read punctuation training summary</td>
+<td style="text-align: right;">54‑55</td>
+<td>10. Save results</td>
+<td>Zip <code>outputs/</code> and copy <code>reports/</code> to a downloadable location.</td>
 </tr>
 <tr>
-<td style="text-align: right;">14</td>
-<td>markdown</td>
-<td>stage 2 explanation (pair format, decoders)</td>
-</tr>
-<tr>
-<td style="text-align: right;">15</td>
-<td>code</td>
-<td><code>!python -m src.ordering.train --epochs 2 --batch-size 8 ...</code></td>
-</tr>
-<tr>
-<td style="text-align: right;">16</td>
-<td>code</td>
-<td>read ordering training summary</td>
-</tr>
-<tr>
-<td style="text-align: right;">17</td>
-<td>markdown</td>
-<td>evaluation explanation</td>
-</tr>
-<tr>
-<td style="text-align: right;">18</td>
-<td>code</td>
-<td><code>!python -m src.evaluate --max-...</code></td>
-</tr>
-<tr>
-<td style="text-align: right;">19</td>
-<td>code</td>
-<td>print evaluation JSON</td>
-</tr>
-<tr>
-<td style="text-align: right;">20</td>
-<td>markdown</td>
-<td>pipeline explanation (four files per input, groups of five)</td>
-</tr>
-<tr>
-<td style="text-align: right;">21</td>
-<td>code</td>
-<td><code>!python -m src.pipeline --strategy borda --memory-gb 1.5</code></td>
-</tr>
-<tr>
-<td style="text-align: right;">22</td>
-<td>code</td>
-<td>print the first four Hindi/English groups of sample-1</td>
-</tr>
-<tr>
-<td style="text-align: right;">23</td>
-<td>markdown</td>
-<td>memory/timing explanation</td>
-</tr>
-<tr>
-<td style="text-align: right;">24</td>
-<td>code</td>
-<td>read and print <code>run_summary.json</code></td>
-</tr>
-<tr>
-<td style="text-align: right;">25</td>
-<td>markdown</td>
-<td>save-results explanation</td>
-</tr>
-<tr>
-<td style="text-align: right;">26</td>
-<td>code</td>
-<td>zip outputs, copy reports</td>
-</tr>
-<tr>
-<td style="text-align: right;">27</td>
-<td>markdown</td>
-<td>notes, limitations, troubleshooting</td>
+<td style="text-align: right;">56‑58</td>
+<td>11. Troubleshooting, next reading, glossary</td>
+<td>Diagnose common failures, list the code-reading order, and define the vocabulary used in the notebook.</td>
 </tr>
 </tbody>
 </table>
 <h3 id="242-cell-by-cell-notes">24.2 Cell-by-cell notes</h3>
-<p><strong>Cells 0-3: setup and diagnostics.</strong> The notebook sets <code>PROJECT_DIR = '/content/nlp-zero-to-hero'</code>, checks that it exists, changes into it, and inserts it into <code>sys.path</code>. It then prints the torch version, whether CUDA is available, the GPU name, and total GPU memory. If CUDA is not available, the training cells will be extremely slow; switch the runtime to GPU.</p>
-<p><strong>Cell 5: dependencies.</strong> It runs <code>scripts/colab_setup.sh</code>, which upgrades pip, installs <code>requirements-colab.txt</code>, and installs <code>IndicTransToolkit</code> (wheel or source). It also prints torch and CUDA information. This cell takes a few minutes on a fresh runtime.</p>
-<p><strong>Cell 7: seeds and memory cap.</strong> It imports the project constants and utilities, calls <code>set_seed(42)</code>, and applies <code>limit_gpu_memory(1.5)</code>. On a 15 GB T4, this sets the process memory fraction to <code>1.5 / 15 = 0.1</code>. If the process tries to exceed it, CUDA raises an out-of-memory error rather than silently using more.</p>
-<p><strong>Cells 8-10: data.</strong> Cell 9 builds the datasets. Cell 10 reads <code>data/processed/data_prep_summary.json</code>, prints article counts, split sizes, punctuation examples and label counts, ordering pair counts, and shows the first 18 words/labels of a training window. The expected counts are 3,000 articles, 2,700/150/150 splits, 25,000/2,317/2,208 windows, and 40,000/3,000/3,000 pairs.</p>
-<p><strong>Cells 11-13: punctuation training.</strong> Cell 12 trains for 3 epochs with batch size 8 and LR 3e-4. Cell 13 reads <code>models/punctuation/training_summary.json</code> and prints trainable parameters, validation metrics, test metrics, and peak memory. The log also prints the label counts and class weights.</p>
-<p><strong>Cells 14-16: ordering training.</strong> Cell 15 trains for 2 epochs with batch size 8 and LR 2e-4. Cell 16 prints validation/test metrics and peak memory. The expected pair accuracy is above 0.5; the full-data recipe should improve on the subset result.</p>
-<p><strong>Cells 17-19: evaluation.</strong> Cell 18 runs <code>src.evaluate</code> with caps: 1,200 punctuation examples, 3,000 ordering pairs, 30 articles, 200 translation examples. Cell 19 prints the evaluation JSON. If IndicTrans2 is not authenticated, the translation stage is skipped with a reason; the punctuation and ordering stages still run.</p>
-<p><strong>Cells 20-22: pipeline.</strong> Cell 21 runs <code>src.pipeline</code> with Borda and the 1.5 GB cap. Cell 22 prints the first four Hindi and English groups of sample-1. Each group should contain five sentences, except possibly the last.</p>
-<p><strong>Cells 23-24: timing and memory.</strong> Cell 24 reads <code>run_summary.json</code> and prints the strategy, timings, memory limit, and per-file counts. On a T4, the ordering stage is the slowest; on MPS, the local run took 130.53 seconds for ordering, 102.17 seconds for translation, and 2.31 seconds for punctuation.</p>
-<p><strong>Cells 25-26: saving.</strong> Cell 26 zips <code>outputs/</code> to <code>/content/hindi_assignment_outputs.zip</code> and copies <code>reports/</code> to <code>/content/hindi_assignment_reports/</code>. This is what you attach to a submission.</p>
-<p><strong>Cell 27: notes.</strong> It restates the no-LLM guarantee, the no-fallback guarantee, the memory strategy, the data limitations, the rarity of question/exclamation marks, the difficulty of ordering, and translation evaluation caveats. It also has troubleshooting bullets for toolkit builds, peft/transformers mismatches, and CUDA OOM.</p>
+<p><strong>Cells 0-2: orientation.</strong> The notebook starts with a plain-English description of the problem: Hindi text has lost its punctuation and sentence order, and the pipeline must restore both before translating to English. It also states the prerequisites: a Google account, a T4 GPU runtime, and an optional Hugging Face token for gated IndicTrans2. There is no hidden setup step; if the GPU check or the install check fails, the notebook stops before doing expensive work.</p>
+<p><strong>Cells 3-5: project folder.</strong> The first code cell looks for an existing project root, falls back to <code>/content/nlp-zero-to-hero</code>, and runs <code>git clone</code> if the repository is missing. If the folder already exists, it pulls the latest <code>main</code> when possible, so a rerun does not keep stale code. It then changes into the root and inserts it into <code>sys.path</code>. This is why a reviewer can open the GitHub Colab link and use <strong>Run all</strong> without uploading a folder first.</p>
+<p><strong>Cells 6-8: GPU diagnostics.</strong> The notebook imports torch, prints the torch version, checks <code>torch.cuda.is_available()</code>, and prints the GPU name and total memory. The next markdown cell explains that a CPU runtime is not a valid substitute: training would take hours instead of minutes. This is a hard stop, not a warning.</p>
+<p><strong>Cells 9-12: dependencies.</strong> Cell 10 runs <code>bash scripts/colab_setup.sh</code>, which upgrades pip, installs <code>requirements-colab.txt</code>, and installs <code>IndicTransToolkit</code> from a wheel or a source build. Cell 12 imports <code>datasets</code>, <code>transformers</code>, <code>peft</code>, <code>torch</code> and <code>sacrebleu</code>, then prints their versions and the GPU name. The pins are deliberate: transformers 4.44.2 keeps the ONNX conversion path that IndicTrans2 needs, peft 0.13.2 avoids a macOS-only tensor import, and datasets 3.6.0 matches the pinned hub client.</p>
+<p><strong>Cells 15-16: settings and memory.</strong> The notebook imports <code>LABELS</code>, <code>PUNCT_DATA</code>, <code>ORDER_DATA</code>, <code>PUNCT_MODEL_DIR</code>, <code>ORDER_MODEL_DIR</code>, <code>TRANSLATION_MODEL</code>, <code>set_seed</code> and <code>limit_gpu_memory</code>. It calls <code>set_seed(42)</code> so splits and training are repeatable, then applies a 1.5 GB cap on a 15 GB T4 (a fraction of 0.1). The cap is intentionally tight; it turns a silent memory overrun into a clear CUDA out-of-memory error.</p>
+<p><strong>Cells 17-26: data.</strong> The markdown cells explain the difference between an input and a target, why Wikipedia can supply both punctuation labels and sentence order, and why Hindi needs care (the danda <code>।</code>, <code>str.split()</code> instead of a naive <code>\w</code> regex, and <code>NULL</code> removal). Cell 19 reads <code>data/raw/sample-1.txt</code> and prints its token count. Cells 20-21 define the five labels and describe the windowing/pair-building recipe. Cell 22 runs:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>src.data_prep<span class="w"> </span>--num-articles<span class="w"> </span><span class="m">3000</span><span class="w"> </span>--max-train-pairs<span class="w"> </span><span class="m">40000</span>
+</code></pre></div>
+
+<p>Cell 24 reads <code>data/processed/data_prep_summary.json</code> and prints article counts, split sizes, punctuation example counts, label distributions, ordering pair counts, and one held-out window. Cell 26 runs the data-only verifier:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>scripts/verify_colab_run.py<span class="w"> </span>--skip-models<span class="w"> </span>--skip-reports<span class="w"> </span>--skip-outputs
+</code></pre></div>
+
+<p>The expected counts are 3,000 articles; 2,700/150/150 splits; 25,000/2,317/2,208 punctuation windows; and 40,000/3,000/3,000 ordering pairs.</p>
+<p><strong>Cells 27-34: punctuation.</strong> Cell 29 uses <code>AutoTokenizer.from_pretrained("bert-base-multilingual-cased")</code> on a short Hindi phrase to show that a word becomes several subword tokens. The label is attached to the first subword; the remaining subword positions are ignored by the loss. The markdown explains why punctuation is imbalanced (most words are <code>none</code>), how class weights compensate, and what LoRA freezes and trains. Cell 31 runs:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>src.punctuation.train<span class="w"> </span>--epochs<span class="w"> </span><span class="m">3</span><span class="w"> </span>--batch-size<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--learning-rate<span class="w"> </span>3e-4<span class="w"> </span>--memory-gb<span class="w"> </span><span class="m">1</span>.5
+</code></pre></div>
+
+<p>Cell 33 reads <code>models/punctuation/training_summary.json</code> and prints trainable parameters, validation metrics, test metrics, and peak memory. Cell 34 lists the most common failure modes: missing labels, a missing adapter, and CUDA OOM.</p>
+<p><strong>Cells 35-38: ordering.</strong> The markdown explains why predicting a whole permutation is impractical (20 sentences give more than 2 quintillion orders) and why the project instead trains a pairwise classifier on <code>(A, B) -&gt; 1</code> and <code>(B, A) -&gt; 0</code>. It compares the three decoders: Borda (default, robust), clusters (TF-IDF + KMeans), and beam (higher cost, sometimes better). Cell 36 runs:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>src.ordering.train<span class="w"> </span>--epochs<span class="w"> </span><span class="m">2</span><span class="w"> </span>--batch-size<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--learning-rate<span class="w"> </span>2e-4<span class="w"> </span>--memory-gb<span class="w"> </span><span class="m">1</span>.5
+</code></pre></div>
+
+<p>Cell 38 prints validation/test metrics from <code>models/ordering/training_summary.json</code>. Pair accuracy should be clearly above 0.5; the full-data recipe should beat the subset result.</p>
+<p><strong>Cells 39-44: evaluation.</strong> The markdown distinguishes word accuracy from boundary F1 (why the latter is the meaningful punctuation score), pair accuracy from Kendall's tau (why a good pair classifier can still produce a mediocre full order), and BLEU/chrF from accuracy (they are comparative, not percentages). Cell 40 runs <code>python -m src.evaluate</code> with the notebook's caps. Cell 42 prints <code>reports/evaluation.json</code>. Cell 44 runs the verifier again, this time skipping outputs and the adapter smoke test:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>scripts/verify_colab_run.py<span class="w"> </span>--skip-outputs<span class="w"> </span>--skip-model-smoke
+</code></pre></div>
+
+<p>If IndicTrans2 is not authenticated, translation fails with a clear error; the notebook does not silently fall back to another model.</p>
+<p><strong>Cells 45-49: pipeline.</strong> Cell 46 runs:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--strategy<span class="w"> </span>borda<span class="w"> </span>--memory-gb<span class="w"> </span><span class="m">1</span>.5
+</code></pre></div>
+
+<p>The pipeline removes <code>NULL</code>, restores punctuation, groups sentences, orders each group, translates five sentences at a time, and writes four files per input. Cell 48 prints the first Hindi and English groups of sample-1. Each group should contain five sentences, except possibly the last. Cell 49 explains what to look for: Hindi punctuation present, English readable, and occasional ordering mistakes expected because ordering is the weakest stage.</p>
+<p><strong>Cells 50-51: memory and timing.</strong> Cell 51 reads <code>reports/run_summary.json</code> and prints the strategy, timings, memory limit, and per-file counts. On a T4, ordering is the slowest stage; on the local MPS run, ordering took 130.53 seconds, translation 102.17 seconds, and punctuation 2.31 seconds.</p>
+<p><strong>Cells 52-53: final self-check.</strong> Cell 53 runs the full verifier with no skip flags. It checks the data, model files, reports, deterministic adapter smoke test, metric thresholds, and every output file. The notebook does not declare success unless this cell finishes with <code>All checks passed.</code></p>
+<p><strong>Cells 54-55: saving.</strong> Cell 55 zips <code>outputs/</code> to <code>/content/hindi_assignment_outputs.zip</code> and copies <code>reports/</code> to <code>/content/hindi_assignment_reports/</code>. These are the artifacts to attach to a submission.</p>
+<p><strong>Cells 56-58: troubleshooting and vocabulary.</strong> The final cells cover GPU problems, 401/gated-repo errors, toolkit build failures, import errors after install, CUDA OOM, slow data downloads, and failed self-checks. The code-reading order is <code>src/constants.py</code>, <code>src/pipeline.py</code>, the two model packages, the translator wrapper, then <code>src/data_prep.py</code> and <code>src/evaluate.py</code>. The glossary defines adapter, batch, BLEU, Borda, chrF, epoch, F1, inference, Kendall's tau, LoRA, loss, mBERT, NULL, seed, and softmax.</p>
 <h3 id="243-how-to-run-it">24.3 How to run it</h3>
 <ol>
 <li>Open the notebook in Colab.</li>
 <li><code>Runtime &gt; Change runtime type &gt; Hardware accelerator: GPU (T4)</code>.</li>
-<li>Upload the project folder to <code>/content/nlp-zero-to-hero</code> or clone the GitHub repo there.</li>
-<li>If using the official IndicTrans2, accept the license on Hugging Face and run <code>huggingface-cli login</code> (or set <code>HF_TOKEN</code>) before cell 21/18.</li>
-<li><code>Runtime &gt; Run all</code>.</li>
+<li>Press <strong>Runtime &gt; Run all</strong>. The first code cell clones the repository to <code>/content/nlp-zero-to-hero</code> automatically.</li>
+<li>Optional, for translation: accept the IndicTrans2 licence on Hugging Face and add a Colab secret named <code>HF_TOKEN</code>. Training works without it; evaluation and the pipeline need it.</li>
+<li>The notebook installs dependencies, prepares data, trains both adapters, evaluates, runs the pipeline and saves the artifacts.</li>
 <li>Download the zip and reports from <code>/content/</code>.</li>
 </ol>
 <blockquote>
-<p><strong>Common issue.</strong> The notebook's default <code>TRANSLATION_MODEL</code> is the official gated Hub id. If you have not authenticated, translation fails. You can pass a local mirror path in the commands, but the notebook cells as written use the constant. The local demo notebook is the tested path on this machine.</p>
+<p><strong>Common issue.</strong> The notebook's default <code>TRANSLATION_MODEL</code> is the official gated Hub id. If you have not authenticated, translation fails at the evaluation or pipeline step with a clear error. Add <code>HF_TOKEN</code> in Colab Secrets and rerun the optional login cell. The executed demo notebook is the tested evidence path on this machine.</p>
 </blockquote>
 <h2 id="25-pipeline_demoipynb-the-executed-local-demo">25. <code>pipeline_demo.ipynb</code> — the executed local demo</h2>
 <div class='approach'>
 <strong>APPROACH CHOSEN.</strong> Publish an executed notebook that uses the real adapters and shows visible outputs for every stage. This is the evidence artifact: it proves the local pipeline runs, that Hindi/English outputs align, and that the reported metrics are reproducible on this machine.
 </div>
 
-<p>This notebook has 13 cells and is already executed. It is the artifact that proves the local pipeline runs with visible outputs.</p>
+<p>This notebook has 22 cells and is already executed. It is the short, beginner-friendly companion to the full course: it does not train anything, but it explains each stage and shows real predictions and real output files.</p>
 <h3 id="251-cell-map-and-observed-outputs">25.1 Cell map and observed outputs</h3>
 <table>
 <thead>
@@ -3360,79 +3513,133 @@ python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class=
 <tr>
 <td style="text-align: right;">0</td>
 <td>markdown</td>
-<td>title, environment summary</td>
+<td>Title, what the project does, the three stages, and environment summary</td>
 <td>Python 3.12, torch 2.15 MPS, 2-3 minutes</td>
 </tr>
 <tr>
 <td style="text-align: right;">1</td>
-<td>code</td>
-<td>set project root, print Python version</td>
-<td><code>Python: 3.12.13</code></td>
-</tr>
-<tr>
-<td style="text-align: right;">2</td>
 <td>markdown</td>
-<td>stage 1 explanation</td>
+<td>Section 0: how the notebook finds the project root</td>
 <td>—</td>
 </tr>
 <tr>
-<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
 <td>code</td>
-<td>load punctuation adapter, predict one test window</td>
-<td>73 words; token accuracy 0.849; correct <code>है -&gt; sentence_end</code>, <code>राज्यव्यवस्था -&gt; comma</code></td>
+<td>Set the project root, add it to <code>sys.path</code>, print the Python version</td>
+<td><code>Python: 3.12.13</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>markdown</td>
+<td>What the path cell should print and why it matters</td>
+<td>—</td>
 </tr>
 <tr>
 <td style="text-align: right;">4</td>
 <td>markdown</td>
-<td>stage 2 explanation</td>
+<td>Section 1: punctuation problem, five labels, subword labels, LoRA</td>
 <td>—</td>
 </tr>
 <tr>
 <td style="text-align: right;">5</td>
 <td>code</td>
-<td>load ordering adapter, score one test pair</td>
-<td>gold 1; P(A before B)=0.711; P(B before A)=0.289</td>
+<td>Load the punctuation adapter and predict one test window</td>
+<td>73 words; token accuracy 0.849; correct <code>है -&gt; sentence_end</code>, <code>राज्यव्यवस्था -&gt; comma</code></td>
 </tr>
 <tr>
 <td style="text-align: right;">6</td>
 <td>markdown</td>
-<td>stage 3 explanation</td>
+<td>How to read <code>true=</code> and <code>pred=</code>; why the classifier warning is expected</td>
 <td>—</td>
 </tr>
 <tr>
 <td style="text-align: right;">7</td>
-<td>code</td>
-<td>translate three sentences</td>
-<td>“India is a huge country.”; “It's a test.”; “Please submit your report by tomorrow.”</td>
-</tr>
-<tr>
-<td style="text-align: right;">8</td>
 <td>markdown</td>
-<td>end-to-end artifacts explanation</td>
+<td>Section 2: why pairwise ordering, and how Borda turns pairs into an order</td>
 <td>—</td>
 </tr>
 <tr>
-<td style="text-align: right;">9</td>
+<td style="text-align: right;">8</td>
 <td>code</td>
-<td>check alignment of all seven samples</td>
-<td>52/11, 55/11, 49/10, 53/11, 55/11, 80/16, 99/20; all aligned</td>
+<td>Load the ordering adapter and score one test pair</td>
+<td>gold 1; P(A before B)=0.711; P(B before A)=0.289</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>markdown</td>
+<td>How to read the pair probabilities; why one pair is only a sanity check</td>
+<td>—</td>
 </tr>
 <tr>
 <td style="text-align: right;">10</td>
 <td>markdown</td>
-<td>evaluation explanation</td>
-<td>subset adapters</td>
+<td>Section 3: IndicTrans2, language tags, and why there is no fallback</td>
+<td>—</td>
 </tr>
 <tr>
 <td style="text-align: right;">11</td>
 <td>code</td>
-<td>print key metrics</td>
-<td>0.8724 / 0.8842; 0.6543; 0.2007; 34.125 / 59.686</td>
+<td>Translate three short Hindi sentences</td>
+<td>“India is a huge country.”; “It's a test.”; “Please submit your report by tomorrow.”</td>
 </tr>
 <tr>
 <td style="text-align: right;">12</td>
 <td>markdown</td>
-<td>reproduce commands</td>
+<td>What the translations should look like; wording may vary</td>
+<td>—</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td>markdown</td>
+<td>Section 4: the four output files per sample and the alignment rule</td>
+<td>—</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td>code</td>
+<td>Check alignment of all seven samples</td>
+<td>52/11, 55/11, 49/10, 53/11, 55/11, 80/16, 99/20; all aligned</td>
+</tr>
+<tr>
+<td style="text-align: right;">15</td>
+<td>markdown</td>
+<td>How to read <code>aligned=True</code>; what good and bad output look like</td>
+<td>—</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td>markdown</td>
+<td>Section 5: what each metric means and why the subset scores are honest</td>
+<td>—</td>
+</tr>
+<tr>
+<td style="text-align: right;">17</td>
+<td>code</td>
+<td>Print the key metrics from <code>reports/evaluation.json</code></td>
+<td>0.8724 / 0.8842; 0.6543; 0.2007; 34.125 / 59.686</td>
+</tr>
+<tr>
+<td style="text-align: right;">18</td>
+<td>markdown</td>
+<td>How to read the scores; why ordering is the weak point</td>
+<td>—</td>
+</tr>
+<tr>
+<td style="text-align: right;">19</td>
+<td>markdown</td>
+<td>Section 6: reproduce the artifacts and run the verifier</td>
+<td>—</td>
+</tr>
+<tr>
+<td style="text-align: right;">20</td>
+<td>markdown</td>
+<td>The three command-line commands</td>
+<td>—</td>
+</tr>
+<tr>
+<td style="text-align: right;">21</td>
+<td>markdown</td>
+<td>Section 7: code-reading order and exercises</td>
 <td>—</td>
 </tr>
 </tbody>
@@ -3442,7 +3649,8 @@ python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class=
 <li>It uses the <strong>actual trained adapters</strong>, not toy weights.</li>
 <li>It shows <strong>visible outputs</strong> for all three stages, including Hindi text.</li>
 <li>It verifies <strong>alignment</strong>: the number of Hindi sentences equals the number of English sentences equals the summary's sentence count, and the same for groups.</li>
-<li>It reports the <strong>subset adapter</strong> scores honestly.</li>
+<li>It reports the <strong>subset adapter</strong> scores honestly instead of hiding the weak ordering result.</li>
+<li>It is short enough for a reviewer to read before the full course. In Colab it is <strong>read-only evidence</strong>: the model weights and processed data are git-ignored, so a reviewer should read the saved outputs instead of using <strong>Run all</strong>.</li>
 </ul>
 <h3 id="253-how-to-run-it">25.3 How to run it</h3>
 <div class="codehilite"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>.venv.backup-20261109-124948/bin/activate
@@ -3637,7 +3845,7 @@ jupyter<span class="w"> </span>notebook<span class="w"> </span>notebooks/pipelin
 </blockquote>
 <h2 id="28-design-decisions-expanded">28. Design decisions, expanded</h2>
 <div class='approach'>
-<strong>APPROACH CHOSEN.</strong> Make each major decision explicit, with the alternative, the reason, and the cost. This is the material a reviewer or examiner will probe, so it is written as a decision log rather than prose.
+<strong>APPROACH CHOSEN.</strong> Make each major decision explicit, with the alternative, the reason, the pros, and the cons. This is the material a reviewer or examiner will probe, so it is written as a decision log rather than prose.
 </div>
 
 <h3 id="d1-language-hindi">D1. Language: Hindi</h3>
@@ -3645,84 +3853,96 @@ jupyter<span class="w"> </span>notebook<span class="w"> </span>notebooks/pipelin
 <li><strong>Chosen:</strong> Hindi (Devanagari), with English translation.</li>
 <li><strong>Alternatives:</strong> a higher-resource language with better tooling.</li>
 <li><strong>Why:</strong> the task requires Hindi; Devanagari has clear sentence-ending danda, rich morphology, and available multilingual models.</li>
-<li><strong>Cost:</strong> fewer high-quality tools than English; tokenization is harder.</li>
+<li><strong>Pros:</strong> direct task match; the danda gives an unambiguous sentence terminator; multilingual models support Devanagari; only one target language is needed.</li>
+<li><strong>Cons:</strong> fewer high-quality tools than English; rich morphology and combining marks make tokenization harder; no large Hindi-only pretrained encoder was available locally.</li>
 </ul>
 <h3 id="d2-tokenization-whitespace-not-regex">D2. Tokenization: whitespace, not regex</h3>
 <ul>
 <li><strong>Chosen:</strong> <code>str.split()</code>.</li>
 <li><strong>Alternatives:</strong> <code>re.findall(r'\w+', text)</code>.</li>
 <li><strong>Why:</strong> Devanagari vowel signs are combining marks; <code>\w+</code> drops them (<code>अयोध्या</code> → <code>अय</code>, <code>ध</code>, <code>य</code>). Whitespace keeps words intact.</li>
-<li><strong>Cost:</strong> punctuation attached to words must be handled by the models or stripped.</li>
+<li><strong>Pros:</strong> preserves Devanagari vowel signs; trivially simple; matches the assignment's space-separated input; no regex or language-specific rules.</li>
+<li><strong>Cons:</strong> punctuation attached to tokens must be stripped or modelled; no Unicode normalization; clitics and compounds are not split; whitespace errors pass through.</li>
 </ul>
 <h3 id="d3-punctuation-token-classification-not-seq2seq">D3. Punctuation: token classification, not seq2seq</h3>
 <ul>
 <li><strong>Chosen:</strong> classify each word into five labels.</li>
 <li><strong>Alternatives:</strong> generate punctuated text with a seq2seq model; use a large LLM.</li>
 <li><strong>Why:</strong> one-to-one alignment, fast, small, no hallucination, fits 1.5 GB.</li>
-<li><strong>Cost:</strong> cannot insert words; rare labels are hard; comma style is limited.</li>
+<li><strong>Pros:</strong> exact one-to-one word alignment; fast; small; deterministic; cannot hallucinate or delete words; easy to evaluate per token.</li>
+<li><strong>Cons:</strong> cannot insert or rewrite words; rare labels are hard to learn; comma style is limited; subword-to-word alignment adds complexity.</li>
 </ul>
 <h3 id="d4-model-mbert-lora">D4. Model: mBERT + LoRA</h3>
 <ul>
 <li><strong>Chosen:</strong> <code>bert-base-multilingual-cased</code> with LoRA r=16 on query/value.</li>
 <li><strong>Alternatives:</strong> full fine-tuning; a larger multilingual model; XLM-R; MuRIL.</li>
 <li><strong>Why:</strong> mBERT has Hindi coverage, is ~178M params, and LoRA makes training cheap. It was available locally.</li>
-<li><strong>Cost:</strong> mBERT is older than XLM-R/MuRIL; cased vocab splits Devanagari heavily.</li>
+<li><strong>Pros:</strong> Hindi coverage; only ~178M parameters; LoRA makes training cheap; adapters are portable and small; one backbone serves two tasks.</li>
+<li><strong>Cons:</strong> older and weaker than XLM-R/MuRIL; the cased vocabulary fragments Devanagari into many subwords; 512-token limit; no generative ability.</li>
 </ul>
 <h3 id="d5-label-alignment-first-subword">D5. Label alignment: first subword</h3>
 <ul>
 <li><strong>Chosen:</strong> assign the word label to its first subword; ignore the rest.</li>
 <li><strong>Alternatives:</strong> average subword logits; predict on the last subword; use word-level tokenizer.</li>
 <li><strong>Why:</strong> Bengali/Hindi word endings carry punctuation cues, but first-subword is simple, stable, and works well in practice.</li>
-<li><strong>Cost:</strong> loses some information from later subwords; a learned pooling could be better.</li>
+<li><strong>Pros:</strong> simple and stable; one label per word; works directly with WordPiece; no extra parameters or alignment model.</li>
+<li><strong>Cons:</strong> ignores evidence in later subwords; no learned pooling; sensitive to tokenizer changes; a word's final subword often carries the clearest punctuation cue.</li>
 </ul>
 <h3 id="d6-ordering-pairwise-binary-classification-borda">D6. Ordering: pairwise binary classification + Borda</h3>
 <ul>
 <li><strong>Chosen:</strong> train <code>[CLS] A [SEP] B [SEP] → before/after</code>; decode with Borda.</li>
 <li><strong>Alternatives:</strong> pointer networks; seq2seq ordering; listwise ranking; topological sort.</li>
 <li><strong>Why:</strong> pairwise data is easy to generate and the classifier is small and robust. Borda aggregates noisy preferences.</li>
-<li><strong>Cost:</strong> pairwise preferences can be cyclic; Borda is not optimal; full order is weak.</li>
+<li><strong>Pros:</strong> training data is easy to generate; the model generalizes to any document length; small and robust; decoders can be swapped without retraining; performance is measurable with pair accuracy.</li>
+<li><strong>Cons:</strong> O(n²) pairs; preferences can be cyclic; Borda is an approximation, not the optimal Kemeny order; full-order accuracy is weak; early errors propagate.</li>
 </ul>
 <h3 id="d7-ordering-training-data-balanced-both-directions">D7. Ordering training data: balanced both directions</h3>
 <ul>
 <li><strong>Chosen:</strong> for each adjacent pair, add <code>(A,B,1)</code> and <code>(B,A,0)</code>.</li>
 <li><strong>Alternatives:</strong> only natural order; sample random pairs.</li>
 <li><strong>Why:</strong> removes position bias and doubles data.</li>
-<li><strong>Cost:</strong> model cannot use absolute position; only relative coherence.</li>
+<li><strong>Pros:</strong> removes position bias; doubles the training data; forces the model to learn symmetric coherence rather than a direction shortcut.</li>
+<li><strong>Cons:</strong> artificial reverse pairs can be plausible; the model cannot use absolute position; training and inference cost double.</li>
 </ul>
 <h3 id="d8-translation-indictrans2-200m">D8. Translation: IndicTrans2 200M</h3>
 <ul>
 <li><strong>Chosen:</strong> <code>ai4bharat/indictrans2-indic-en-dist-200M</code>.</li>
 <li><strong>Alternatives:</strong> MarianMT; NLLB; a large LLM; Google Translate API.</li>
 <li><strong>Why:</strong> Indic-specialized, 200M is feasible, strong Hindi→English quality, runs locally.</li>
-<li><strong>Cost:</strong> gated license; ~913 MB; 256-token limit; slower on CPU.</li>
+<li><strong>Pros:</strong> Indic-specialized; 200M parameters fit the budget; strong Hindi→English quality; runs locally; exact sentence-level alignment.</li>
+<li><strong>Cons:</strong> gated license; ~913 MB; 256-token context limit; slow on CPU; no document-level context; a local mirror may differ from the official checkpoint.</li>
 </ul>
 <h3 id="d9-memory-staged-loadfree-vs-simultaneous">D9. Memory: staged load/free vs simultaneous</h3>
 <ul>
 <li><strong>Chosen:</strong> load one model, run its stage on all files, free it, load the next.</li>
 <li><strong>Alternatives:</strong> load all three and stream.</li>
 <li><strong>Why:</strong> three models would exceed 1.5 GB; staging caps peak memory at the largest model.</li>
-<li><strong>Cost:</strong> cannot jointly optimize stages; more I/O.</li>
+<li><strong>Pros:</strong> peak memory is the largest single model, not the sum; simple and predictable; easy to swap or skip a stage; no quantization needed.</li>
+<li><strong>Cons:</strong> repeated load/free time; more I/O; cannot jointly optimize stages; failures are only discovered when the stage runs.</li>
 </ul>
 <h3 id="d10-evaluation-per-stage-honest-subsets">D10. Evaluation: per-stage, honest subsets</h3>
 <ul>
 <li><strong>Chosen:</strong> held-out windows/pairs/articles and a 100-sentence translation sample.</li>
 <li><strong>Alternatives:</strong> one end-to-end human evaluation.</li>
 <li><strong>Why:</strong> fast, reproducible, isolates failures.</li>
-<li><strong>Cost:</strong> does not measure full-pipeline quality directly.</li>
+<li><strong>Pros:</strong> fast; reproducible; isolates which stage failed; cheap to rerun; uses the same inference code as the pipeline.</li>
+<li><strong>Cons:</strong> does not measure full-pipeline quality directly; translation is scored on clean IITB pairs, not pipeline output; subset sizes add sampling variance.</li>
 </ul>
 <h3 id="d11-notebooks-recipe-executed-demo">D11. Notebooks: recipe + executed demo</h3>
 <ul>
 <li><strong>Chosen:</strong> a full Colab recipe notebook and an executed local demo.</li>
 <li><strong>Alternatives:</strong> only scripts; only a notebook.</li>
 <li><strong>Why:</strong> the recipe is portable; the demo is evidence.</li>
-<li><strong>Cost:</strong> two artifacts to maintain; the recipe is not executed here.</li>
+<li><strong>Pros:</strong> the recipe is portable to Colab; the demo is executed evidence; readers can inspect outputs without training; markdown explains each step.</li>
+<li><strong>Cons:</strong> two artifacts to maintain; the full recipe is not executed in this repository; versions can drift; Colab-specific paths and installs.</li>
 </ul>
 <h3 id="d12-no-llm">D12. No LLM</h3>
 <ul>
 <li><strong>Chosen:</strong> no generative LLM anywhere in the pipeline.</li>
 <li><strong>Alternatives:</strong> prompt GPT/Gemini for punctuation/ordering/translation.</li>
 <li><strong>Why:</strong> the assignment forbids an LLM-based solution; also cost, latency, privacy, and determinism.</li>
-<li><strong>Cost:</strong> lower ceiling on quality, especially ordering.</li>
+<li><strong>Pros:</strong> satisfies the assignment constraint; lower cost and latency; privacy-preserving; deterministic; small dependency surface; every prediction is traceable to a model.</li>
+<li><strong>Cons:</strong> lower quality ceiling, especially for ordering; no fluent generation; more engineering than prompting; weak rare-punctuation handling.</li>
 </ul>
 <h2 id="29-viva-and-interview-question-bank">29. Viva and interview question bank</h2>
 <div class='approach'>
@@ -4024,37 +4244,65 @@ python<span class="w"> </span>scripts/build_study_guide.py
 </tbody>
 </table>
 <h2 id="appendix-d-report-schemas">Appendix D. Report schemas</h2>
-<p><code>reports/data_prep_summary.json</code>:</p>
+<p><code>reports/data_prep_summary.json</code> (values from the verified local run):</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"train"</span><span class="p">:</span><span class="w"> </span><span class="mi">2700</span><span class="p">,</span><span class="w"> </span><span class="nt">"val"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">},</span>
-<span class="w">  </span><span class="nt">"punctuation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"train"</span><span class="p">:</span><span class="w"> </span><span class="mi">25000</span><span class="p">,</span><span class="w"> </span><span class="nt">"val"</span><span class="p">:</span><span class="w"> </span><span class="mi">2317</span><span class="p">,</span><span class="w"> </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="mi">2208</span><span class="p">},</span>
-<span class="w">  </span><span class="nt">"ordering"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"train"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="p">,</span><span class="w"> </span><span class="nt">"val"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">"eval_articles"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">},</span>
-<span class="w">  </span><span class="nt">"label_counts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"none"</span><span class="p">:</span><span class="w"> </span><span class="mi">1653107</span><span class="p">,</span><span class="w"> </span><span class="nt">"comma"</span><span class="p">:</span><span class="w"> </span><span class="mi">59324</span><span class="p">,</span>
-<span class="w">                   </span><span class="nt">"sentence_end"</span><span class="p">:</span><span class="w"> </span><span class="mi">104840</span><span class="p">,</span>
-<span class="w">                   </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="mi">236</span><span class="p">,</span><span class="w"> </span><span class="nt">"exclamation"</span><span class="p">:</span><span class="w"> </span><span class="mi">153</span><span class="p">}</span>
+<span class="w">  </span><span class="nt">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wikimedia/wikipedia"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"config"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20231101.hi"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"seed"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"splits"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"train"</span><span class="p">:</span><span class="w"> </span><span class="mi">2700</span><span class="p">,</span><span class="w"> </span><span class="nt">"val"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"punctuation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"train"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="mi">2700</span><span class="p">,</span><span class="w"> </span><span class="nt">"examples"</span><span class="p">:</span><span class="w"> </span><span class="mi">25000</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"none"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1653107</span><span class="p">,</span><span class="w"> </span><span class="nt">"share"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.90947</span><span class="p">},</span>
+<span class="w">                         </span><span class="nt">"comma"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">59324</span><span class="p">,</span><span class="w"> </span><span class="nt">"share"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03264</span><span class="p">},</span>
+<span class="w">                         </span><span class="nt">"sentence_end"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">104840</span><span class="p">,</span><span class="w"> </span><span class="nt">"share"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05768</span><span class="p">},</span>
+<span class="w">                         </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">236</span><span class="p">,</span><span class="w"> </span><span class="nt">"share"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00013</span><span class="p">},</span>
+<span class="w">                         </span><span class="nt">"exclamation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">153</span><span class="p">,</span><span class="w"> </span><span class="nt">"share"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00008</span><span class="p">}}},</span>
+<span class="w">    </span><span class="nt">"val"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span><span class="nt">"examples"</span><span class="p">:</span><span class="w"> </span><span class="mi">2317</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span><span class="nt">"examples"</span><span class="p">:</span><span class="w"> </span><span class="mi">2208</span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"ordering"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"train"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="mi">2700</span><span class="p">,</span><span class="w"> </span><span class="nt">"pairs"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"val"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span><span class="nt">"pairs"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"articles"</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span><span class="nt">"pairs"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<p><code>models/*/training_summary.json</code>:</p>
+<p><code>models/punctuation/training_summary.json</code> (abridged; ordering has the analogous keys):</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">"base_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bert-base-multilingual-cased"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"epochs"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"batch_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"learning_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0003</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"train_windows"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">"trainable_parameters"</span><span class="p">:</span><span class="w"> </span><span class="mi">593669</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">"total_parameters"</span><span class="p">:</span><span class="w"> </span><span class="mi">177860362</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">"train_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
-<span class="w">  </span><span class="nt">"eval_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"eval_loss"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4399</span><span class="p">,</span><span class="w"> </span><span class="nt">"eval_boundary_f1"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8246</span><span class="p">},</span>
-<span class="w">  </span><span class="nt">"test_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"test_accuracy"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8688</span><span class="p">,</span><span class="w"> </span><span class="nt">"test_boundary_f1"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8633</span><span class="p">},</span>
-<span class="w">  </span><span class="nt">"peak_memory_gb"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">  </span><span class="nt">"validation_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"eval_loss"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4399</span><span class="p">,</span>
+<span class="w">                         </span><span class="nt">"eval_boundary_f1"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8246</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"test_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"test_accuracy"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8688</span><span class="p">,</span>
+<span class="w">                   </span><span class="nt">"test_boundary_f1"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8633</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"label_counts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"none"</span><span class="p">:</span><span class="w"> </span><span class="mi">1653107</span><span class="p">,</span><span class="w"> </span><span class="nt">"comma"</span><span class="p">:</span><span class="w"> </span><span class="mi">59324</span><span class="p">,</span>
+<span class="w">                   </span><span class="nt">"sentence_end"</span><span class="p">:</span><span class="w"> </span><span class="mi">104840</span><span class="p">,</span>
+<span class="w">                   </span><span class="nt">"question"</span><span class="p">:</span><span class="w"> </span><span class="mi">236</span><span class="p">,</span><span class="w"> </span><span class="nt">"exclamation"</span><span class="p">:</span><span class="w"> </span><span class="mi">153</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"class_weights"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.22</span><span class="p">,</span><span class="w"> </span><span class="mf">6.128</span><span class="p">,</span><span class="w"> </span><span class="mf">3.467</span><span class="p">,</span><span class="w"> </span><span class="mf">20.0</span><span class="p">,</span><span class="w"> </span><span class="mf">20.0</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"memory_limit"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"memory_at_end"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <p><code>reports/run_summary.json</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">"strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"borda"</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">"timings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"punctuation_seconds"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.31</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">"ordering_seconds"</span><span class="p">:</span><span class="w"> </span><span class="mf">130.53</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">"translation_seconds"</span><span class="p">:</span><span class="w"> </span><span class="mf">102.17</span><span class="p">},</span>
-<span class="w">  </span><span class="nt">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"sample-1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"words"</span><span class="p">:</span><span class="w"> </span><span class="mi">747</span><span class="p">,</span><span class="w"> </span><span class="nt">"null_removed"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"group_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"ordering_strategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"borda"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"punctuation_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"models/punctuation"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"ordering_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"models/ordering"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"translation_model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"models/translation/indictrans2-indic-en-200M"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"memory_limit_gb"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"timings_seconds"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"punctuation"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.31</span><span class="p">,</span>
+<span class="w">                      </span><span class="nt">"ordering"</span><span class="p">:</span><span class="w"> </span><span class="mf">130.53</span><span class="p">,</span>
+<span class="w">                      </span><span class="nt">"translation"</span><span class="p">:</span><span class="w"> </span><span class="mf">102.17</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"sample-1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"words"</span><span class="p">:</span><span class="w"> </span><span class="mi">747</span><span class="p">,</span><span class="w"> </span><span class="nt">"null_tokens_removed"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
 <span class="w">                         </span><span class="nt">"sentences"</span><span class="p">:</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w"> </span><span class="nt">"groups"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">}}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -4141,5 +4389,1030 @@ python<span class="w"> </span>scripts/build_study_guide.py
 <p><strong>Week 4 — inference and decoding.</strong> Sliding-window prediction, Borda/clusters/beam, Kendall tau. Re-run <code>src.evaluate</code> and reproduce the reported numbers.</p>
 <p><strong>Week 5 — translation and orchestration.</strong> IndicTrans2, tokenizer quirks, staged loading, memory caps. Run the pipeline end to end and inspect all four outputs per file.</p>
 <p><strong>Week 6 — communication.</strong> Read this guide's Parts 0.5 and IV, answer the viva bank aloud, and explain one design decision to someone else in two minutes.</p>
+<div class='pagebreak'></div>
+
+<h2 id="appendix-h-abbreviations-and-full-forms">Appendix H. Abbreviations and full forms</h2>
+<p>Every acronym, initialism, and short form used in this guide is listed here. The goal is that a reader never has to guess what an abbreviation means. Clipped words such as “config”, “repo”, and “demo” are ordinary shorthand, not acronyms; document notation such as <code>A.1</code> and <code>D1</code> is explained in H.6.</p>
+<h3 id="h1-core-nlp-and-machine-learning">H.1 Core NLP and machine learning</h3>
+<table>
+<thead>
+<tr>
+<th>Short form</th>
+<th>Full form</th>
+<th>Meaning in this guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NLP</strong></td>
+<td>Natural Language Processing</td>
+<td>the field concerned with making computers process human language</td>
+</tr>
+<tr>
+<td><strong>LLM</strong></td>
+<td>Large Language Model</td>
+<td>a large generative model such as GPT; explicitly not used here</td>
+</tr>
+<tr>
+<td><strong>BERT</strong></td>
+<td>Bidirectional Encoder Representations from Transformers</td>
+<td>the pretrained encoder family used for stages 1 and 2</td>
+</tr>
+<tr>
+<td><strong>mBERT</strong></td>
+<td>Multilingual BERT</td>
+<td><code>bert-base-multilingual-cased</code>, pretrained on many languages including Hindi</td>
+</tr>
+<tr>
+<td><strong>XLM-R</strong></td>
+<td>Cross-lingual Language Model – RoBERTa</td>
+<td>a stronger multilingual encoder considered as an alternative</td>
+</tr>
+<tr>
+<td><strong>MuRIL</strong></td>
+<td>Multilingual Representations for Indian Languages</td>
+<td>an Indic-focused BERT variant considered as an alternative</td>
+</tr>
+<tr>
+<td><strong>GPT</strong></td>
+<td>Generative Pre-trained Transformer</td>
+<td>the decoder-only model family behind many LLMs</td>
+</tr>
+<tr>
+<td><strong>LoRA</strong></td>
+<td>Low-Rank Adaptation</td>
+<td>the parameter-efficient fine-tuning method used for both adapters</td>
+</tr>
+<tr>
+<td><strong>PEFT</strong></td>
+<td>Parameter-Efficient Fine-Tuning</td>
+<td>the library and the general family of methods that includes LoRA</td>
+</tr>
+<tr>
+<td><strong>MLM</strong></td>
+<td>Masked Language Modeling</td>
+<td>BERT pretraining task: predict randomly masked tokens</td>
+</tr>
+<tr>
+<td><strong>NSP</strong></td>
+<td>Next Sentence Prediction</td>
+<td>BERT pretraining task: predict whether B follows A</td>
+</tr>
+<tr>
+<td><strong>FFN</strong></td>
+<td>Feed-Forward Network</td>
+<td>the position-wise two-layer network inside a transformer block</td>
+</tr>
+<tr>
+<td><strong>MLP</strong></td>
+<td>Multi-Layer Perceptron</td>
+<td>a stack of linear layers with nonlinearities; the FFN is an MLP</td>
+</tr>
+<tr>
+<td><strong>GELU</strong></td>
+<td>Gaussian Error Linear Unit</td>
+<td>a smooth activation function used in BERT</td>
+</tr>
+<tr>
+<td><strong>ReLU</strong></td>
+<td>Rectified Linear Unit</td>
+<td>the simple <code>max(0, x)</code> activation mentioned as a contrast</td>
+</tr>
+<tr>
+<td><strong>BPE</strong></td>
+<td>Byte Pair Encoding</td>
+<td>a subword tokenization algorithm</td>
+</tr>
+<tr>
+<td><strong>OOV</strong></td>
+<td>Out-of-Vocabulary</td>
+<td>a word the tokenizer cannot represent directly</td>
+</tr>
+<tr>
+<td><strong>TF-IDF</strong></td>
+<td>Term Frequency–Inverse Document Frequency</td>
+<td>a classical lexical weighting scheme used as an ordering ablation</td>
+</tr>
+<tr>
+<td><strong>DP</strong></td>
+<td>Dynamic Programming</td>
+<td>the optimization method used by the rule-based baseline segmenter</td>
+</tr>
+<tr>
+<td><strong>NP-hard</strong></td>
+<td>Nondeterministic Polynomial-time hard</td>
+<td>a complexity class; finding the optimal Kemeny order is NP-hard</td>
+</tr>
+<tr>
+<td><strong>seq2seq</strong></td>
+<td>Sequence-to-Sequence</td>
+<td>a model that maps one sequence to another; used for translation</td>
+</tr>
+<tr>
+<td><strong>SDPA</strong></td>
+<td>Scaled Dot-Product Attention</td>
+<td>the fused attention implementation that is avoided on MPS</td>
+</tr>
+<tr>
+<td><strong>CLS</strong></td>
+<td>Classification</td>
+<td>the <code>[CLS]</code> special token whose final vector summarizes a sequence</td>
+</tr>
+<tr>
+<td><strong>SEP</strong></td>
+<td>Separator</td>
+<td>the <code>[SEP]</code> token that separates sequences in a BERT pair input</td>
+</tr>
+<tr>
+<td><strong>PAD</strong></td>
+<td>Padding</td>
+<td>the <code>[PAD]</code> token that makes batch sequences equal length</td>
+</tr>
+<tr>
+<td><strong>MT</strong></td>
+<td>Machine Translation</td>
+<td>translating text from one language to another</td>
+</tr>
+<tr>
+<td><strong>NMT</strong></td>
+<td>Neural Machine Translation</td>
+<td>machine translation using neural networks</td>
+</tr>
+<tr>
+<td><strong>RNG</strong></td>
+<td>Random Number Generator</td>
+<td>the seeded generator used for shuffling and splits</td>
+</tr>
+<tr>
+<td><strong>NaN</strong></td>
+<td>Not a Number</td>
+<td>an invalid floating-point value; a sign of numerical failure</td>
+</tr>
+<tr>
+<td><strong>AdamW</strong></td>
+<td>Adaptive Moment Estimation with decoupled Weight decay</td>
+<td>the optimizer used by Hugging Face <code>Trainer</code></td>
+</tr>
+<tr>
+<td><strong>SGD</strong></td>
+<td>Stochastic Gradient Descent</td>
+<td>the basic optimizer mentioned as a contrast</td>
+</tr>
+<tr>
+<td><strong>LR</strong></td>
+<td>Learning Rate</td>
+<td>the step size for optimizer updates</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h2-models-and-translation-systems">H.2 Models and translation systems</h3>
+<table>
+<thead>
+<tr>
+<th>Short form</th>
+<th>Full form</th>
+<th>Meaning in this guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IndicTrans2</strong></td>
+<td>Indic Translation 2</td>
+<td>AI4Bharat's Indic-to-Indic/English translation model family</td>
+</tr>
+<tr>
+<td><strong>AI4Bharat</strong></td>
+<td>Artificial Intelligence for Bharat</td>
+<td>the research group that released IndicTrans2</td>
+</tr>
+<tr>
+<td><strong>MarianMT</strong></td>
+<td>Marian Machine Translation</td>
+<td>the OPUS/Marian neural translation model family</td>
+</tr>
+<tr>
+<td><strong>OPUS-MT</strong></td>
+<td>Open Parallel Corpus – Machine Translation</td>
+<td>the OPUS collection of pretrained translation models</td>
+</tr>
+<tr>
+<td><strong>OPUS</strong></td>
+<td>Open Parallel Corpus</td>
+<td>the parallel-text corpus project behind OPUS-MT</td>
+</tr>
+<tr>
+<td><strong>NLLB</strong></td>
+<td>No Language Left Behind</td>
+<td>Meta's multilingual translation model family, considered as an alternative</td>
+</tr>
+<tr>
+<td><strong>IITB</strong></td>
+<td>Indian Institute of Technology Bombay</td>
+<td>the source of the Hindi–English evaluation benchmark</td>
+</tr>
+<tr>
+<td><strong>HF</strong></td>
+<td>Hugging Face</td>
+<td>the model/dataset hosting company and its libraries</td>
+</tr>
+<tr>
+<td><strong>HF_TOKEN</strong></td>
+<td>Hugging Face Token</td>
+<td>the access token used to download gated models</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h3-evaluation-metrics">H.3 Evaluation metrics</h3>
+<table>
+<thead>
+<tr>
+<th>Short form</th>
+<th>Full form</th>
+<th>Meaning in this guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>F1</strong></td>
+<td>F1 score</td>
+<td>harmonic mean of precision and recall</td>
+</tr>
+<tr>
+<td><strong>P</strong></td>
+<td>Precision</td>
+<td>fraction of predicted positives that are correct</td>
+</tr>
+<tr>
+<td><strong>R</strong></td>
+<td>Recall</td>
+<td>fraction of true positives that are found</td>
+</tr>
+<tr>
+<td><strong>TP</strong></td>
+<td>True Positive</td>
+<td>correctly predicted positive</td>
+</tr>
+<tr>
+<td><strong>TN</strong></td>
+<td>True Negative</td>
+<td>correctly predicted negative</td>
+</tr>
+<tr>
+<td><strong>FP</strong></td>
+<td>False Positive</td>
+<td>incorrectly predicted positive</td>
+</tr>
+<tr>
+<td><strong>FN</strong></td>
+<td>False Negative</td>
+<td>missed positive</td>
+</tr>
+<tr>
+<td><strong>BLEU</strong></td>
+<td>Bilingual Evaluation Understudy</td>
+<td>n-gram precision metric for translation</td>
+</tr>
+<tr>
+<td><strong>BP</strong></td>
+<td>Brevity Penalty</td>
+<td>BLEU's penalty for outputs shorter than the reference</td>
+</tr>
+<tr>
+<td><strong>chrF</strong></td>
+<td>character n-gram F-score</td>
+<td>character-level translation metric</td>
+</tr>
+<tr>
+<td><strong>tau</strong></td>
+<td>Kendall rank correlation coefficient (τ)</td>
+<td>measures how close a recovered order is to the true order</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h4-hardware-formats-and-tooling">H.4 Hardware, formats, and tooling</h3>
+<table>
+<thead>
+<tr>
+<th>Short form</th>
+<th>Full form</th>
+<th>Meaning in this guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GPU</strong></td>
+<td>Graphics Processing Unit</td>
+<td>the accelerator used for training and inference</td>
+</tr>
+<tr>
+<td><strong>CPU</strong></td>
+<td>Central Processing Unit</td>
+<td>the fallback processor; much slower for these models</td>
+</tr>
+<tr>
+<td><strong>CUDA</strong></td>
+<td>Compute Unified Device Architecture</td>
+<td>NVIDIA's GPU programming platform</td>
+</tr>
+<tr>
+<td><strong>MPS</strong></td>
+<td>Metal Performance Shaders</td>
+<td>Apple's GPU backend used on the M4</td>
+</tr>
+<tr>
+<td><strong>T4</strong></td>
+<td>NVIDIA Tesla T4</td>
+<td>the 16 GB GPU assumed by the Colab recipe</td>
+</tr>
+<tr>
+<td><strong>M4</strong></td>
+<td>Apple M4</td>
+<td>the Apple silicon chip used for the verified local run</td>
+</tr>
+<tr>
+<td><strong>GB</strong></td>
+<td>Gigabyte</td>
+<td>10^9 bytes (used loosely for GPU memory)</td>
+</tr>
+<tr>
+<td><strong>MB</strong></td>
+<td>Megabyte</td>
+<td>10^6 bytes</td>
+</tr>
+<tr>
+<td><strong>fp16</strong></td>
+<td>16-bit floating point</td>
+<td>half precision, used on CUDA</td>
+</tr>
+<tr>
+<td><strong>fp32</strong></td>
+<td>32-bit floating point</td>
+<td>full precision, used on MPS</td>
+</tr>
+<tr>
+<td><strong>OOM</strong></td>
+<td>Out of Memory</td>
+<td>the failure when a model exceeds the memory budget</td>
+</tr>
+<tr>
+<td><strong>ONNX</strong></td>
+<td>Open Neural Network Exchange</td>
+<td>an export format; its removal in transformers 5 is a pin reason</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td>Application Programming Interface</td>
+<td>a programmatic interface, e.g. the Hugging Face Hub API</td>
+</tr>
+<tr>
+<td><strong>CLI</strong></td>
+<td>Command-Line Interface</td>
+<td>the <code>python -m src...</code> commands used throughout</td>
+</tr>
+<tr>
+<td><strong>JSON</strong></td>
+<td>JavaScript Object Notation</td>
+<td>the report and configuration format</td>
+</tr>
+<tr>
+<td><strong>JSONL</strong></td>
+<td>JSON Lines</td>
+<td>one JSON object per line; the dataset format</td>
+</tr>
+<tr>
+<td><strong>HTML</strong></td>
+<td>HyperText Markup Language</td>
+<td>the intermediate format used to build the PDF</td>
+</tr>
+<tr>
+<td><strong>PDF</strong></td>
+<td>Portable Document Format</td>
+<td>this document's format</td>
+</tr>
+<tr>
+<td><strong>URL</strong></td>
+<td>Uniform Resource Locator</td>
+<td>a web address</td>
+</tr>
+<tr>
+<td><strong>URI</strong></td>
+<td>Uniform Resource Identifier</td>
+<td>the <code>file://</code> address used to load the HTML into Chrome</td>
+</tr>
+<tr>
+<td><strong>ID</strong></td>
+<td>Identifier</td>
+<td>a unique key, e.g. an article ID or label ID</td>
+</tr>
+<tr>
+<td><strong>I/O</strong></td>
+<td>Input/Output</td>
+<td>reading and writing data or models</td>
+</tr>
+<tr>
+<td><strong>NLTK</strong></td>
+<td>Natural Language Toolkit</td>
+<td>the classical NLP library used in the lesson notebooks</td>
+</tr>
+<tr>
+<td><strong>Colab</strong></td>
+<td>Google Colaboratory</td>
+<td>the hosted notebook environment used by the full recipe</td>
+</tr>
+<tr>
+<td><strong>OS</strong></td>
+<td>Operating System</td>
+<td>the platform running the code</td>
+</tr>
+<tr>
+<td><strong>macOS</strong></td>
+<td>Mac Operating System</td>
+<td>Apple's desktop OS used for the verified local run</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h5-licenses-and-organizations">H.5 Licenses and organizations</h3>
+<table>
+<thead>
+<tr>
+<th>Short form</th>
+<th>Full form</th>
+<th>Meaning in this guide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CC BY-SA</strong></td>
+<td>Creative Commons Attribution-ShareAlike</td>
+<td>the license of Wikipedia text</td>
+</tr>
+<tr>
+<td><strong>GFDL</strong></td>
+<td>GNU Free Documentation License</td>
+<td>the other license of Wikipedia text</td>
+</tr>
+<tr>
+<td><strong>GNU</strong></td>
+<td>GNU's Not Unix</td>
+<td>the project behind the GFDL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h6-roman-numerals-and-section-labels">H.6 Roman numerals and section labels</h3>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>I, II, III, IV</strong></td>
+<td>Part numbers (Part I, Part II, Part III, Part IV)</td>
+</tr>
+<tr>
+<td><strong>A.1–A.8</strong></td>
+<td>sections of Part 0.5, the approach chapter</td>
+</tr>
+<tr>
+<td><strong>D1–D12</strong></td>
+<td>design decisions in Chapter 28</td>
+</tr>
+<tr>
+<td><strong>H.1–H.7, I.1–I.16</strong></td>
+<td>sections of these appendices</td>
+</tr>
+<tr>
+<td><strong>Ch. / §</strong></td>
+<td>chapter / section cross-reference</td>
+</tr>
+<tr>
+<td><strong>e.g.</strong></td>
+<td><em>exempli gratia</em> (Latin)</td>
+</tr>
+<tr>
+<td><strong>et al.</strong></td>
+<td><em>et alia</em> (Latin)</td>
+</tr>
+<tr>
+<td><strong>README</strong></td>
+<td>“read me”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h7-symbols-and-notation">H.7 Symbols and notation</h3>
+<table>
+<thead>
+<tr>
+<th>Form</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[CLS]</code>, <code>[SEP]</code>, <code>[PAD]</code></td>
+<td>BERT special tokens (see H.1)</td>
+</tr>
+<tr>
+<td><code>##</code></td>
+<td>WordPiece continuation marker: this subword continues the previous one</td>
+</tr>
+<tr>
+<td><code>U+0964</code></td>
+<td>Unicode code point for the Devanagari danda <code>।</code></td>
+</tr>
+<tr>
+<td><code>U+092F</code>, <code>U+0927</code>, <code>U+093E</code>, <code>U+094D</code></td>
+<td>Unicode code points for DEVANAGARI LETTER YA, DHA, VOWEL SIGN AA, and VIRAMA (<code>्</code>)</td>
+</tr>
+<tr>
+<td><code>r</code>, <code>alpha</code>, <code>dropout</code></td>
+<td>LoRA rank, scaling factor, and adapter dropout</td>
+</tr>
+<tr>
+<td><code>O(n²)</code></td>
+<td>quadratic growth in the number of sentences</td>
+</tr>
+<tr>
+<td><code>τ</code></td>
+<td>Kendall's tau (see H.3)</td>
+</tr>
+<tr>
+<td><code>BP</code></td>
+<td>BLEU brevity penalty (see H.3)</td>
+</tr>
+<tr>
+<td><code>d_model</code> / <code>d_ff</code></td>
+<td>model hidden dimension / feed-forward hidden dimension</td>
+</tr>
+<tr>
+<td><code>\u0964</code></td>
+<td>Python escape for the danda <code>।</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note.</strong> Unicode character names such as <code>DEVANAGARI LETTER YA</code>, <code>DEVANAGARI LETTER DHA</code>, <code>DEVANAGARI VOWEL SIGN AA</code>, and <code>VIRAMA</code> describe code points; they are not abbreviations. All-caps code names such as <code>LABELS</code>, <code>LABEL2ID</code>, and <code>PUNCT_DATA</code> are Python constants, not acronyms. The <code>##</code> in <code>भारत</code> tokenizations is a WordPiece marker, not a comment.</p>
+</blockquote>
+<div class='pagebreak'></div>
+
+<h2 id="appendix-i-how-to-actually-test-it">Appendix I. How to actually test it</h2>
+<p>This appendix is a practical test plan. It starts with cheap checks and ends with the full pipeline. Every step has a command and a pass condition, so “it works” becomes something you can demonstrate rather than assert.</p>
+<h3 id="i1-the-four-test-levels">I.1 The four test levels</h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Question</th>
+<th>Typical time</th>
+<th>Pass condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0. Environment</td>
+<td>do the pinned imports work?</td>
+<td>seconds</td>
+<td>no import errors; device printed</td>
+</tr>
+<tr>
+<td>1. Data</td>
+<td>are windows, labels, pairs, and splits correct?</td>
+<td>minutes</td>
+<td>counts match; no leakage; labels aligned</td>
+</tr>
+<tr>
+<td>2. Stage quality</td>
+<td>does each model beat its baseline?</td>
+<td>minutes</td>
+<td>boundary F1 ≥ 0.85; pair accuracy &gt; 0.5; Borda tau &gt; TF-IDF tau</td>
+</tr>
+<tr>
+<td>3. End to end</td>
+<td>are outputs aligned, complete, and reproducible?</td>
+<td>minutes</td>
+<td>4 files per input; equal sentence/group counts; no <code>NULL</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="i2-one-time-setup">I.2 One-time setup</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>.venv.backup-20261109-124948/bin/activate
+python<span class="w"> </span>-m<span class="w"> </span>compileall<span class="w"> </span>-q<span class="w"> </span>src
+python<span class="w"> </span>setup_check.py
+</code></pre></div>
+
+<p>Expected: <code>setup_check.py</code> reports Python, torch, and the available device without raising. On this machine the device is MPS.</p>
+<h3 id="i3-test-0-environment-and-pins">I.3 Test 0 — environment and pins</h3>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<span class="s">import torch, transformers, peft, datasets, sacrebleu</span>
+<span class="s">print('torch       ', torch.__version__)</span>
+<span class="s">print('transformers', transformers.__version__)</span>
+<span class="s">print('peft        ', peft.__version__)</span>
+<span class="s">print('datasets    ', datasets.__version__)</span>
+<span class="s">print('sacrebleu   ', sacrebleu.__version__)</span>
+<span class="s">print('cuda        ', torch.cuda.is_available())</span>
+<span class="s">print('mps         ', torch.backends.mps.is_available())</span>
+<span class="s">PY</span>
+</code></pre></div>
+
+<p>Pass condition: the versions match <code>requirements-colab.txt</code>, and at least one accelerator is available. The verified local stack is torch 2.15.0, transformers 4.44.2, peft 0.13.2, datasets 3.6.0 on Python 3.12.</p>
+<h3 id="i4-test-1-data-integrity">I.4 Test 1 — data integrity</h3>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>src.data_prep<span class="w"> </span>--num-articles<span class="w"> </span><span class="m">3000</span><span class="w"> </span>--max-train-pairs<span class="w"> </span><span class="m">40000</span>
+python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<span class="s">import json</span>
+<span class="s">from collections import Counter</span>
+<span class="s">from pathlib import Path</span>
+<span class="s">from src.constants import LABELS, MAX_WORDS, MIN_WORDS</span>
+
+<span class="s">root = Path('data/processed')</span>
+<span class="s">summary = json.loads((root / 'data_prep_summary.json').read_text())</span>
+
+<span class="s">assert summary['articles'] == 3000, summary['articles']</span>
+<span class="s">assert summary['splits'] == {'train': 2700, 'val': 150, 'test': 150}</span>
+<span class="s">assert summary['punctuation']['train']['examples'] == 25000</span>
+<span class="s">assert summary['ordering']['train']['pairs'] == 40000</span>
+
+<span class="s">windows = {}</span>
+<span class="s">for split in ('train', 'val', 'test'):</span>
+<span class="s">    rows = [json.loads(line) for line in</span>
+<span class="s">            (root / 'punctuation' / f'{split}.jsonl').open(encoding='utf-8')]</span>
+<span class="s">    windows[split] = rows</span>
+<span class="s">    assert len(rows) == summary['punctuation'][split]['examples']</span>
+<span class="s">    for row in rows:</span>
+<span class="s">        assert len(row['words']) == len(row['labels'])</span>
+<span class="s">        assert MIN_WORDS &lt;= len(row['words']) &lt;= MAX_WORDS</span>
+<span class="s">        assert set(row['labels']) &lt;= set(LABELS)</span>
+
+<span class="s">    pairs = [json.loads(line) for line in</span>
+<span class="s">             (root / 'ordering' / f'{split}.jsonl').open(encoding='utf-8')]</span>
+<span class="s">    assert len(pairs) == summary['ordering'][split]['pairs']</span>
+<span class="s">    counts = Counter(pair['label'] for pair in pairs)</span>
+<span class="s">    positive_share = counts[1] / len(pairs)</span>
+<span class="s">    assert 0.48 &lt;= positive_share &lt;= 0.52, (split, counts)</span>
+
+<span class="s">ids = {split: {row['article_id'] for row in rows}</span>
+<span class="s">       for split, rows in windows.items()}</span>
+<span class="s">assert not (ids['train'] &amp; ids['val'])</span>
+<span class="s">assert not (ids['train'] &amp; ids['test'])</span>
+<span class="s">assert not (ids['val'] &amp; ids['test'])</span>
+
+<span class="s">eval_articles = [json.loads(line) for line in</span>
+<span class="s">                 (root / 'ordering' / 'ordering_eval.jsonl').open(encoding='utf-8')]</span>
+<span class="s">assert len(eval_articles) == 40</span>
+<span class="s">assert all(8 &lt;= len(article['sentences']) &lt;= 70 for article in eval_articles)</span>
+<span class="s">print('data integrity OK:', {k: len(v) for k, v in windows.items()})</span>
+<span class="s">PY</span>
+</code></pre></div>
+
+<p>Pass conditions: no assertion fires. This proves that words and labels align, windows respect the 32–96 word bounds, ordering pairs are approximately balanced after capping (49–50% positive), and no article appears in two splits.</p>
+<h3 id="i5-test-2-punctuation-adapter">I.5 Test 2 — punctuation adapter</h3>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<span class="s">import json</span>
+<span class="s">from pathlib import Path</span>
+<span class="s">from src.punctuation.predict import PunctuationRestorer</span>
+
+<span class="s">row = json.loads(next((Path('data/processed/punctuation/test.jsonl')</span>
+<span class="s">                       .open(encoding='utf-8'))))</span>
+<span class="s">words = row['words']</span>
+<span class="s">restorer = PunctuationRestorer('models/punctuation', memory_gb=1.5)</span>
+<span class="s">labels, punctuated, plain = restorer.restore(words)</span>
+
+<span class="s">assert len(labels) == len(words)</span>
+<span class="s">assert all(0 &lt;= label &lt; 5 for label in labels)</span>
+<span class="s">assert len(punctuated) == len(plain) &gt;= 1</span>
+<span class="s">assert all(item.strip() for item in punctuated)</span>
+<span class="s">first = restorer.predict_labels(words)</span>
+<span class="s">second = restorer.predict_labels(words)</span>
+<span class="s">assert first == second, 'inference is not deterministic'</span>
+<span class="s">restorer.close()</span>
+<span class="s">print('punctuation OK:', len(words), 'words,', len(punctuated), 'sentences')</span>
+<span class="s">PY</span>
+</code></pre></div>
+
+<p>Pass condition: the output lengths match, labels are in range, sentences are non-empty, and two calls return identical labels. The model is in <code>eval()</code> mode and uses argmax, so determinism is expected.</p>
+<h3 id="i6-test-3-ordering-adapter-and-decoders">I.6 Test 3 — ordering adapter and decoders</h3>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<span class="s">import json</span>
+<span class="s">from pathlib import Path</span>
+<span class="s">from src.ordering.decode import OrderScorer, order_sentences</span>
+
+<span class="s">article = json.loads(next((Path('data/processed/ordering/ordering_eval.jsonl')</span>
+<span class="s">                           .open(encoding='utf-8'))))</span>
+<span class="s">sentences = article['sentences'][:8]</span>
+<span class="s">scorer = OrderScorer('models/ordering', memory_gb=1.5)</span>
+<span class="s">matrix = scorer.score_matrix(sentences)</span>
+
+<span class="s">assert matrix.shape == (len(sentences), len(sentences))</span>
+<span class="s">assert all(abs(matrix[i, i] - 0.5) &lt; 1e-9 for i in range(len(sentences)))</span>
+<span class="s">for i in range(len(sentences)):</span>
+<span class="s">    for j in range(len(sentences)):</span>
+<span class="s">        assert abs(matrix[i, j] + matrix[j, i] - 1.0) &lt; 1e-6</span>
+
+<span class="s">for strategy in ('borda', 'clusters', 'beam'):</span>
+<span class="s">    order = order_sentences(sentences, scorer, strategy=strategy)</span>
+<span class="s">    assert sorted(order) == list(range(len(sentences))), strategy</span>
+<span class="s">scorer.close()</span>
+<span class="s">print('ordering OK: 8 sentences, 3 decoders produced valid permutations')</span>
+<span class="s">PY</span>
+</code></pre></div>
+
+<p>Pass condition: the matrix is symmetric-complementary, the diagonal is 0.5, and every decoder returns a true permutation (no duplicates, no missing indices).</p>
+<h3 id="i7-test-4-translation-adapter">I.7 Test 4 — translation adapter</h3>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<span class="s">from src.translation.indictrans import IndicTrans2Translator</span>
+
+<span class="s">translator = IndicTrans2Translator(</span>
+<span class="s">    'models/translation/indictrans2-indic-en-200M', memory_gb=1.5)</span>
+<span class="s">texts = ['भारत एक विशाल देश है।', 'यह एक परीक्षण है।', 'समय बहुत महत्वपूर्ण है।']</span>
+<span class="s">outputs = translator.translate(texts, batch_size=2)</span>
+<span class="s">translator.close()</span>
+
+<span class="s">assert len(outputs) == len(texts)</span>
+<span class="s">assert all(output.strip() for output in outputs)</span>
+<span class="s">assert all(any(ch.isalpha() for ch in output) for output in outputs)</span>
+<span class="s">print('translation OK:')</span>
+<span class="s">for hindi, english in zip(texts, outputs):</span>
+<span class="s">    print(' ', hindi, '-&gt;', english)</span>
+<span class="s">PY</span>
+</code></pre></div>
+
+<p>Pass condition: one non-empty English string per Hindi input. The exact wording can vary with beams or model version; do not assert exact strings.</p>
+<h3 id="i8-test-5-end-to-end-artifacts">I.8 Test 5 — end-to-end artifacts</h3>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--translation-model<span class="w"> </span>models/translation/indictrans2-indic-en-200M<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--translation-batch-size<span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output-dir<span class="w"> </span>/tmp/pipeline-check
+
+python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<span class="s">import math</span>
+<span class="s">from pathlib import Path</span>
+
+<span class="s">root = Path('/tmp/pipeline-check')</span>
+<span class="s">expected = {</span>
+<span class="s">    'sample-1': (52, 11), 'sample-2': (55, 11), 'sample-3': (49, 10),</span>
+<span class="s">    'sample-4': (53, 11), 'sample-5': (55, 11), 'sample-6': (80, 16),</span>
+<span class="s">    'sample-7': (99, 20),</span>
+<span class="s">}</span>
+<span class="s">for stem, (sentences, groups) in expected.items():</span>
+<span class="s">    hi = (root / f'{stem}.sentences_hi.txt').read_text(encoding='utf-8').splitlines()</span>
+<span class="s">    en = (root / f'{stem}.sentences_en.txt').read_text(encoding='utf-8').splitlines()</span>
+<span class="s">    ghi = (root / f'{stem}.groups_hi.txt').read_text(encoding='utf-8').splitlines()</span>
+<span class="s">    gen = (root / f'{stem}.groups_en.txt').read_text(encoding='utf-8').splitlines()</span>
+
+<span class="s">    assert len(hi) == sentences, (stem, len(hi))</span>
+<span class="s">    assert len(en) == len(hi), stem</span>
+<span class="s">    assert len(ghi) == len(gen) == groups == math.ceil(len(hi) / 5), stem</span>
+<span class="s">    assert all(line.strip() for line in hi + en + ghi + gen)</span>
+<span class="s">    assert not any('NULL' in line for line in hi), stem</span>
+<span class="s">    assert any('\u0900' &lt;= char &lt;= '\u097f' for char in ''.join(hi)), stem</span>
+<span class="s">    assert any(char.isascii() and char.isalpha() for char in ''.join(en)), stem</span>
+<span class="s">print('end-to-end OK: all seven files have aligned Hindi/English outputs')</span>
+<span class="s">PY</span>
+</code></pre></div>
+
+<p>Pass conditions: all assertions hold. These are the same counts reported in Chapter 2 and <code>reports/run_summary.json</code>.</p>
+<h3 id="i9-test-6-failure-behavior">I.9 Test 6 — failure behavior</h3>
+<p>A good pipeline fails loudly. Run these and confirm a non-zero exit and a clear message:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Missing adapter</span>
+python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--limit<span class="w"> </span><span class="m">1</span><span class="w"> </span>--punctuation-model<span class="w"> </span>/tmp/does-not-exist
+<span class="c1"># Expect: FileNotFoundError ... Train it first</span>
+
+<span class="c1"># Missing input directory</span>
+python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--input-dir<span class="w"> </span>/tmp/no-such-dir
+<span class="c1"># Expect: SystemExit with the directory path</span>
+
+<span class="c1"># Missing translation model</span>
+python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--limit<span class="w"> </span><span class="m">1</span><span class="w"> </span>--translation-model<span class="w"> </span>/tmp/no-such-model
+<span class="c1"># Expect: an OSError/ImportError with the model path</span>
+</code></pre></div>
+
+<p>Pass condition: none of these silently falls back to a different model or writes empty outputs. That is a deliberate design choice.</p>
+<h3 id="i10-test-7-determinism">I.10 Test 7 — determinism</h3>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--limit<span class="w"> </span><span class="m">1</span><span class="w"> </span>--output-dir<span class="w"> </span>/tmp/run-a
+python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--limit<span class="w"> </span><span class="m">1</span><span class="w"> </span>--output-dir<span class="w"> </span>/tmp/run-b
+diff<span class="w"> </span>-r<span class="w"> </span>/tmp/run-a<span class="w"> </span>/tmp/run-b
+</code></pre></div>
+
+<p>Pass condition: <code>diff</code> prints nothing. Timings differ, but they are written to <code>reports/run_summary.json</code>, not to the per-file outputs. Do not compare <code>run_summary.json</code> itself across runs.</p>
+<h3 id="i11-test-8-the-executed-notebook">I.11 Test 8 — the executed notebook</h3>
+<div class="codehilite"><pre><span></span><code>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>notebook<span class="w"> </span>--execute<span class="w"> </span>notebooks/pipeline_demo.ipynb<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>/tmp/demo.executed.ipynb<span class="w"> </span>--ExecutePreprocessor.timeout<span class="o">=</span><span class="m">900</span>
+python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<span class="s">import nbformat</span>
+<span class="s">nb = nbformat.read('/tmp/demo.executed.ipynb', as_version=4)</span>
+<span class="s">errors = [out for cell in nb.cells for out in cell.get('outputs', [])</span>
+<span class="s">          if out.get('output_type') == 'error']</span>
+<span class="s">assert not errors, errors</span>
+<span class="s">print('notebook OK:', len(nb.cells), 'cells, no error outputs')</span>
+<span class="s">PY</span>
+</code></pre></div>
+
+<p>Pass condition: the notebook executes and contains no error outputs. The checked-in notebook is already executed; this test re-runs it from scratch.</p>
+<h3 id="i12-test-9-memory-budget">I.12 Test 9 — memory budget</h3>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<span class="s">import torch</span>
+<span class="s">from src.utils import get_device, limit_gpu_memory</span>
+<span class="s">print('device:', get_device())</span>
+<span class="s">print('cap:', limit_gpu_memory(1.5))</span>
+<span class="s">if torch.cuda.is_available():</span>
+<span class="s">    print('allocated GB:', torch.cuda.memory_allocated() / 1e9)</span>
+<span class="s">PY</span>
+</code></pre></div>
+
+<p>Pass condition: <code>limit_gpu_memory(1.5)</code> succeeds, and a full pipeline run does not raise a CUDA out-of-memory error. The cap is enforced by <code>torch.cuda.set_per_process_memory_fraction</code>, so exceeding it fails rather than silently using more. On MPS the function is a no-op; peak memory is reported by the training summaries instead.</p>
+<h3 id="i13-test-10-report-consistency">I.13 Test 10 — report consistency</h3>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<span class="s">import json</span>
+<span class="s">from pathlib import Path</span>
+
+<span class="s">report = json.loads(Path('reports/evaluation.json').read_text())</span>
+<span class="s">assert report['no_llm'] is True</span>
+<span class="s">assert report['memory_limit_gb'] == 1.5</span>
+<span class="s">assert report['punctuation']['status'] == 'ok'</span>
+<span class="s">assert report['punctuation']['boundary']['f1'] &gt;= 0.85</span>
+<span class="s">assert report['punctuation']['accuracy'] &gt;= 0.85</span>
+<span class="s">assert report['ordering']['pairs']['accuracy'] &gt; 0.5</span>
+<span class="s">assert report['ordering']['kendall_tau']['borda']['mean_tau'] &gt; \</span>
+<span class="s">       report['ordering']['kendall_tau']['tfidf_ablation']['mean_tau']</span>
+<span class="s">assert report['translation']['status'] == 'ok'</span>
+<span class="s">assert report['translation']['bleu'] &gt;= 30.0</span>
+<span class="s">print('report OK:', report['punctuation']['boundary']['f1'],</span>
+<span class="s">      report['ordering']['pairs']['accuracy'],</span>
+<span class="s">      report['ordering']['kendall_tau']['borda']['mean_tau'],</span>
+<span class="s">      report['translation']['bleu'])</span>
+<span class="s">PY</span>
+</code></pre></div>
+
+<p>Pass condition: no assertion fires. The thresholds are deliberately below the measured values, so they detect regressions without failing on harmless variance.</p>
+<h3 id="i14-expected-values-for-the-verified-local-run">I.14 Expected values for the verified local run</h3>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Expected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Punctuation test windows</td>
+<td>2,208</td>
+</tr>
+<tr>
+<td>Punctuation evaluation words</td>
+<td>108,898</td>
+</tr>
+<tr>
+<td>Punctuation accuracy</td>
+<td>0.8724</td>
+</tr>
+<tr>
+<td>Punctuation boundary F1</td>
+<td>0.8842</td>
+</tr>
+<tr>
+<td>Ordering test pair accuracy</td>
+<td>0.6543</td>
+</tr>
+<tr>
+<td>Ordering Borda mean tau</td>
+<td>0.2007</td>
+</tr>
+<tr>
+<td>Ordering TF-IDF mean tau</td>
+<td>0.0631</td>
+</tr>
+<tr>
+<td>Translation BLEU (100 IITB sentences)</td>
+<td>34.125</td>
+</tr>
+<tr>
+<td>Translation chrF</td>
+<td>59.686</td>
+</tr>
+<tr>
+<td>Sentences, sample-1 to sample-7</td>
+<td>52, 55, 49, 53, 55, 80, 99</td>
+</tr>
+<tr>
+<td>Groups, sample-1 to sample-7</td>
+<td>11, 11, 10, 11, 11, 16, 20</td>
+</tr>
+<tr>
+<td>Pipeline timings (MPS)</td>
+<td>2.31 s / 130.53 s / 102.17 s</td>
+</tr>
+</tbody>
+</table>
+<h3 id="i15-testing-on-your-own-data">I.15 Testing on your own data</h3>
+<p>The sample files are only seven inputs. To test whether the pipeline generalizes, use a new Hindi text and one of the two paths below.</p>
+<p><strong>Path A: unlabeled custom input (does it run and look sane?).</strong></p>
+<p>The pipeline expects a <code>.txt</code> file of whitespace-separated Hindi words with no punctuation. <code>NULL</code> tokens are allowed and removed. If you start from a normal punctuated article, flatten it first:</p>
+<div class="codehilite"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>data/custom
+python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<span class="s">import random</span>
+<span class="s">import re</span>
+<span class="s">from pathlib import Path</span>
+<span class="s">from src.utils import strip_punctuation</span>
+
+<span class="s">source = Path('my_article_raw.txt')          # your punctuated Hindi text</span>
+<span class="s">output = Path('data/custom/my_article.txt')</span>
+<span class="s">text = re.sub(r'\[\d+\]', '', source.read_text(encoding='utf-8'))</span>
+<span class="s">parts = re.split(r'(?&lt;=[।॥?!])\s+', text)</span>
+
+<span class="s">blocks = []</span>
+<span class="s">for part in parts:</span>
+<span class="s">    words = [strip_punctuation(token)[0] for token in part.split()]</span>
+<span class="s">    words = [word for word in words if word]</span>
+<span class="s">    if words:</span>
+<span class="s">        blocks.append(words)</span>
+
+<span class="s">random.Random(42).shuffle(blocks)             # mimic shuffled assignment input</span>
+<span class="s">flat = ' '.join(word for block in blocks for word in block)</span>
+<span class="s">output.write_text(flat, encoding='utf-8')</span>
+<span class="s">print('wrote', output, 'with', len(flat.split()), 'words')</span>
+<span class="s">PY</span>
+</code></pre></div>
+
+<p>Then run only the Hindi stages, or the full pipeline:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Fast: punctuation + ordering only</span>
+python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--input-dir<span class="w"> </span>data/custom<span class="w"> </span>--output-dir<span class="w"> </span>outputs/custom<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--no-translate
+
+<span class="c1"># Full pipeline</span>
+python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--input-dir<span class="w"> </span>data/custom<span class="w"> </span>--output-dir<span class="w"> </span>outputs/custom<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--translation-model<span class="w"> </span>models/translation/indictrans2-indic-en-200M<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--translation-batch-size<span class="w"> </span><span class="m">8</span>
+</code></pre></div>
+
+<p>Check the four outputs and their alignment:</p>
+<div class="codehilite"><pre><span></span><code>wc<span class="w"> </span>-l<span class="w"> </span>outputs/custom/my_article.sentences_hi.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>outputs/custom/my_article.sentences_en.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>outputs/custom/my_article.groups_hi.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>outputs/custom/my_article.groups_en.txt
+</code></pre></div>
+
+<p>Pass condition: all four files exist, Hindi and English sentence counts match, and group counts match <code>ceil(sentences / 5)</code>. With no references this proves execution and plausibility, not accuracy.</p>
+<p><strong>Path B: labeled custom evaluation (does it generalize numerically?).</strong></p>
+<p>Create JSONL in the same schemas used by <code>src.evaluate</code>. For punctuation, one object per window:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom-1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom-article-1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"split"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">"words"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"भारत"</span><span class="p">,</span><span class="w"> </span><span class="s2">"एक"</span><span class="p">,</span><span class="w"> </span><span class="s2">"विशाल"</span><span class="p">,</span><span class="w"> </span><span class="s2">"देश"</span><span class="p">,</span><span class="w"> </span><span class="s2">"है"</span><span class="p">],</span>
+<span class="w"> </span><span class="nt">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"none"</span><span class="p">,</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sentence_end"</span><span class="p">]}</span>
+</code></pre></div>
+
+<p>For ordering pairs, one object per pair:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">"sentence_a"</span><span class="p">:</span><span class="w"> </span><span class="s2">"पहला वाक्य है।"</span><span class="p">,</span><span class="w"> </span><span class="nt">"sentence_b"</span><span class="p">:</span><span class="w"> </span><span class="s2">"दूसरा वाक्य है।"</span><span class="p">,</span><span class="w"> </span><span class="nt">"label"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}</span>
+</code></pre></div>
+
+<p>For full-order evaluation, one object per held-out article, in the true order:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span><span class="nt">"article_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom-article-1"</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">"sentences"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"पहला वाक्य है।"</span><span class="p">,</span><span class="w"> </span><span class="s2">"दूसरा वाक्य है।"</span><span class="p">,</span><span class="w"> </span><span class="s2">"तीसरा वाक्य है।"</span><span class="p">]}</span>
+</code></pre></div>
+
+<p>Then run:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>src.evaluate<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--punct-test<span class="w"> </span>data/custom/punct_test.jsonl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--skip-ordering<span class="w"> </span>--skip-translation<span class="w"> </span>--report<span class="w"> </span>/tmp/custom-punct.json
+
+python<span class="w"> </span>-m<span class="w"> </span>src.evaluate<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--order-test<span class="w"> </span>data/custom/order_test.jsonl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--order-eval<span class="w"> </span>data/custom/order_eval.jsonl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--skip-punctuation<span class="w"> </span>--skip-translation<span class="w"> </span>--report<span class="w"> </span>/tmp/custom-order.json
+</code></pre></div>
+
+<p>Pass condition: the report contains <code>status: ok</code> and a metric for your data. Keep the custom article IDs disjoint from any training data; otherwise the score is leakage, not generalization.</p>
+<p><strong>Translation on your own parallel data.</strong> <code>src.evaluate</code> streams the IITB benchmark, so for your own Hindi–English pairs use the wrapper directly:</p>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-<span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<span class="s">import json</span>
+<span class="s">import sacrebleu</span>
+<span class="s">from src.translation.indictrans import IndicTrans2Translator</span>
+
+<span class="s">pairs = [json.loads(line) for line in</span>
+<span class="s">         open('data/custom/parallel.jsonl', encoding='utf-8')]</span>
+<span class="s">translator = IndicTrans2Translator(</span>
+<span class="s">    'models/translation/indictrans2-indic-en-200M', memory_gb=1.5)</span>
+<span class="s">hypotheses = translator.translate([pair['hindi'] for pair in pairs], batch_size=8)</span>
+<span class="s">translator.close()</span>
+
+<span class="s">references = [[pair['english'] for pair in pairs]]</span>
+<span class="s">print('BLEU:', sacrebleu.corpus_bleu(hypotheses, references).score)</span>
+<span class="s">print('chrF:', sacrebleu.corpus_chrf(hypotheses, references).score)</span>
+<span class="s">PY</span>
+</code></pre></div>
+
+<p>The input file has one object per line: <code>{"hindi": "...", "english": "..."}</code>.</p>
+<p><strong>What to expect.</strong> These models learned Wikipedia prose. News and encyclopedia text should behave similarly; dialogue, poetry, song lyrics, and social-media text will be worse, especially for sentence boundaries and ordering. Report the domain next to the score; a metric on out-of-domain text is not comparable to the Wikipedia test set.</p>
+<h3 id="i16-what-to-show-a-reviewer">I.16 What to show a reviewer</h3>
+<ol>
+<li><code>reports/evaluation.json</code> — every stage <code>status: ok</code>, with the metrics above.</li>
+<li><code>reports/run_summary.json</code> — the four output counts per file and the timings.</li>
+<li>The four output files for one sample — aligned Hindi and English, groups of five.</li>
+<li><code>notebooks/pipeline_demo.ipynb</code> — executed, with visible outputs and no errors.</li>
+<li><code>models/*/training_summary.json</code> — trainable parameters, validation/test metrics, peak memory.</li>
+<li>The failure tests in I.9 — proof that the pipeline does not hide problems.</li>
+</ol>
+<blockquote>
+<p><strong>The honest claim.</strong> “On this machine, with 4,000-example subset adapters and a local IndicTrans2 mirror, the pipeline runs end to end, the stage metrics pass these thresholds, and the outputs align. The full-data recipe is documented but was not run to completion here.” That sentence is defensible; anything stronger is not supported by the artifacts.</p>
+</blockquote>
 </body>
 </html>

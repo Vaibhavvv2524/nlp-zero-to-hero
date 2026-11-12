@@ -62,6 +62,7 @@ def run(args):
     if not files:
         raise SystemExit(f"No .txt files found in {input_dir.resolve()}")
 
+    # Read every input once. All three stages reuse this token list.
     records = {}
     for path in files:
         words, null_count = read_tokens(path)
@@ -104,6 +105,8 @@ def run(args):
     print("Ordering memory:", scorer.memory())
     start = time.perf_counter()
     for stem, record in records.items():
+        # The decoder returns an ordering of sentence indices. Apply that same
+        # permutation to the punctuated sentences.
         order = order_sentences(
             record["sentences_plain"],
             scorer,
@@ -132,6 +135,8 @@ def run(args):
         print("Translation memory:", translator.memory())
         start = time.perf_counter()
 
+        # Translate one flat batch, then split it back per input file so the
+        # English lines stay in the same order as the Hindi lines.
         flat_sentences = []
         for record in records.values():
             flat_sentences.extend(record["ordered_hi"])
@@ -173,6 +178,7 @@ def run(args):
         "files": {},
     }
 
+    # Write the sentence files first, then the same sentences grouped in fives.
     for stem, record in records.items():
         write_lines(output_dir / f"{stem}.sentences_hi.txt", record["ordered_hi"])
         write_lines(

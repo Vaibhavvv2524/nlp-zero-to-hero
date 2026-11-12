@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What to Learn, in Priority Order - Hindi Restoration and Translation</title>
+<style>
+
+@page { size: A4; margin: 14mm 14mm 14mm 14mm; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: "Charter", "Georgia", "Devanagari Sangam MN", "Noto Serif Devanagari", serif;
+  font-size: 10.0pt; line-height: 1.48; color: #17202b; margin: 0;
+}
+h1, h2, h3, h4 {
+  font-family: "Avenir Next", "Helvetica Neue", "Devanagari Sangam MN", sans-serif;
+  color: #0d2b4e; page-break-after: avoid; break-after: avoid;
+}
+h1 {
+  font-size: 20pt; margin: 20pt 0 8pt; padding-bottom: 5pt;
+  border-bottom: 2.5px solid #c9a227; letter-spacing: -0.2pt;
+}
+.cover h1, .toc-title { page-break-before: avoid; break-before: auto; }
+h2 { font-size: 13.2pt; margin: 15pt 0 5pt; color: #12355b; }
+h3 { font-size: 11.2pt; margin: 12pt 0 4pt; color: #1d4f7a; }
+h4 { font-size: 10.3pt; margin: 11pt 0 3pt; }
+p { margin: 0 0 5.5pt; orphans: 2; widows: 2; }
+ul, ol { margin: 0 0 8pt; padding-left: 16pt; }
+li { margin: 0 0 3pt; }
+a { color: #12355b; text-decoration: none; }
+strong { color: #0b2540; }
+em { color: #243447; }
+hr { border: 0; border-top: 1px solid #e3e8ef; margin: 14pt 0; }
+blockquote {
+  margin: 10pt 0; padding: 8pt 11pt; background: #f5f7fa;
+  border-left: 3px solid #c9a227; color: #2b3644; page-break-inside: avoid;
+}
+blockquote p:last-child { margin-bottom: 0; }
+code {
+  font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+  font-size: 8.5pt; background: #f2f4f7; padding: 0.5pt 3pt; border-radius: 2pt;
+  color: #1f3550;
+}
+pre { margin: 8pt 0 10pt; page-break-inside: avoid; }
+pre code { background: none; padding: 0; font-size: 8.0pt; line-height: 1.42; }
+.codehilite {
+  background: #f6f8fa; border: 1px solid #e3e8ef; border-radius: 3pt;
+  padding: 7pt 9pt; overflow: hidden; page-break-inside: avoid;
+}
+table {
+  width: 100%; border-collapse: collapse; margin: 8pt 0 12pt;
+  font-size: 8.4pt; page-break-inside: auto;
+}
+thead { display: table-header-group; }
+tr { page-break-inside: avoid; }
+th, td { border: 1px solid #d8dee7; padding: 3.5pt 5pt; text-align: left; vertical-align: top; }
+th { background: #eaf0f8; color: #12355b; font-weight: 600; }
+tbody tr:nth-child(even) { background: #fafbfd; }
+.lead {
+  margin: 12pt 0 16pt; padding: 10pt 13pt; background: #f3f7fd;
+  border: 1px solid #dbe6f5; border-radius: 4pt; font-size: 11.2pt;
+  line-height: 1.55; color: #14294a;
+}
+.lead p:last-child { margin-bottom: 0; }
+.callout, .pass, .priority, .warning {
+  margin: 10pt 0 12pt; padding: 8pt 11pt; border-radius: 3pt;
+  page-break-inside: avoid; font-size: 9.8pt; line-height: 1.5;
+}
+.callout { background: #eef4ff; border-left: 4px solid #2563eb; color: #14294a; }
+.pass { background: #f2fbf5; border-left: 4px solid #1f8a4c; color: #143522; }
+.priority { background: #fff7ea; border-left: 4px solid #c47b12; color: #3d2a08; }
+.warning { background: #fdecec; border-left: 4px solid #b91c1c; color: #3b1212; }
+.callout p:last-child, .pass p:last-child, .priority p:last-child,
+.warning p:last-child { margin-bottom: 0; }
+.formula {
+  margin: 8pt 0 11pt; padding: 7pt 10pt; background: #f7f9fc;
+  border: 1px solid #e1e7f0; border-radius: 3pt;
+  font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+  font-size: 10pt; color: #12355b; text-align: center;
+  page-break-inside: avoid;
+}
+.pagebreak { display: block; height: 0; margin: 0; padding: 0;
+  page-break-after: always; break-after: page; }
+figure.diagram {
+  margin: 9pt 0 14pt; padding: 6pt 6pt 5pt; background: #fbfcfe;
+  border: 1px solid #dbe3ee; border-radius: 4pt; page-break-inside: avoid;
+  break-inside: avoid;
+}
+figure.diagram img { display: block; width: 96%; height: auto; margin: 0 auto; }
+figure.diagram figcaption {
+  margin-top: 5pt; font-size: 8.4pt; line-height: 1.4; color: #475569;
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+}
+figure.diagram figcaption strong { color: #0d2b4e; }
+.toc-title { margin-bottom: 8pt; }
+.toc { font-size: 9.6pt; column-count: 2; column-gap: 9mm;
+  page-break-after: always; break-after: page; }
+.toc > ul { list-style: none; padding-left: 0; margin: 0; }
+.toc ul { list-style: none; padding-left: 9pt; margin: 2pt 0; }
+.toc li { margin: 0 0 3pt; break-inside: avoid; }
+.toc > ul > li { font-weight: 600; color: #12355b; margin-top: 6pt; }
+.toc a { color: inherit; }
+.cover {
+  margin: 0; padding: 24mm 18mm 16mm; min-height: 257mm;
+  background: #0b2340; color: #f8fafc; page-break-after: always; break-after: page;
+}
+.cover .kicker {
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif; font-size: 8.6pt;
+  letter-spacing: 2.4pt; text-transform: uppercase; color: #d6b85a; margin-bottom: 14pt;
+}
+.cover h1 {
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+  font-size: 58pt; line-height: 0.94; border: none; margin: 0 0 16pt;
+  color: #ffffff; letter-spacing: -1.4pt;
+}
+.cover .subtitle { font-size: 17pt; line-height: 1.35; color: #cfe0f5; margin: 0 0 18pt; max-width: 155mm; }
+.cover .lede { font-size: 11.4pt; line-height: 1.6; color: #e7eef8; max-width: 150mm; }
+.cover .meta {
+  margin-top: 38mm; padding-top: 10pt; border-top: 1px solid #3b5577;
+  font-size: 9.2pt; line-height: 1.5; color: #dbe7f5;
+}
+.cover .meta p { margin: 0 0 5pt; }
+.cover .stamp {
+  margin-top: 12mm; display: inline-block; padding: 4pt 9pt;
+  border: 1px solid #d6b85a; color: #d6b85a; font-size: 8pt;
+  letter-spacing: 1.8pt; font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+}
+#title-block-header { display: none; }
+
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f8f8f8; }
+.codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #3D7B7B; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #9C6500 } /* Comment.Preproc */
+.codehilite .cpf { color: #3D7B7B; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #3D7B7B; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #3D7B7B; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #E40000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #008400 } /* Generic.Inserted */
+.codehilite .go { color: #717171 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #687822 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #00F; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #800 } /* Name.Constant */
+.codehilite .nd { color: #A2F } /* Name.Decorator */
+.codehilite .ni { color: #717171; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #CB3F38; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #00F } /* Name.Function */
+.codehilite .nl { color: #767600 } /* Name.Label */
+.codehilite .nn { color: #00F; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #A2F; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666 } /* Literal.Number.Oct */
+.codehilite .sa { color: #BA2121 } /* Literal.String.Affix */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #AA5D1F; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #A45A77; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #A45A77 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #00F } /* Name.Function.Magic */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .vm { color: #19177C } /* Name.Variable.Magic */
+.codehilite .il { color: #666 } /* Literal.Number.Integer.Long */
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="kicker">Priority map &middot; study less, know more</div>
+  <h1>WHAT TO<br>LEARN</h1>
+  <p class="subtitle">The short, ordered path through the Hindi punctuation &rarr;
+  sentence ordering &rarr; translation project.</p>
+  <p class="lede">Start with the story. Add one stage at a time. Stop when you can
+  explain the pipeline, defend its weak scores, and name what you must not claim.</p>
+  <div class="meta">
+    <p><strong>Order:</strong> P0 story &rarr; P1 punctuation &rarr; P2 ordering &rarr; P3 translation &rarr; P4-P7 depth</p>
+    <p><strong>Minimum:</strong> 30 minutes for the story and Stage 1; 2 hours for the scoreboard</p>
+    <p><strong>Evidence:</strong> subset adapters &middot; boundary F1 0.884 &middot; Borda tau 0.201 &middot; BLEU 34.1</p>
+    <p><strong>Repository:</strong> github.com/Vaibhavvv2524/nlp-zero-to-hero</p>
+  </div>
+  <div class="stamp">P0 &middot; P1 &middot; P2 &middot; P3 FIRST</div>
+</section>
+
+<h1 class="toc-title">Contents</h1>
+
+<div class="toc">
+<ul>
+<li><a href="#0-how-to-use-this-guide">0. How to use this guide</a></li>
+<li><a href="#1-p0-the-story-you-must-know-cold">1. P0: the story you must know cold</a></li>
+<li><a href="#2-the-priority-ladder">2. The priority ladder</a></li>
+<li><a href="#3-p1-stage-1-punctuation">3. P1: Stage 1 — punctuation</a></li>
+<li><a href="#4-p2-stage-2-ordering">4. P2: Stage 2 — ordering</a></li>
+<li><a href="#5-p3-stage-3-translation">5. P3: Stage 3 — translation</a></li>
+<li><a href="#6-p4-data-and-metrics">6. P4: Data and metrics</a></li>
+<li><a href="#7-p5-systems-and-constraints">7. P5: Systems and constraints</a></li>
+<li><a href="#8-p6-limits-and-rejected-alternatives">8. P6: Limits and rejected alternatives</a></li>
+<li><a href="#9-p7-code-and-demo">9. P7: Code and demo</a></li>
+<li><a href="#10-study-plans-and-what-to-skip">10. Study plans and what to skip</a></li>
+<li><a href="#11-abbreviations">11. Abbreviations</a></li>
+<li><a href="#12-self-test-15-questions">12. Self-test: 15 questions</a></li>
+<li><a href="#13-form-ready-answers">13. Form-ready answers</a></li>
+</ul>
+</div>
+<h1 id="0-how-to-use-this-guide">0. How to use this guide</h1>
+<div class="lead">
+<p><strong>This is the map, not the manual.</strong> Read it first. It tells you what to learn, in what order, what to skip, and how to stop studying when you know enough.</p>
+</div>
+<p>The project has two long PDFs:</p>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Job</th>
+<th>When to read it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>assblasternlp.pdf</code></td>
+<td>Beginner study guide</td>
+<td>First, to learn the project from scratch</td>
+</tr>
+<tr>
+<td><code>holy-approach.pdf</code></td>
+<td>Detailed design dossier</td>
+<td>Later, for depth, viva, or design defence</td>
+</tr>
+<tr>
+<td><strong>this guide</strong></td>
+<td>Priority map</td>
+<td>Before both, and again before the form/presentation</td>
+</tr>
+</tbody>
+</table>
+<p>Three rules:</p>
+<ol>
+<li><strong>Story before detail.</strong> If you cannot explain the three stages in 60 seconds, do not start memorising hyperparameters.</li>
+<li><strong>One stage at a time.</strong> Learn punctuation, then ordering, then translation. Do not jump between them.</li>
+<li><strong>Know why, not every number.</strong> Memorise a small scoreboard. Understand what each score proves and what it does not.</li>
+</ol>
+<div class="callout">
+<p><strong>The 30-second version.</strong> A no-LLM, three-stage Hindi pipeline. mBERT+LoRA restores punctuation and sentence boundaries. A pairwise mBERT classifier plus Borda decoding orders sentences. IndicTrans2 translates each ordered sentence. Models load one at a time to respect the 1.5GB CUDA budget. Sentence alignment is preserved end to end.</p>
+</div>
+<h1 id="1-p0-the-story-you-must-know-cold">1. P0: the story you must know cold</h1>
+<figure class="diagram">
+<img src="learning_assets/02_pipeline_story.svg" alt="Three-stage pipeline story">
+<figcaption><strong>Figure 1.1.</strong> The whole project in one line: words become sentences, sentences are permuted, sentences become English, and the output stays aligned.</figcaption>
+</figure>
+
+<h2 id="11-five-sentences-that-explain-everything">1.1 Five sentences that explain everything</h2>
+<ol>
+<li><strong>Input:</strong> Hindi words with punctuation removed, sentence order shuffled, and optional <code>NULL</code> placeholders.</li>
+<li><strong>Stage 1:</strong> mBERT+LoRA predicts one of five punctuation labels per word, which rebuilds sentences.</li>
+<li><strong>Stage 2:</strong> a pairwise mBERT classifier scores whether sentence A comes before sentence B; Borda turns those scores into one order.</li>
+<li><strong>Stage 3:</strong> IndicTrans2 translates each ordered Hindi sentence into English with beam search.</li>
+<li><strong>Output:</strong> aligned Hindi sentences, English sentences, and groups of five.</li>
+</ol>
+<h2 id="12-eight-facts-to-know-without-notes">1.2 Eight facts to know without notes</h2>
+<table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Three stages, not one model</strong></td>
+<td>No aligned triplets exist; each stage can be evaluated and replaced.</td>
+</tr>
+<tr>
+<td><strong>No LLM</strong></td>
+<td>Only mBERT and IndicTrans2 are used. This is a hard assignment constraint.</td>
+</tr>
+<tr>
+<td><strong>Stage 1 is token classification</strong></td>
+<td>It assigns labels to existing words; it cannot rewrite or invent words.</td>
+</tr>
+<tr>
+<td><strong>Stage 2 is pairwise classification</strong></td>
+<td>It answers "does A come before B?" then composes a global order.</td>
+</tr>
+<tr>
+<td><strong>Stage 3 is sentence-level MT</strong></td>
+<td>One Hindi sentence in, one English sentence out, order preserved.</td>
+</tr>
+<tr>
+<td><strong>Data is self-supervised from Wikipedia</strong></td>
+<td>Remove punctuation to create labels; consecutive sentences create before/after pairs.</td>
+</tr>
+<tr>
+<td><strong>Models load sequentially</strong></td>
+<td>Peak memory is one model, not three; LoRA keeps adapters small.</td>
+</tr>
+<tr>
+<td><strong>Ordering is the weakest stage</strong></td>
+<td>Pair accuracy is 0.654, but full-order Kendall tau is only 0.201.</td>
+</tr>
+</tbody>
+</table>
+<div class="pass">
+<p><strong>Pass condition.</strong> You can say the five sentences above, in order, without looking at this page.</p>
+</div>
+<h1 id="2-the-priority-ladder">2. The priority ladder</h1>
+<figure class="diagram">
+<img src="learning_assets/01_priority_ladder.svg" alt="P0 to P7 priority ladder">
+<figcaption><strong>Figure 2.1.</strong> Learn from the top down. P0-P3 are the minimum for explaining the project; P4-P7 make the explanation defensible.</figcaption>
+</figure>
+
+<h2 id="21-priority-table">2.1 Priority table</h2>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Topic</th>
+<th>Learn this</th>
+<th>Pass condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>P0</strong></td>
+<td>The story</td>
+<td>Three stages, no LLM, model per stage, alignment, memory</td>
+<td>60-second explanation</td>
+</tr>
+<tr>
+<td><strong>P1</strong></td>
+<td>Stage 1</td>
+<td>5 labels, subwords, imbalance, boundary F1, windows</td>
+<td>Explain accuracy vs boundary F1</td>
+</tr>
+<tr>
+<td><strong>P2</strong></td>
+<td>Stage 2</td>
+<td>Pairwise A-before-B, reversals, score matrix, Borda</td>
+<td>Explain why tau is only 0.20</td>
+</tr>
+<tr>
+<td><strong>P3</strong></td>
+<td>Stage 3</td>
+<td>IndicTrans2, sentence-level translation, BLEU/chrF</td>
+<td>Explain alignment and drift</td>
+</tr>
+<tr>
+<td><strong>P4</strong></td>
+<td>Data + metrics</td>
+<td>Hiding punctuation, pairs, article splits, scoreboard</td>
+<td>Know which scores to quote</td>
+</tr>
+<tr>
+<td><strong>P5</strong></td>
+<td>Systems</td>
+<td>LoRA, sequential loading, 1.5GB cap, no fallback</td>
+<td>Explain how memory stays bounded</td>
+</tr>
+<tr>
+<td><strong>P6</strong></td>
+<td>Limits</td>
+<td>Weak ordering, weak commas, dialogue, rejected alternatives</td>
+<td>State what not to claim</td>
+</tr>
+<tr>
+<td><strong>P7</strong></td>
+<td>Code + demo</td>
+<td>Pipeline map, notebooks, commands, outputs</td>
+<td>Trace one sentence end to end</td>
+</tr>
+</tbody>
+</table>
+<h2 id="22-stop-rules">2.2 Stop rules</h2>
+<table>
+<thead>
+<tr>
+<th>Time available</th>
+<th>Stop after</th>
+<th>You can still</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30 minutes</td>
+<td>P1</td>
+<td>Give a short presentation and name the main weakness</td>
+</tr>
+<tr>
+<td>2 hours</td>
+<td>P4</td>
+<td>Answer most technical questions and quote the scoreboard</td>
+</tr>
+<tr>
+<td>1 day</td>
+<td>P7</td>
+<td>Defend design choices, alternatives, and limitations</td>
+</tr>
+</tbody>
+</table>
+<div class="pass">
+<p><strong>Do not start with P7.</strong> Reading code before the story makes the project look like unrelated files. Learn P0-P3 first.</p>
+</div>
+<h1 id="3-p1-stage-1-punctuation">3. P1: Stage 1 — punctuation</h1>
+<div class="priority">
+<p><strong>One-line version.</strong> Punctuation is five-class word labelling: mBERT+LoRA decides whether each word is followed by nothing, a comma, a danda, a question mark, or an exclamation mark.</p>
+</div>
+<h2 id="31-the-five-labels">3.1 The five labels</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Id</th>
+<th>Label</th>
+<th>Mark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">0</td>
+<td><code>none</code></td>
+<td>nothing</td>
+</tr>
+<tr>
+<td style="text-align: right;">1</td>
+<td><code>comma</code></td>
+<td><code>,</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td><code>sentence_end</code></td>
+<td><code>।</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td><code>question</code></td>
+<td><code>?</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td><code>exclamation</code></td>
+<td><code>!</code></td>
+</tr>
+</tbody>
+</table>
+<p>The model never generates text. It predicts a label for each existing word; the mark is appended afterwards. This is why Stage 1 cannot lose or rewrite a word.</p>
+<h2 id="32-the-three-mechanics-to-understand">3.2 The three mechanics to understand</h2>
+<h3 id="a-subword-alignment">A. Subword alignment</h3>
+<p>mBERT uses WordPiece. One Hindi word may become several subwords. The word's label is placed on the <strong>first subword</strong>; continuation subwords and special tokens get <code>-100</code>, which the loss ignores.</p>
+<p><strong>Why:</strong> exactly one supervision signal per word, simple and stable.</p>
+<h3 id="b-class-imbalance">B. Class imbalance</h3>
+<p><code>none</code> is 90.947% of labels. A model that predicts <code>none</code> everywhere already scores about 91% accuracy. The loss uses capped inverse-frequency weights:</p>
+<div class="formula">
+w<sub>c</sub> = min(20, N / (5N<sub>c</sub>))
+</div>
+
+<p>The cap prevents rare classes from destabilising training.</p>
+<h3 id="c-overlapping-windows">C. Overlapping windows</h3>
+<p>Inference uses 64-word windows with stride 40. A word can appear in several windows. Predictions near a window centre get more weight than predictions near an edge.</p>
+<div class="formula">
+a<sub>i</sub> = max(0.05, 1 &minus; |i &minus; (&ell; &minus; 1)/2| / ((&ell; &minus; 1)/2 + 1))
+</div>
+
+<p><strong>Why:</strong> every word gets enough context, and unreliable edge predictions are down-weighted.</p>
+<h2 id="33-the-scoreboard">3.3 The scoreboard</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align: right;">Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Word accuracy</td>
+<td style="text-align: right;">0.8724</td>
+<td>Misleadingly high because of <code>none</code></td>
+</tr>
+<tr>
+<td>Boundary F1</td>
+<td style="text-align: right;"><strong>0.8842</strong></td>
+<td>The headline Stage 1 metric</td>
+</tr>
+<tr>
+<td><code>sentence_end</code> F1</td>
+<td style="text-align: right;"><strong>0.8838</strong></td>
+<td>Danda restoration works well</td>
+</tr>
+<tr>
+<td><code>none</code> F1</td>
+<td style="text-align: right;">0.9285</td>
+<td>Easy majority class</td>
+</tr>
+<tr>
+<td><code>comma</code> F1</td>
+<td style="text-align: right;">0.3161</td>
+<td>Weak; commas are ambiguous and rare</td>
+</tr>
+<tr>
+<td><code>question</code> F1</td>
+<td style="text-align: right;">0.0000</td>
+<td>Only 236 training examples</td>
+</tr>
+<tr>
+<td><code>exclamation</code> F1</td>
+<td style="text-align: right;">0.0000</td>
+<td>Only 153 training examples</td>
+</tr>
+</tbody>
+</table>
+<h2 id="34-what-to-say">3.4 What to say</h2>
+<blockquote>
+<p>Stage 1 is five-class word classification, not text generation. Only the first subword of each word is supervised, class weights handle the 91% <code>none</code> imbalance, and overlapping windows are merged with triangular weights. Boundary F1 is 0.884 and sentence-end F1 is 0.884, but comma F1 is 0.316 and question/exclamation are zero because the training data barely contains them.</p>
+</blockquote>
+<div class="warning">
+<p><strong>Do not say</strong> "punctuation accuracy is 87%, so it is good." Accuracy is dominated by <code>none</code>; boundary F1 and per-class F1 are the honest metrics.</p>
+</div>
+<h1 id="4-p2-stage-2-ordering">4. P2: Stage 2 — ordering</h1>
+<div class="priority">
+<p><strong>One-line version.</strong> Train a classifier to answer "does A come before B?", score every sentence pair, then use Borda to turn the pairwise matrix into one order.</p>
+</div>
+<h2 id="41-the-three-mechanics-to-understand">4.1 The three mechanics to understand</h2>
+<h3 id="a-pairwise-supervision">A. Pairwise supervision</h3>
+<p>Only consecutive sentences are used. Each natural pair creates two balanced examples:</p>
+<div class="codehilite"><pre><span></span><code>(A, B) -&gt; 1     correct order
+(B, A) -&gt; 0     reversed
+</code></pre></div>
+
+<p><strong>Why reversals:</strong> they remove shortcuts such as "the first input is always earlier" or "the longer sentence is always earlier."</p>
+<h3 id="b-the-score-matrix">B. The score matrix</h3>
+<p>For n sentences, build M where:</p>
+<div class="formula">
+M<sub>ij</sub> = P(sentence i precedes j)
+</div>
+
+<p>Only unordered pairs are scored. The other triangle is the complement:</p>
+<div class="formula">
+M<sub>ji</sub> = 1 &minus; M<sub>ij</sub>
+</div>
+
+<p>For 99 sentences that is 4,851 model calls, not 9,801.</p>
+<h3 id="c-borda-like-decoding">C. Borda-like decoding</h3>
+<p>For each sentence:</p>
+<div class="formula">
+s<sub>i</sub> = (1 / (n &minus; 1)) &Sigma;<sub>j &ne; i</sub> M<sub>ij</sub>
+</div>
+
+<p>Sort by s<sub>i</sub> descending. The sentence that is often predicted to come before others moves earlier.</p>
+<h2 id="42-why-ordering-is-weak">4.2 Why ordering is weak</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pair accuracy</td>
+<td style="text-align: right;">0.6543</td>
+</tr>
+<tr>
+<td>Macro F1</td>
+<td style="text-align: right;">0.6534</td>
+</tr>
+<tr>
+<td><strong>Borda mean Kendall tau</strong></td>
+<td style="text-align: right;"><strong>0.2007</strong></td>
+</tr>
+<tr>
+<td>Clusters tau</td>
+<td style="text-align: right;">0.1220</td>
+</tr>
+<tr>
+<td>Beam tau</td>
+<td style="text-align: right;">0.0921</td>
+</tr>
+<tr>
+<td>TF-IDF ablation tau</td>
+<td style="text-align: right;">0.0631</td>
+</tr>
+</tbody>
+</table>
+<p>The key insight: <strong>65% pair accuracy does not become 65% order accuracy.</strong> Local pair decisions can form cycles such as A &prec; B &prec; C &prec; A. Borda averages the conflict; it does not recover the truth.</p>
+<h2 id="43-decoder-comparison">4.3 Decoder comparison</h2>
+<table>
+<thead>
+<tr>
+<th>Decoder</th>
+<th>How it works</th>
+<th>Why it lost or won</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Borda</strong></td>
+<td>Average all pairwise before-scores, sort</td>
+<td><strong>Won:</strong> robust to individual pair errors</td>
+</tr>
+<tr>
+<td>Clusters</td>
+<td>TF-IDF + KMeans, order cluster medoids, beam inside</td>
+<td>Assumes topical neighbours are adjacent</td>
+</tr>
+<tr>
+<td>Beam</td>
+<td>Build a chain, keep top 8 partial orders</td>
+<td>Locks in an early bad transition</td>
+</tr>
+<tr>
+<td>TF-IDF</td>
+<td>Greedy cosine-similarity chain</td>
+<td>Measures topic, not discourse order</td>
+</tr>
+</tbody>
+</table>
+<h2 id="44-what-to-say">4.4 What to say</h2>
+<blockquote>
+<p>Ordering is pairwise: a classifier answers whether A comes before B, trained on consecutive pairs and their reversals. The symmetric score matrix is decoded with a Borda-style mean score. Borda wins with Kendall tau 0.20, but that is weak: 65% pair accuracy does not compose into a good global order because local decisions can be inconsistent.</p>
+</blockquote>
+<div class="warning">
+<p><strong>Do not say</strong> "the ordering model works well." It beats chance and the TF-IDF baseline, but it does not reconstruct documents reliably. Negative tau appears on some articles.</p>
+</div>
+<h1 id="5-p3-stage-3-translation">5. P3: Stage 3 — translation</h1>
+<div class="priority">
+<p><strong>One-line version.</strong> Translate each ordered Hindi sentence into English with IndicTrans2-200M, sentence by sentence, preserving order and alignment.</p>
+</div>
+<h2 id="51-the-mechanics">5.1 The mechanics</h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td><code>ai4bharat/indictrans2-indic-en-dist-200M</code></td>
+</tr>
+<tr>
+<td>Source / target</td>
+<td><code>hin_Deva</code> / <code>eng_Latn</code></td>
+</tr>
+<tr>
+<td>Batch size</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Beams</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Max generation length</td>
+<td>256</td>
+</tr>
+<tr>
+<td>Preprocessing</td>
+<td>IndicTransToolkit</td>
+</tr>
+<tr>
+<td>CUDA precision</td>
+<td>fp16</td>
+</tr>
+<tr>
+<td>MPS precision</td>
+<td>fp32</td>
+</tr>
+</tbody>
+</table>
+<p>Sentences are translated one at a time, not as a whole document. That gives exact one-to-one alignment:</p>
+<div class="codehilite"><pre><span></span><code>Hindi sentence i -&gt; English sentence i
+</code></pre></div>
+
+<p>The pipeline flattens all sentences from all files, translates them in batches, then slices the results back per file. Empty strings stay empty, so indexes never shift.</p>
+<h2 id="52-the-scoreboard">5.2 The scoreboard</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th style="text-align: right;">Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BLEU</td>
+<td style="text-align: right;"><strong>34.125</strong></td>
+<td>Useful but imperfect n-gram match</td>
+</tr>
+<tr>
+<td>chrF</td>
+<td style="text-align: right;"><strong>59.686</strong></td>
+<td>Character overlap; more forgiving</td>
+</tr>
+<tr>
+<td>Examples</td>
+<td style="text-align: right;">100</td>
+<td>IITB English–Hindi, not assignment files</td>
+</tr>
+</tbody>
+</table>
+<p>The metrics are <strong>corpus-level on a benchmark</strong>, not a measure of the assignment output. There are no reference English translations for the assignment files.</p>
+<h2 id="53-what-to-say">5.3 What to say</h2>
+<blockquote>
+<p>Stage 3 is sentence-level IndicTrans2 with four beams. It preserves alignment exactly, but it loses cross-sentence context, so pronouns and discourse links can drift. BLEU 34.1 and chrF 59.7 on 100 IITB pairs show usable translation quality, not perfect meaning preservation.</p>
+</blockquote>
+<div class="warning">
+<p><strong>Do not say</strong> "BLEU 34 measures the assignment output." It measures 100 benchmark pairs. The assignment output is inspected qualitatively.</p>
+</div>
+<h1 id="6-p4-data-and-metrics">6. P4: Data and metrics</h1>
+<h2 id="61-how-supervision-is-created">6.1 How supervision is created</h2>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>How it becomes supervision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Existing punctuation</td>
+<td>Remove the mark from the last token; store it as a label</td>
+</tr>
+<tr>
+<td>Existing sentence order</td>
+<td>Consecutive sentences create positive pairs; reversals create negatives</td>
+</tr>
+<tr>
+<td>Hindi Wikipedia prose</td>
+<td>Enough articles for 25,000 windows and 40,000 pairs</td>
+</tr>
+</tbody>
+</table>
+<h2 id="62-data-numbers">6.2 Data numbers</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Articles kept</td>
+<td style="text-align: right;">3,000</td>
+</tr>
+<tr>
+<td>Split</td>
+<td style="text-align: right;">2,700 / 150 / 150</td>
+</tr>
+<tr>
+<td>Punctuation train windows</td>
+<td style="text-align: right;">25,000</td>
+</tr>
+<tr>
+<td>Ordering train pairs</td>
+<td style="text-align: right;">40,000</td>
+</tr>
+<tr>
+<td>Ordering evaluation articles</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr>
+<td>Punctuation window</td>
+<td style="text-align: right;">64 words, stride 40, bounds 32–96</td>
+</tr>
+<tr>
+<td>Sentence filter</td>
+<td style="text-align: right;">5–40 words</td>
+</tr>
+<tr>
+<td>Seed</td>
+<td style="text-align: right;">42</td>
+</tr>
+</tbody>
+</table>
+<p>The split is <strong>article-level</strong>: no article appears in two splits. This prevents overlapping windows and sentence pairs from leaking document context.</p>
+<h2 id="63-the-scoreboard-to-remember">6.3 The scoreboard to remember</h2>
+<figure class="diagram">
+<img src="learning_assets/04_metrics_snapshot.svg" alt="Measured scoreboard">
+<figcaption><strong>Figure 6.1.</strong> Strong sentence endings, weak commas and rare labels, modest ordering, usable translation. These are subset-adapter results.</figcaption>
+</figure>
+
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Metric</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Punctuation</td>
+<td>Boundary F1</td>
+<td style="text-align: right;">0.8842</td>
+</tr>
+<tr>
+<td>Punctuation</td>
+<td><code>sentence_end</code> F1</td>
+<td style="text-align: right;">0.8838</td>
+</tr>
+<tr>
+<td>Punctuation</td>
+<td><code>comma</code> F1</td>
+<td style="text-align: right;">0.3161</td>
+</tr>
+<tr>
+<td>Punctuation</td>
+<td><code>question</code> / <code>exclamation</code> F1</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr>
+<td>Ordering</td>
+<td>Pair accuracy</td>
+<td style="text-align: right;">0.6543</td>
+</tr>
+<tr>
+<td>Ordering</td>
+<td>Borda Kendall tau</td>
+<td style="text-align: right;">0.2007</td>
+</tr>
+<tr>
+<td>Ordering</td>
+<td>TF-IDF tau baseline</td>
+<td style="text-align: right;">0.0631</td>
+</tr>
+<tr>
+<td>Translation</td>
+<td>BLEU</td>
+<td style="text-align: right;">34.125</td>
+</tr>
+<tr>
+<td>Translation</td>
+<td>chrF</td>
+<td style="text-align: right;">59.686</td>
+</tr>
+</tbody>
+</table>
+<h2 id="64-why-the-scores-are-separated">6.4 Why the scores are separated</h2>
+<table>
+<thead>
+<tr>
+<th>If you report only</th>
+<th>You hide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Punctuation accuracy</td>
+<td>That <code>none</code> is 91% of labels</td>
+</tr>
+<tr>
+<td>Pair accuracy</td>
+<td>That full-order recovery is weak</td>
+</tr>
+<tr>
+<td>BLEU</td>
+<td>That meaning can drift despite fluency</td>
+</tr>
+<tr>
+<td>One end-to-end score</td>
+<td>Which stage failed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="65-verifier">6.5 Verifier</h2>
+<p><code>scripts/verify_colab_run.py</code> checks data counts, adapters, report fields, metric floors, output alignment, and notebook structure. The full local run passed <strong>150/150</strong> checks; the <code>--skip-model-smoke</code> path passed <strong>142</strong> checks.</p>
+<div class="pass">
+<p><strong>Pass condition.</strong> You can quote boundary F1, comma F1, pair accuracy, Borda tau, BLEU, and chrF, and say "subset adapters" in the same breath.</p>
+</div>
+<h1 id="7-p5-systems-and-constraints">7. P5: Systems and constraints</h1>
+<h2 id="71-the-memory-story">7.1 The memory story</h2>
+<p>The 1.5GB cap is handled by <strong>not holding models concurrently</strong>:</p>
+<div class="codehilite"><pre><span></span><code>load punctuation -&gt; process -&gt; free
+load ordering    -&gt; process -&gt; free
+load translation -&gt; process -&gt; free
+</code></pre></div>
+
+<p>On CUDA, <code>limit_gpu_memory</code> sets a process memory fraction:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">set_per_process_memory_fraction</span><span class="p">(</span><span class="mf">1.5</span> <span class="o">/</span> <span class="n">total_gb</span><span class="p">)</span>
+</code></pre></div>
+
+<p>On MPS/CPU this is a no-op. Locally, each adapter stage used about 0.67GB on MPS, but the CUDA cap was <strong>not</strong> exercised. Do not claim a measured CUDA peak.</p>
+<h2 id="72-why-lora">7.2 Why LoRA</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th style="text-align: right;">Punctuation adapter</th>
+<th style="text-align: right;">Ordering adapter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trainable parameters</td>
+<td style="text-align: right;">593,669</td>
+<td style="text-align: right;">591,362</td>
+</tr>
+<tr>
+<td>Total parameters</td>
+<td style="text-align: right;">177,860,362</td>
+<td style="text-align: right;">178,446,340</td>
+</tr>
+<tr>
+<td>Trainable share</td>
+<td style="text-align: right;">0.3338%</td>
+<td style="text-align: right;">0.3314%</td>
+</tr>
+<tr>
+<td>Rank / alpha</td>
+<td style="text-align: right;">16 / 32</td>
+<td style="text-align: right;">16 / 32</td>
+</tr>
+</tbody>
+</table>
+<p>The backbone is frozen; only LoRA matrices and the classifier are trained. Adapters are small and easy to ship.</p>
+<h2 id="73-system-invariants">7.3 System invariants</h2>
+<ol>
+<li>Models load one at a time.</li>
+<li>There is no fallback model; missing components fail loudly.</li>
+<li>Ordering returns indices, not edited strings.</li>
+<li>Translation returns one output per input.</li>
+<li>Grouping is pure chunking, never sorting or filtering.</li>
+<li>The same article-level split is used for both learned stages.</li>
+</ol>
+<h2 id="74-what-to-say">7.4 What to say</h2>
+<blockquote>
+<p>The memory cap is respected by sequential loading and LoRA, not by running all three models together. On CUDA the process fraction enforces 1.5GB; on MPS that cap is a no-op, so the local memory numbers are adapter evidence, not proof of the CUDA cap.</p>
+</blockquote>
+<h1 id="8-p6-limits-and-rejected-alternatives">8. P6: Limits and rejected alternatives</h1>
+<h2 id="81-six-limitations-to-state-honestly">8.1 Six limitations to state honestly</h2>
+<table>
+<thead>
+<tr>
+<th>Limitation</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ordering is weak</td>
+<td>Borda tau 0.2007; negative tau on some articles</td>
+</tr>
+<tr>
+<td>Commas are weak</td>
+<td>F1 0.3161</td>
+</tr>
+<tr>
+<td>Questions/exclamations unsupported</td>
+<td>F1 0.0; only 236/153 examples</td>
+</tr>
+<tr>
+<td>Dialogue is over-segmented</td>
+<td>507 words -&gt; 80 sentences; 846 -&gt; 99</td>
+</tr>
+<tr>
+<td>Translation drifts</td>
+<td>BLEU 34; sample paraphrases change emphasis and number</td>
+</tr>
+<tr>
+<td>Subset adapters</td>
+<td>4,000 examples each, not the full 25k/40k recipe</td>
+</tr>
+</tbody>
+</table>
+<h2 id="82-rejected-alternatives-to-know">8.2 Rejected alternatives to know</h2>
+<table>
+<thead>
+<tr>
+<th>Alternative</th>
+<th>Why rejected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One end-to-end model</td>
+<td>No aligned triplets; opaque; budget risk</td>
+</tr>
+<tr>
+<td>LLM prompting</td>
+<td>Forbidden; non-deterministic; not a pipeline</td>
+</tr>
+<tr>
+<td>Seq2seq punctuation</td>
+<td>Could rewrite words; slower; harder alignment</td>
+</tr>
+<tr>
+<td>Full fine-tuning</td>
+<td>More memory; larger checkpoints</td>
+</tr>
+<tr>
+<td>Listwise ordering</td>
+<td>Needs fixed length; harder to train</td>
+</tr>
+<tr>
+<td>Clusters or beam decoding</td>
+<td>Measured worse than Borda</td>
+</tr>
+<tr>
+<td>NLLB / mBART / OPUS-MT</td>
+<td>Larger or weaker for this budget</td>
+</tr>
+<tr>
+<td>Fallback translation model</td>
+<td>Hides failures; doubles memory</td>
+</tr>
+</tbody>
+</table>
+<h2 id="83-claims-to-avoid">8.3 Claims to avoid</h2>
+<table>
+<thead>
+<tr>
+<th>Do not say</th>
+<th>Say instead</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"The pipeline reconstructs documents accurately."</td>
+<td>"It improves order over a lexical baseline but does not fully recover it."</td>
+</tr>
+<tr>
+<td>"It handles questions and exclamations."</td>
+<td>"Those classes have zero F1 due to data scarcity."</td>
+</tr>
+<tr>
+<td>"It was trained on the full recipe."</td>
+<td>"The shipped adapters are 4k subsets; the full recipe is documented."</td>
+</tr>
+<tr>
+<td>"The 1.5GB CUDA cap is verified."</td>
+<td>"It is implemented; it was not exercised locally on CUDA."</td>
+</tr>
+<tr>
+<td>"BLEU 34 measures the assignment output."</td>
+<td>"It measures 100 IITB pairs."</td>
+</tr>
+</tbody>
+</table>
+<h1 id="9-p7-code-and-demo">9. P7: Code and demo</h1>
+<h2 id="91-read-the-code-in-this-order">9.1 Read the code in this order</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Order</th>
+<th>File</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td><code>notebooks/pipeline_demo.ipynb</code></td>
+<td>See inputs, outputs, and scores with no setup</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td><code>src/pipeline.py</code></td>
+<td>The whole flow in one file</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td><code>src/constants.py</code></td>
+<td>Models, labels, windows, memory cap</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td><code>src/punctuation/predict.py</code></td>
+<td>Words -&gt; labels -&gt; sentences</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td><code>src/ordering/decode.py</code></td>
+<td>Score matrix -&gt; Borda/beam/clusters</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td><code>src/translation/indictrans.py</code></td>
+<td>IndicTrans2 wrapper</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td><code>src/data_prep.py</code></td>
+<td>How supervision is built</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td><code>src/evaluate.py</code></td>
+<td>How the scoreboard is computed</td>
+</tr>
+</tbody>
+</table>
+<p>Skip <code>baseline/</code> and <code>lessons/</code> on the first pass. They are historical material.</p>
+<h2 id="92-commands-worth-knowing">9.2 Commands worth knowing</h2>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--strategy<span class="w"> </span>borda
+python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--limit<span class="w"> </span><span class="m">1</span><span class="w"> </span>--no-translate
+python<span class="w"> </span>-m<span class="w"> </span>src.evaluate<span class="w"> </span>--skip-translation
+python<span class="w"> </span>scripts/verify_colab_run.py
+</code></pre></div>
+
+<h2 id="93-what-to-inspect">9.3 What to inspect</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Look for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>outputs/sample-1.sentences_hi.txt</code></td>
+<td>Sentence endings and plausible order</td>
+</tr>
+<tr>
+<td><code>outputs/sample-6.sentences_hi.txt</code></td>
+<td>Over-segmentation on dialogue</td>
+</tr>
+<tr>
+<td><code>outputs/sample-1.groups_en.txt</code></td>
+<td>Five-sentence groups and alignment</td>
+</tr>
+<tr>
+<td><code>reports/evaluation.json</code></td>
+<td>Metrics and sample counts</td>
+</tr>
+<tr>
+<td><code>reports/run_summary.json</code></td>
+<td>Timings, strategy, sentence counts</td>
+</tr>
+</tbody>
+</table>
+<h2 id="94-what-to-say">9.4 What to say</h2>
+<blockquote>
+<p>The code is a linear pipeline: read tokens once, run punctuation, clear the model, run ordering, clear the model, run translation, then write four aligned files per input. Every stage has a narrow interface, so I can trace one sentence from raw word to English output.</p>
+</blockquote>
+<h1 id="10-study-plans-and-what-to-skip">10. Study plans and what to skip</h1>
+<figure class="diagram">
+<img src="learning_assets/03_time_plan.svg" alt="30 minute, 2 hour, and 1 day study plans">
+<figcaption><strong>Figure 10.1.</strong> Choose by available time. The 30-minute plan is enough for a short presentation; the 1-day plan is for a viva or design defence.</figcaption>
+</figure>
+
+<h2 id="101-memorise-vs-understand-vs-skip">10.1 Memorise vs understand vs skip</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Items</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Memorise</strong></td>
+<td>Three stages; no LLM; boundary F1 0.884; comma F1 0.316; pair accuracy 0.654; Borda tau 0.201; BLEU 34.1; chrF 59.7; 1.5GB; 4k subset</td>
+</tr>
+<tr>
+<td><strong>Understand</strong></td>
+<td>Why token classification; first-subword label; class weights; triangular windows; pairwise reversals; Borda; sentence-level alignment; sequential loading</td>
+</tr>
+<tr>
+<td><strong>Skip for now</strong></td>
+<td>Transformer attention math; exact JSON schemas; every CLI flag; all 95 pages of the design dossier; historical <code>baseline/</code> and <code>lessons/</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="102-the-one-page-revision-sheet">10.2 The one-page revision sheet</h2>
+<ol>
+<li><strong>Problem:</strong> Hindi words, no punctuation, shuffled sentences.</li>
+<li><strong>Stage 1:</strong> mBERT+LoRA, 5 labels, first subword, weighted loss, windows.</li>
+<li><strong>Stage 2:</strong> pairwise A-before-B, reversals, score matrix, Borda.</li>
+<li><strong>Stage 3:</strong> IndicTrans2, sentence-level, 4 beams.</li>
+<li><strong>Data:</strong> Wikipedia, hide punctuation, consecutive pairs, article split.</li>
+<li><strong>Memory:</strong> one model at a time, LoRA, 1.5GB CUDA cap.</li>
+<li><strong>Results:</strong> strong sentence endings, weak commas, modest order, usable translation.</li>
+<li><strong>Weakness:</strong> global ordering; subset adapters; domain mismatch.</li>
+</ol>
+<div class="pass">
+<p><strong>Final pass condition.</strong> You can give the 60-second story, draw the three-stage diagram from memory, quote six scores, and name three limitations without contradicting yourself.</p>
+</div>
+<h1 id="11-abbreviations">11. Abbreviations</h1>
+<figure class="diagram">
+<img src="learning_assets/05_abbreviations.svg" alt="Abbreviation map">
+<figcaption><strong>Figure 11.1.</strong> The star-marked acronyms are the ones most likely to appear in a short presentation or viva.</figcaption>
+</figure>
+
+<h2 id="111-full-forms-and-why-they-matter">11.1 Full forms and why they matter</h2>
+<table>
+<thead>
+<tr>
+<th>Abbreviation</th>
+<th>Full form</th>
+<th>Why it matters here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NLP</strong></td>
+<td>Natural Language Processing</td>
+<td>The field: teaching computers to work with language</td>
+</tr>
+<tr>
+<td><strong>LLM</strong></td>
+<td>Large Language Model</td>
+<td>Forbidden as a solution; the project is explicitly no-LLM</td>
+</tr>
+<tr>
+<td><strong>BERT</strong></td>
+<td>Bidirectional Encoder Representations from Transformers</td>
+<td>The encoder family behind mBERT</td>
+</tr>
+<tr>
+<td><strong>mBERT</strong></td>
+<td>Multilingual BERT</td>
+<td>Shared backbone for punctuation and ordering</td>
+</tr>
+<tr>
+<td><strong>LoRA</strong></td>
+<td>Low-Rank Adaptation</td>
+<td>Trains about 0.33% of parameters</td>
+</tr>
+<tr>
+<td><strong>PEFT</strong></td>
+<td>Parameter-Efficient Fine-Tuning</td>
+<td>Library/class of methods including LoRA</td>
+</tr>
+<tr>
+<td><strong>GPU</strong></td>
+<td>Graphics Processing Unit</td>
+<td>Hardware used for training and inference</td>
+</tr>
+<tr>
+<td><strong>CUDA</strong></td>
+<td>Compute Unified Device Architecture</td>
+<td>NVIDIA GPU runtime; where the 1.5GB cap applies</td>
+</tr>
+<tr>
+<td><strong>MPS</strong></td>
+<td>Metal Performance Shaders</td>
+<td>Apple Silicon GPU backend; cap is a no-op there</td>
+</tr>
+<tr>
+<td><strong>SDPA</strong></td>
+<td>Scaled Dot-Product Attention</td>
+<td>Default attention path; dropout breaks on MPS</td>
+</tr>
+<tr>
+<td><strong>FP16</strong></td>
+<td>16-bit floating point</td>
+<td>Half precision on CUDA</td>
+</tr>
+<tr>
+<td><strong>FP32</strong></td>
+<td>32-bit floating point</td>
+<td>Full precision on MPS</td>
+</tr>
+<tr>
+<td><strong>OOM</strong></td>
+<td>Out of Memory</td>
+<td>Failure the CUDA memory fraction is meant to prevent</td>
+</tr>
+<tr>
+<td><strong>F1</strong></td>
+<td>Harmonic mean of precision and recall</td>
+<td>Main punctuation metric</td>
+</tr>
+<tr>
+<td><strong>BLEU</strong></td>
+<td>Bilingual Evaluation Understudy</td>
+<td>Translation n-gram precision score</td>
+</tr>
+<tr>
+<td><strong>chrF</strong></td>
+<td>Character n-gram F-score</td>
+<td>Translation character-overlap score</td>
+</tr>
+<tr>
+<td><strong>tau (τ)</strong></td>
+<td>Kendall rank correlation</td>
+<td>Full-order quality metric</td>
+</tr>
+<tr>
+<td><strong>TF-IDF</strong></td>
+<td>Term Frequency–Inverse Document Frequency</td>
+<td>Clustering features and lexical ablation</td>
+</tr>
+<tr>
+<td><strong>KMeans</strong></td>
+<td>K-means clustering</td>
+<td>Groups sentences in the cluster decoder</td>
+</tr>
+<tr>
+<td><strong>JSON</strong></td>
+<td>JavaScript Object Notation</td>
+<td>Report format</td>
+</tr>
+<tr>
+<td><strong>JSONL</strong></td>
+<td>JSON Lines</td>
+<td>One JSON object per line; training data format</td>
+</tr>
+<tr>
+<td><strong>CLI</strong></td>
+<td>Command-Line Interface</td>
+<td><code>python -m src.pipeline</code> style usage</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td>Application Programming Interface</td>
+<td>Programmatic interface; no API is required here</td>
+</tr>
+<tr>
+<td><strong>HF</strong></td>
+<td>Hugging Face</td>
+<td>Model hub; IndicTrans2 is gated there</td>
+</tr>
+<tr>
+<td><strong>MT</strong></td>
+<td>Machine Translation</td>
+<td>Stage 3 task</td>
+</tr>
+<tr>
+<td><strong>CE</strong></td>
+<td>Cross Entropy</td>
+<td>Training loss for both classifiers</td>
+</tr>
+<tr>
+<td><strong>CLS / SEP</strong></td>
+<td>Classification / Separator tokens</td>
+<td>BERT pair input markers</td>
+</tr>
+<tr>
+<td><strong>TOC</strong></td>
+<td>Table of Contents</td>
+<td>Used in the PDFs</td>
+</tr>
+<tr>
+<td><strong>PDF / SVG</strong></td>
+<td>Portable Document Format / Scalable Vector Graphics</td>
+<td>Document and diagram formats</td>
+</tr>
+</tbody>
+</table>
+<h1 id="12-self-test-15-questions">12. Self-test: 15 questions</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">#</th>
+<th>Question</th>
+<th>Short answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>Why three stages instead of one model?</td>
+<td>No aligned triplets; evaluation; memory; failure isolation</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>Why token classification for punctuation?</td>
+<td>It preserves every input word</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>Why put the label on the first subword?</td>
+<td>One supervision per word; continuation tokens are ignored</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>Why class weights?</td>
+<td><code>none</code> is 90.947%; rare classes need more gradient</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>Why boundary F1 instead of accuracy?</td>
+<td>Accuracy is dominated by <code>none</code></td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>Why triangular window weights?</td>
+<td>Edge predictions have less context</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td>Why pairwise ordering?</td>
+<td>Balanced labels; works for any document length</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>Why include reversed pairs?</td>
+<td>Removes position/length shortcuts; balances classes</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>Why does Borda win?</td>
+<td>It aggregates all pairs; measured tau 0.2007</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>Why is tau only 0.20 if pair accuracy is 0.65?</td>
+<td>Local decisions do not compose into a consistent permutation</td>
+</tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td>Why sentence-level translation?</td>
+<td>Exact alignment with the required output format</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td>Why sequential model loading?</td>
+<td>Peak memory becomes one model, not three</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td>Why are the scores called subset results?</td>
+<td>Shipped adapters use 4,000 examples, not 25k/40k</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td>What is the biggest weakness?</td>
+<td>Global ordering; commas and rare classes are next</td>
+</tr>
+<tr>
+<td style="text-align: right;">15</td>
+<td>What must you not claim?</td>
+<td>Full-data training, CUDA cap verification, accurate document reconstruction</td>
+</tr>
+</tbody>
+</table>
+<div class="callout">
+<p><strong>Practice rule.</strong> Answer each question in one sentence, then add one piece of evidence. If you cannot add evidence, you have memorised a slogan, not the project.</p>
+</div>
+<h1 id="13-form-ready-answers">13. Form-ready answers</h1>
+<h2 id="131-repository-and-notebook-links">13.1 Repository and notebook links</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub repository</td>
+<td><code>https://github.com/Vaibhavvv2524/nlp-zero-to-hero</code></td>
+</tr>
+<tr>
+<td>Full Colab build</td>
+<td><code>https://colab.research.google.com/github/Vaibhavvv2524/nlp-zero-to-hero/blob/main/notebooks/colab_end_to_end.ipynb</code></td>
+</tr>
+<tr>
+<td>Executed demo (read-only)</td>
+<td><code>https://colab.research.google.com/github/Vaibhavvv2524/nlp-zero-to-hero/blob/main/notebooks/pipeline_demo.ipynb</code></td>
+</tr>
+</tbody>
+</table>
+<p>If the form accepts one Colab link, use the <strong>full build</strong>, which clones the repo automatically. If it accepts multiple, add the <strong>executed demo</strong> for visible outputs. Do not click <strong>Run all</strong> in the demo; it needs local model artifacts that are not committed.</p>
+<h2 id="132-approach-in-brief">13.2 Approach in brief</h2>
+<blockquote>
+<p>Three-stage, no-LLM pipeline. Stage 1 restores punctuation and sentence boundaries using a five-class mBERT+LoRA token classifier with overlapping windows and triangular weighting. Stage 2 orders sentences using a pairwise mBERT “A before B” classifier and a Borda-style decoder over the pairwise score matrix. Stage 3 translates ordered Hindi sentences with IndicTrans2-200M. Training data is built from Hindi Wikipedia by stripping punctuation for labels and using consecutive/reversed sentence pairs; splits are article-level. Models load sequentially to fit the 1.5GB CUDA budget. Subset-adapter results: boundary F1 0.884, ordering pair accuracy 0.654 / Borda tau 0.201, BLEU 34.1 / chrF 59.7. Main weakness: global ordering, commas, rare punctuation, and dialogue.</p>
+</blockquote>
+<h2 id="133-before-submitting">13.3 Before submitting</h2>
+<ul>
+<li>[ ] Commit and push the updated notebooks and README.</li>
+<li>[ ] Confirm the Colab link opens the updated notebook.</li>
+<li>[ ] Add a clone-if-missing cell, or clone the repo manually in Colab.</li>
+<li>[ ] Accept the IndicTrans2 licence and authenticate if the notebook is run.</li>
+<li>[ ] If outputs are required, submit the executed demo or run the full notebook and save outputs.</li>
+<li>[ ] Keep PDFs local; they are git-ignored.</li>
+</ul>
+<h2 id="134-which-pdf-should-you-read">13.4 Which PDF should you read?</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First time learning the project</td>
+<td><strong><code>assblasternlp.pdf</code></strong></td>
+</tr>
+<tr>
+<td>Preparing for a viva or design defence</td>
+<td><strong><code>holy-approach.pdf</code></strong>, especially sections 0–8, 11, 13–15</td>
+</tr>
+<tr>
+<td>Only 30 minutes</td>
+<td>This guide, P0–P3</td>
+</tr>
+<tr>
+<td>Only 2 hours</td>
+<td>This guide + <code>assblasternlp.pdf</code> stage sections</td>
+</tr>
+<tr>
+<td>Need every rejected alternative</td>
+<td><code>holy-approach.pdf</code>, section 13</td>
+</tr>
+</tbody>
+</table>
+<p>The short answer: <strong>this guide first, <code>assblasternlp.pdf</code> second, <code>holy-approach.pdf</code> selectively.</strong> You do not need to read both long PDFs cover to cover.</p>
+</body>
+</html>

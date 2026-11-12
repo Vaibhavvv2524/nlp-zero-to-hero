@@ -278,81 +278,112 @@ python -m src.pipeline --limit 1 --output-dir /tmp/pipeline-smoke
 
 # Part III — The notebooks, cell by cell
 
-## 24. `colab_end_to_end.ipynb` — the full recipe
+## 24. `colab_end_to_end.ipynb` — the full beginner course
 
 <div class='approach'>
-<strong>APPROACH CHOSEN.</strong> Put the entire full-scale workflow in one notebook: install, prepare data, train both adapters, evaluate, run the pipeline, and save artifacts. The notebook is the executable version of the README recipe, not a separate demo.
+<strong>APPROACH CHOSEN.</strong> Put the entire full-scale workflow in one notebook: install, prepare data, train both adapters, evaluate, run the pipeline, and save artifacts. The notebook is the executable version of the README recipe, but it also teaches the concepts behind each step instead of only listing commands.
 </div>
 
-This notebook has 28 cells: markdown explanations interleaved with code. It is designed for a Colab T4 GPU.
+This notebook has 59 cells: short explanations and examples interleaved with code. It is designed for a Colab T4 GPU and assumes no prior NLP experience. The first sections explain the problem, the later sections train and evaluate the models, and the final sections run the assignment pipeline and check the artifacts.
 
-### 24.1 Cell map
+### 24.1 Section map
 
-| Cell | Type | Purpose |
+| Cells | Section | Purpose |
 | ---: | --- | --- |
-| 0 | markdown | title, stage table, GPU instruction |
-| 1 | markdown | project location instructions |
-| 2 | code | `os.chdir` to project, `sys.path` setup |
-| 3 | code | torch/CUDA diagnostics |
-| 4 | markdown | dependency install explanation |
-| 5 | code | `!bash scripts/colab_setup.sh` |
-| 6 | markdown | imports, seeds, memory-cap explanation |
-| 7 | code | imports, `set_seed`, `limit_gpu_memory(1.5)` |
-| 8 | markdown | data-preparation explanation |
-| 9 | code | `!python -m src.data_prep --num-articles 3000 --max-train-pairs 40000` |
-| 10 | code | read and print data summary; show a sample |
-| 11 | markdown | stage 1 explanation (labels, LoRA, class weights) |
-| 12 | code | `!python -m src.punctuation.train --epochs 3 --batch-size 8 ...` |
-| 13 | code | read punctuation training summary |
-| 14 | markdown | stage 2 explanation (pair format, decoders) |
-| 15 | code | `!python -m src.ordering.train --epochs 2 --batch-size 8 ...` |
-| 16 | code | read ordering training summary |
-| 17 | markdown | evaluation explanation |
-| 18 | code | `!python -m src.evaluate --max-...` |
-| 19 | code | print evaluation JSON |
-| 20 | markdown | pipeline explanation (four files per input, groups of five) |
-| 21 | code | `!python -m src.pipeline --strategy borda --memory-gb 1.5` |
-| 22 | code | print the first four Hindi/English groups of sample-1 |
-| 23 | markdown | memory/timing explanation |
-| 24 | code | read and print `run_summary.json` |
-| 25 | markdown | save-results explanation |
-| 26 | code | zip outputs, copy reports |
-| 27 | markdown | notes, limitations, troubleshooting |
+| 0‑2 | Big picture and prerequisites | What the project does, what the three stages are, and what the reader needs before starting. |
+| 3‑5 | 0. Project location | Clone the public repo if needed, `os.chdir` into it, and add it to `sys.path`. |
+| 6‑8 | 0.1 GPU check | Print torch/CUDA information and stop with a clear message if no GPU is present. |
+| 9‑12 | 1. Install packages | Run `scripts/colab_setup.sh`, then import the installed libraries to prove the environment works. |
+| 13‑14 | 1.1 Hugging Face access | Read an optional `HF_TOKEN` secret for the gated IndicTrans2 translation stage. |
+| 15‑16 | 2. Settings and seed | Import project constants, call `set_seed(42)`, and cap GPU memory with `limit_gpu_memory(1.5)`. |
+| 17‑26 | 3. Data | Explain inputs, targets and labels; show a raw assignment file; build the datasets; print the summary; run the data-only self-check. |
+| 27‑34 | 4. Punctuation | Show subword tokenization, explain mBERT + LoRA and class weights, train stage 1, print the training summary, and list common fixes. |
+| 35‑38 | 5. Ordering | Explain pairwise classification and the Borda/clusters/beam decoders, train stage 2, and print the training summary. |
+| 39‑44 | 6. Evaluation | Explain held-out metrics, run `src.evaluate`, print the report, and run the pre-pipeline self-check. |
+| 45‑49 | 7. Pipeline | Run the three stages on the seven assignment files, inspect groups, and explain what good output looks like. |
+| 50‑51 | 8. Memory and timing | Read `run_summary.json` and explain the cost of each stage. |
+| 52‑53 | 9. Final self-check | Run every verifier check against the full run. |
+| 54‑55 | 10. Save results | Zip `outputs/` and copy `reports/` to a downloadable location. |
+| 56‑58 | 11. Troubleshooting, next reading, glossary | Diagnose common failures, list the code-reading order, and define the vocabulary used in the notebook. |
 
 ### 24.2 Cell-by-cell notes
 
-**Cells 0-3: setup and diagnostics.** The notebook sets `PROJECT_DIR = '/content/nlp-zero-to-hero'`, checks that it exists, changes into it, and inserts it into `sys.path`. It then prints the torch version, whether CUDA is available, the GPU name, and total GPU memory. If CUDA is not available, the training cells will be extremely slow; switch the runtime to GPU.
+**Cells 0-2: orientation.** The notebook starts with a plain-English description of the problem: Hindi text has lost its punctuation and sentence order, and the pipeline must restore both before translating to English. It also states the prerequisites: a Google account, a T4 GPU runtime, and an optional Hugging Face token for gated IndicTrans2. There is no hidden setup step; if the GPU check or the install check fails, the notebook stops before doing expensive work.
 
-**Cell 5: dependencies.** It runs `scripts/colab_setup.sh`, which upgrades pip, installs `requirements-colab.txt`, and installs `IndicTransToolkit` (wheel or source). It also prints torch and CUDA information. This cell takes a few minutes on a fresh runtime.
+**Cells 3-5: project folder.** The first code cell looks for an existing project root, falls back to `/content/nlp-zero-to-hero`, and runs `git clone` if the repository is missing. If the folder already exists, it pulls the latest `main` when possible, so a rerun does not keep stale code. It then changes into the root and inserts it into `sys.path`. This is why a reviewer can open the GitHub Colab link and use **Run all** without uploading a folder first.
 
-**Cell 7: seeds and memory cap.** It imports the project constants and utilities, calls `set_seed(42)`, and applies `limit_gpu_memory(1.5)`. On a 15 GB T4, this sets the process memory fraction to `1.5 / 15 = 0.1`. If the process tries to exceed it, CUDA raises an out-of-memory error rather than silently using more.
+**Cells 6-8: GPU diagnostics.** The notebook imports torch, prints the torch version, checks `torch.cuda.is_available()`, and prints the GPU name and total memory. The next markdown cell explains that a CPU runtime is not a valid substitute: training would take hours instead of minutes. This is a hard stop, not a warning.
 
-**Cells 8-10: data.** Cell 9 builds the datasets. Cell 10 reads `data/processed/data_prep_summary.json`, prints article counts, split sizes, punctuation examples and label counts, ordering pair counts, and shows the first 18 words/labels of a training window. The expected counts are 3,000 articles, 2,700/150/150 splits, 25,000/2,317/2,208 windows, and 40,000/3,000/3,000 pairs.
+**Cells 9-12: dependencies.** Cell 10 runs `bash scripts/colab_setup.sh`, which upgrades pip, installs `requirements-colab.txt`, and installs `IndicTransToolkit` from a wheel or a source build. Cell 12 imports `datasets`, `transformers`, `peft`, `torch` and `sacrebleu`, then prints their versions and the GPU name. The pins are deliberate: transformers 4.44.2 keeps the ONNX conversion path that IndicTrans2 needs, peft 0.13.2 avoids a macOS-only tensor import, and datasets 3.6.0 matches the pinned hub client.
 
-**Cells 11-13: punctuation training.** Cell 12 trains for 3 epochs with batch size 8 and LR 3e-4. Cell 13 reads `models/punctuation/training_summary.json` and prints trainable parameters, validation metrics, test metrics, and peak memory. The log also prints the label counts and class weights.
+**Cells 15-16: settings and memory.** The notebook imports `LABELS`, `PUNCT_DATA`, `ORDER_DATA`, `PUNCT_MODEL_DIR`, `ORDER_MODEL_DIR`, `TRANSLATION_MODEL`, `set_seed` and `limit_gpu_memory`. It calls `set_seed(42)` so splits and training are repeatable, then applies a 1.5 GB cap on a 15 GB T4 (a fraction of 0.1). The cap is intentionally tight; it turns a silent memory overrun into a clear CUDA out-of-memory error.
 
-**Cells 14-16: ordering training.** Cell 15 trains for 2 epochs with batch size 8 and LR 2e-4. Cell 16 prints validation/test metrics and peak memory. The expected pair accuracy is above 0.5; the full-data recipe should improve on the subset result.
+**Cells 17-26: data.** The markdown cells explain the difference between an input and a target, why Wikipedia can supply both punctuation labels and sentence order, and why Hindi needs care (the danda `।`, `str.split()` instead of a naive `\w` regex, and `NULL` removal). Cell 19 reads `data/raw/sample-1.txt` and prints its token count. Cells 20-21 define the five labels and describe the windowing/pair-building recipe. Cell 22 runs:
 
-**Cells 17-19: evaluation.** Cell 18 runs `src.evaluate` with caps: 1,200 punctuation examples, 3,000 ordering pairs, 30 articles, 200 translation examples. Cell 19 prints the evaluation JSON. If IndicTrans2 is not authenticated, the translation stage is skipped with a reason; the punctuation and ordering stages still run.
+```bash
+python -m src.data_prep --num-articles 3000 --max-train-pairs 40000
+```
 
-**Cells 20-22: pipeline.** Cell 21 runs `src.pipeline` with Borda and the 1.5 GB cap. Cell 22 prints the first four Hindi and English groups of sample-1. Each group should contain five sentences, except possibly the last.
+Cell 24 reads `data/processed/data_prep_summary.json` and prints article counts, split sizes, punctuation example counts, label distributions, ordering pair counts, and one held-out window. Cell 26 runs the data-only verifier:
 
-**Cells 23-24: timing and memory.** Cell 24 reads `run_summary.json` and prints the strategy, timings, memory limit, and per-file counts. On a T4, the ordering stage is the slowest; on MPS, the local run took 130.53 seconds for ordering, 102.17 seconds for translation, and 2.31 seconds for punctuation.
+```bash
+python scripts/verify_colab_run.py --skip-models --skip-reports --skip-outputs
+```
 
-**Cells 25-26: saving.** Cell 26 zips `outputs/` to `/content/hindi_assignment_outputs.zip` and copies `reports/` to `/content/hindi_assignment_reports/`. This is what you attach to a submission.
+The expected counts are 3,000 articles; 2,700/150/150 splits; 25,000/2,317/2,208 punctuation windows; and 40,000/3,000/3,000 ordering pairs.
 
-**Cell 27: notes.** It restates the no-LLM guarantee, the no-fallback guarantee, the memory strategy, the data limitations, the rarity of question/exclamation marks, the difficulty of ordering, and translation evaluation caveats. It also has troubleshooting bullets for toolkit builds, peft/transformers mismatches, and CUDA OOM.
+**Cells 27-34: punctuation.** Cell 29 uses `AutoTokenizer.from_pretrained("bert-base-multilingual-cased")` on a short Hindi phrase to show that a word becomes several subword tokens. The label is attached to the first subword; the remaining subword positions are ignored by the loss. The markdown explains why punctuation is imbalanced (most words are `none`), how class weights compensate, and what LoRA freezes and trains. Cell 31 runs:
+
+```bash
+python -m src.punctuation.train --epochs 3 --batch-size 8 \
+    --learning-rate 3e-4 --memory-gb 1.5
+```
+
+Cell 33 reads `models/punctuation/training_summary.json` and prints trainable parameters, validation metrics, test metrics, and peak memory. Cell 34 lists the most common failure modes: missing labels, a missing adapter, and CUDA OOM.
+
+**Cells 35-38: ordering.** The markdown explains why predicting a whole permutation is impractical (20 sentences give more than 2 quintillion orders) and why the project instead trains a pairwise classifier on `(A, B) -> 1` and `(B, A) -> 0`. It compares the three decoders: Borda (default, robust), clusters (TF-IDF + KMeans), and beam (higher cost, sometimes better). Cell 36 runs:
+
+```bash
+python -m src.ordering.train --epochs 2 --batch-size 8 \
+    --learning-rate 2e-4 --memory-gb 1.5
+```
+
+Cell 38 prints validation/test metrics from `models/ordering/training_summary.json`. Pair accuracy should be clearly above 0.5; the full-data recipe should beat the subset result.
+
+**Cells 39-44: evaluation.** The markdown distinguishes word accuracy from boundary F1 (why the latter is the meaningful punctuation score), pair accuracy from Kendall's tau (why a good pair classifier can still produce a mediocre full order), and BLEU/chrF from accuracy (they are comparative, not percentages). Cell 40 runs `python -m src.evaluate` with the notebook's caps. Cell 42 prints `reports/evaluation.json`. Cell 44 runs the verifier again, this time skipping outputs and the adapter smoke test:
+
+```bash
+python scripts/verify_colab_run.py --skip-outputs --skip-model-smoke
+```
+
+If IndicTrans2 is not authenticated, translation fails with a clear error; the notebook does not silently fall back to another model.
+
+**Cells 45-49: pipeline.** Cell 46 runs:
+
+```bash
+python -m src.pipeline --strategy borda --memory-gb 1.5
+```
+
+The pipeline removes `NULL`, restores punctuation, groups sentences, orders each group, translates five sentences at a time, and writes four files per input. Cell 48 prints the first Hindi and English groups of sample-1. Each group should contain five sentences, except possibly the last. Cell 49 explains what to look for: Hindi punctuation present, English readable, and occasional ordering mistakes expected because ordering is the weakest stage.
+
+**Cells 50-51: memory and timing.** Cell 51 reads `reports/run_summary.json` and prints the strategy, timings, memory limit, and per-file counts. On a T4, ordering is the slowest stage; on the local MPS run, ordering took 130.53 seconds, translation 102.17 seconds, and punctuation 2.31 seconds.
+
+**Cells 52-53: final self-check.** Cell 53 runs the full verifier with no skip flags. It checks the data, model files, reports, deterministic adapter smoke test, metric thresholds, and every output file. The notebook does not declare success unless this cell finishes with `All checks passed.`
+
+**Cells 54-55: saving.** Cell 55 zips `outputs/` to `/content/hindi_assignment_outputs.zip` and copies `reports/` to `/content/hindi_assignment_reports/`. These are the artifacts to attach to a submission.
+
+**Cells 56-58: troubleshooting and vocabulary.** The final cells cover GPU problems, 401/gated-repo errors, toolkit build failures, import errors after install, CUDA OOM, slow data downloads, and failed self-checks. The code-reading order is `src/constants.py`, `src/pipeline.py`, the two model packages, the translator wrapper, then `src/data_prep.py` and `src/evaluate.py`. The glossary defines adapter, batch, BLEU, Borda, chrF, epoch, F1, inference, Kendall's tau, LoRA, loss, mBERT, NULL, seed, and softmax.
 
 ### 24.3 How to run it
 
 1. Open the notebook in Colab.
 2. `Runtime > Change runtime type > Hardware accelerator: GPU (T4)`.
-3. Upload the project folder to `/content/nlp-zero-to-hero` or clone the GitHub repo there.
-4. If using the official IndicTrans2, accept the license on Hugging Face and run `huggingface-cli login` (or set `HF_TOKEN`) before cell 21/18.
-5. `Runtime > Run all`.
+3. Press **Runtime > Run all**. The first code cell clones the repository to `/content/nlp-zero-to-hero` automatically.
+4. Optional, for translation: accept the IndicTrans2 licence on Hugging Face and add a Colab secret named `HF_TOKEN`. Training works without it; evaluation and the pipeline need it.
+5. The notebook installs dependencies, prepares data, trains both adapters, evaluates, runs the pipeline and saves the artifacts.
 6. Download the zip and reports from `/content/`.
 
-> **Common issue.** The notebook's default `TRANSLATION_MODEL` is the official gated Hub id. If you have not authenticated, translation fails. You can pass a local mirror path in the commands, but the notebook cells as written use the constant. The local demo notebook is the tested path on this machine.
+> **Common issue.** The notebook's default `TRANSLATION_MODEL` is the official gated Hub id. If you have not authenticated, translation fails at the evaluation or pipeline step with a clear error. Add `HF_TOKEN` in Colab Secrets and rerun the optional login cell. The executed demo notebook is the tested evidence path on this machine.
 
 ## 25. `pipeline_demo.ipynb` — the executed local demo
 
@@ -360,32 +391,42 @@ This notebook has 28 cells: markdown explanations interleaved with code. It is d
 <strong>APPROACH CHOSEN.</strong> Publish an executed notebook that uses the real adapters and shows visible outputs for every stage. This is the evidence artifact: it proves the local pipeline runs, that Hindi/English outputs align, and that the reported metrics are reproducible on this machine.
 </div>
 
-This notebook has 13 cells and is already executed. It is the artifact that proves the local pipeline runs with visible outputs.
+This notebook has 22 cells and is already executed. It is the short, beginner-friendly companion to the full course: it does not train anything, but it explains each stage and shows real predictions and real output files.
 
 ### 25.1 Cell map and observed outputs
 
 | Cell | Type | What it does | Observed output |
 | ---: | --- | --- | --- |
-| 0 | markdown | title, environment summary | Python 3.12, torch 2.15 MPS, 2-3 minutes |
-| 1 | code | set project root, print Python version | `Python: 3.12.13` |
-| 2 | markdown | stage 1 explanation | — |
-| 3 | code | load punctuation adapter, predict one test window | 73 words; token accuracy 0.849; correct `है -> sentence_end`, `राज्यव्यवस्था -> comma` |
-| 4 | markdown | stage 2 explanation | — |
-| 5 | code | load ordering adapter, score one test pair | gold 1; P(A before B)=0.711; P(B before A)=0.289 |
-| 6 | markdown | stage 3 explanation | — |
-| 7 | code | translate three sentences | “India is a huge country.”; “It's a test.”; “Please submit your report by tomorrow.” |
-| 8 | markdown | end-to-end artifacts explanation | — |
-| 9 | code | check alignment of all seven samples | 52/11, 55/11, 49/10, 53/11, 55/11, 80/16, 99/20; all aligned |
-| 10 | markdown | evaluation explanation | subset adapters |
-| 11 | code | print key metrics | 0.8724 / 0.8842; 0.6543; 0.2007; 34.125 / 59.686 |
-| 12 | markdown | reproduce commands | — |
+| 0 | markdown | Title, what the project does, the three stages, and environment summary | Python 3.12, torch 2.15 MPS, 2-3 minutes |
+| 1 | markdown | Section 0: how the notebook finds the project root | — |
+| 2 | code | Set the project root, add it to `sys.path`, print the Python version | `Python: 3.12.13` |
+| 3 | markdown | What the path cell should print and why it matters | — |
+| 4 | markdown | Section 1: punctuation problem, five labels, subword labels, LoRA | — |
+| 5 | code | Load the punctuation adapter and predict one test window | 73 words; token accuracy 0.849; correct `है -> sentence_end`, `राज्यव्यवस्था -> comma` |
+| 6 | markdown | How to read `true=` and `pred=`; why the classifier warning is expected | — |
+| 7 | markdown | Section 2: why pairwise ordering, and how Borda turns pairs into an order | — |
+| 8 | code | Load the ordering adapter and score one test pair | gold 1; P(A before B)=0.711; P(B before A)=0.289 |
+| 9 | markdown | How to read the pair probabilities; why one pair is only a sanity check | — |
+| 10 | markdown | Section 3: IndicTrans2, language tags, and why there is no fallback | — |
+| 11 | code | Translate three short Hindi sentences | “India is a huge country.”; “It's a test.”; “Please submit your report by tomorrow.” |
+| 12 | markdown | What the translations should look like; wording may vary | — |
+| 13 | markdown | Section 4: the four output files per sample and the alignment rule | — |
+| 14 | code | Check alignment of all seven samples | 52/11, 55/11, 49/10, 53/11, 55/11, 80/16, 99/20; all aligned |
+| 15 | markdown | How to read `aligned=True`; what good and bad output look like | — |
+| 16 | markdown | Section 5: what each metric means and why the subset scores are honest | — |
+| 17 | code | Print the key metrics from `reports/evaluation.json` | 0.8724 / 0.8842; 0.6543; 0.2007; 34.125 / 59.686 |
+| 18 | markdown | How to read the scores; why ordering is the weak point | — |
+| 19 | markdown | Section 6: reproduce the artifacts and run the verifier | — |
+| 20 | markdown | The three command-line commands | — |
+| 21 | markdown | Section 7: code-reading order and exercises | — |
 
 ### 25.2 Why the demo matters
 
 - It uses the **actual trained adapters**, not toy weights.
 - It shows **visible outputs** for all three stages, including Hindi text.
 - It verifies **alignment**: the number of Hindi sentences equals the number of English sentences equals the summary's sentence count, and the same for groups.
-- It reports the **subset adapter** scores honestly.
+- It reports the **subset adapter** scores honestly instead of hiding the weak ordering result.
+- It is short enough for a reviewer to read before the full course. In Colab it is **read-only evidence**: the model weights and processed data are git-ignored, so a reviewer should read the saved outputs instead of using **Run all**.
 
 ### 25.3 How to run it
 

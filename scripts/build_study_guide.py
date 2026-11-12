@@ -160,7 +160,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--html-out", type=Path, default=DOCS / "study_guide.html")
     parser.add_argument("--pdf-out", type=Path,
-                        default=DOCS / "NLP_Zero_to_Hero_Study_Guide.pdf")
+                        default=DOCS / "assblasternlp.pdf")
     parser.add_argument("--skip-pdf", action="store_true")
     args = parser.parse_args()
 

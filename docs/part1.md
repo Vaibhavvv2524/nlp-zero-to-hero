@@ -108,8 +108,8 @@ A crucial engineering decision is that the three models are **never resident in 
 | **Subword** | A piece of a word, used so the model can handle rare words. |
 | **Embedding** | A dense vector representing a token, word, or sentence. |
 | **Transformer** | A neural architecture built from attention layers. |
-| **BERT** | A transformer encoder pretrained to fill in masked words; good at understanding text. |
-| **mBERT** | The multilingual version of BERT, pretrained on many languages including Hindi. |
+| **BERT** | Bidirectional Encoder Representations from Transformers: a transformer encoder pretrained to fill in masked words; good at understanding text. |
+| **mBERT** | Multilingual BERT: the multilingual version of BERT, pretrained on many languages including Hindi. |
 | **LoRA** | Low-Rank Adaptation: train small matrices instead of all model weights. |
 | **Logit** | The raw, unnormalized score a model produces before softmax. |
 | **Softmax** | Turns logits into probabilities that sum to one. |
@@ -119,8 +119,10 @@ A crucial engineering decision is that the three models are **never resident in 
 | **Cross-entropy** | The standard classification loss; punishes confident wrong answers. |
 | **Inference** | Using a trained model to make predictions. |
 | **Decoder** | The component that turns model scores into a final structure (a label, an order, a translation). |
-| **BLEU / chrF** | Metrics for machine translation quality. |
+| **BLEU / chrF** | Bilingual Evaluation Understudy / character n-gram F-score: metrics for machine translation quality. |
 | **Kendall's tau** | A rank-correlation metric for how close a recovered order is to the truth. |
+
+> **Acronyms.** The full form of every initialism used in this guide, from BERT and LoRA to BLEU, fp16, MPS, and JSONL, is listed in **Appendix H**. The table above defines the concepts; Appendix H defines the abbreviations.
 
 <div class='pagebreak'></div>
 
@@ -221,6 +223,82 @@ raw tokens -> [stage 1: label each word] -> sentences
 - **The weaknesses are measured, not hidden.** Comma F1, question/exclamation F1, and ordering tau are reported honestly.
 - **The memory claim is architectural, not wishful.** The code physically releases each model before loading the next.
 - **The data story is clean.** Natural Wikipedia supervision, article-level splits, and no synthetic labels.
+
+## A.7 Pros and cons of the chosen approach
+
+The design is a trade, not a free win. The table states both sides and how each weakness is contained.
+
+<div class='decision'>
+
+**Pros**
+
+1. **Fits the constraints.** Two small BERT-based stages plus one 200M translator, loaded one at a time, stay within the 1.5 GB budget and contain no LLM.
+2. **Uses supervision that already exists.** Wikipedia supplies punctuation and natural sentence order, so no synthetic labels or LLM-generated data are needed.
+3. **Every stage is independently measurable.** Boundary F1, pair macro F1/Kendall's tau, and BLEU/chrF localize failures instead of hiding them in one score.
+4. **Cheap adaptation.** LoRA trains about 0.33% of parameters, keeps optimizer state small, and produces adapters of roughly 2.4 MB.
+5. **Reuse and simplicity.** One multilingual backbone serves two tasks; only one new model family is introduced for translation.
+6. **Failure isolation.** If ordering is weak, punctuation and translation still produce a valid partial result; if the translator is unavailable, the first two stages still run.
+7. **Deterministic structure.** The pipeline never rewrites input words, so the word stream is auditable and the output can be aligned exactly.
+8. **Replaceable parts.** Each stage can be retrained, swapped, or evaluated without touching the other two.
+
+**Cons**
+
+1. **Error propagation.** A bad sentence boundary corrupts ordering; a bad order corrupts translation context. There is no joint correction.
+2. **The ordering stage is the weak link.** Pairwise accuracy is 0.6543 and Borda tau is only 0.2007; full-document order is not solved.
+3. **Quadratic pair cost.** Ordering n sentences requires n(n−1)/2 model calls; 99 sentences means 4,851 pairs.
+4. **Multiple artifacts.** Three models or adapters, a tokenizer, a toolkit, and a local translation mirror must all be present and compatible.
+5. **No joint optimization.** Each stage is trained on its own objective, so the pipeline is not globally optimal.
+6. **Subset adapters in this repository.** The shipped models were trained on 4,000 windows/pairs, not the full 25,000/40,000, which caps the measured quality.
+7. **Distribution mismatch.** Models learn Wikipedia prose; dialogue and poetry are over-segmented or misordered.
+8. **Rare punctuation is not learned.** Question and exclamation marks have 236 and 153 training examples, so their F1 is zero.
+
+</div>
+
+| Weakness | Containment in this project | What would remove it |
+| --- | --- | --- |
+| Error propagation | per-stage metrics, honest reporting, groups of five keep local order | joint reranking or end-to-end training |
+| Weak ordering | Borda is the best of three decoders; TF-IDF ablation quantifies the gain | stronger pair model, longer context, better decoder |
+| Quadratic cost | only sentence pairs, not word pairs; small model; batched scoring | approximate ranking or chunked ordering |
+| Many artifacts | pinned environment, setup script, executed notebook | container image or single packaged model |
+| Subset adapters | documented full-data recipe, separate subset/full claims | full-data training run |
+| Distribution mismatch | stated limitation; samples show the failure | in-domain data and evaluation |
+| Rare punctuation | class weights plus explicit zero-F1 reporting | targeted data collection or augmentation |
+
+## A.8 How to actually test the approach
+
+You test the approach at four levels, from cheap to expensive. Appendix I gives the exact commands, assertions, and expected values.
+
+| Level | What it proves | Command | Pass condition |
+| --- | --- | --- | --- |
+| 1. Environment | the pinned stack imports and the GPU backend is visible | `python setup_check.py` | no import errors; device reported |
+| 2. Data | windows, labels, pairs, and splits are correct and leak-free | `python -m src.data_prep ...` then inspect JSONL | expected counts; no article overlaps |
+| 3. Stage quality | each model beats its baseline on held-out data | `python -m src.evaluate ...` | boundary F1 > 0.85; pair acc > 0.5; Borda tau > TF-IDF tau |
+| 4. End to end | outputs are aligned, non-empty, and reproducible | `python -m src.pipeline ...` | 4 files per input; sentence/group counts match; no `NULL`; Hindi and English align |
+
+A quick manual test after any change is:
+
+```bash
+python -m compileall -q src
+python -m src.pipeline --limit 1 --output-dir /tmp/pipeline-smoke
+diff <(wc -l < outputs/sample-1.sentences_hi.txt) \
+     <(wc -l < outputs/sample-1.sentences_en.txt)
+```
+
+The `diff` must print nothing: Hindi and English sentence counts must match. Appendix I turns these checks into an automated script.
+
+<div class='pagebreak'></div>
+
+## A.9 The approach in one page
+
+If you need the whole design in one screen, this is it.
+
+| Question | Answer |
+| --- | --- |
+| **What is the approach?** | Three supervised stages: (1) mBERT + LoRA labels every word with `none/comma/sentence_end/question/exclamation`; (2) mBERT + LoRA scores every sentence pair, and Borda turns the scores into an order; (3) IndicTrans2 200M translates each ordered sentence. The pipeline loads one model at a time and groups every five sentences. |
+| **Why did we use it?** | It is the only decomposition that satisfies all constraints at once: no LLM, 1.5 GB memory, Hindi support, natural Wikipedia supervision, per-stage evaluation, and exact word/sentence alignment. A single end-to-end model has no aligned training data and cannot be evaluated stage by stage. |
+| **What are the pros?** | Fits the budget; uses existing supervision; each stage is measurable and replaceable; LoRA trains ~0.33% of parameters; errors are isolated; outputs are deterministic and auditable. |
+| **What are the cons?** | Errors propagate across stages; ordering is the weak link (Borda tau 0.2007); pairwise scoring is O(n²); three artifacts must stay compatible; shipped adapters are subset adapters; Wikipedia prose does not match dialogue. |
+| **How do you test it?** | (0) `python setup_check.py`; (1) rerun `src.data_prep` and assert counts/splits/label alignment; (2) run `src.evaluate` and require boundary F1 ≥ 0.85, pair accuracy > 0.5, Borda tau > TF-IDF tau, BLEU ≥ 30; (3) run `src.pipeline` and assert 4 files per input, equal Hindi/English sentence and group counts, no `NULL`; (4) rerun twice and `diff` the outputs; (5) run the executed notebook. Exact commands are in Appendix I. |
 
 <div class='callout'>
 <strong>If you remember one thing:</strong> the project succeeds because it chooses the <em>right decomposition</em> for the constraints. mBERT labels words, a pairwise model ranks sentences, a decoder turns rankings into an order, and IndicTrans2 translates. Each stage is small, measurable, and replaceable.

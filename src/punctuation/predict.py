@@ -80,6 +80,8 @@ class PunctuationRestorer:
         if not words:
             return []
 
+        # Long inputs are split into overlapping windows. A word can appear in
+        # more than one window, so we accumulate a weighted score per word.
         windows = sliding_windows(len(words), WINDOW_WORDS, STRIDE_WORDS)
         texts = [words[start:end] for start, end in windows]
 
@@ -109,6 +111,8 @@ class PunctuationRestorer:
                 probabilities = torch.softmax(logits, dim=-1).cpu().numpy()
 
                 for row, (start, end) in enumerate(batch_windows):
+                    # BERT may split one word into several subwords. Keep only
+                    # the first subword; later subwords repeat the same word_id.
                     previous_word = None
                     for position, word_id in enumerate(word_ids_per_row[row]):
                         if word_id is None or word_id == previous_word:
@@ -120,6 +124,7 @@ class PunctuationRestorer:
                         )
                         weights[start + word_id] += weight
 
+        # Average the overlapping window scores, then take the best label.
         labels = []
         for index in range(len(words)):
             if weights[index] == 0:

@@ -37,6 +37,7 @@ from .utils import ensure_dir, read_jsonl, save_json, set_seed
 
 
 def _boundary_metrics(true_labels, predicted_labels):
+    """Score all punctuation marks as one yes/no boundary decision."""
     boundary_true = np.isin(true_labels, BOUNDARY_IDS)
     boundary_pred = np.isin(predicted_labels, BOUNDARY_IDS)
     precision, recall, f1, _ = precision_recall_fscore_support(
@@ -55,6 +56,7 @@ def evaluate_punctuation(
     max_examples=1500,
     memory_gb=MEMORY_LIMIT_GB,
 ):
+    """Measure per-word accuracy, boundary P/R/F1 and per-class F1."""
     from .punctuation.predict import PunctuationRestorer
 
     rows = read_jsonl(test_path)
@@ -98,6 +100,7 @@ def evaluate_ordering_pairs(
     test_path=ORDER_DATA / "test.jsonl",
     max_examples=3000,
 ):
+    """Measure how often the pair classifier puts A before B correctly."""
     rows = read_jsonl(test_path)
     if max_examples is not None:
         rows = rows[:max_examples]
@@ -123,6 +126,7 @@ def evaluate_translation(
     dataset_name="cfilt/iitb-english-hindi",
     max_examples=200,
 ):
+    """Compute corpus BLEU and chrF on a public Hindi-English test set."""
     try:
         from datasets import load_dataset
         from sacrebleu.metrics import BLEU, CHRF

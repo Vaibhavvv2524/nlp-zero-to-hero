@@ -108,7 +108,10 @@ class OrderScorer:
     def score_matrix(self, sentences, batch_size=32):
         """Symmetric matrix where ``M[i, j] = P(sentence i before j)``."""
         count = len(sentences)
+        # The diagonal compares a sentence with itself, so 0.5 is neutral.
         matrix = np.full((count, count), 0.5, dtype=np.float64)
+        # Score each unordered pair once, then fill both sides with
+        # P(i before j) and 1 - P(i before j).
         pairs = [(i, j) for i in range(count) for j in range(i + 1, count)]
         if not pairs:
             return matrix
@@ -121,6 +124,7 @@ class OrderScorer:
         return matrix
 
     def predict_pair_labels(self, pairs, batch_size=32):
+        """Return 1 when A is predicted before B, otherwise 0."""
         first = [pair[0] for pair in pairs]
         second = [pair[1] for pair in pairs]
         probabilities = self._pair_probabilities(first, second, batch_size)
@@ -173,6 +177,7 @@ def cluster_sentences(sentences, n_clusters=None):
 
 
 def _earliness(matrix, node, nodes):
+    """Average probability that ``node`` comes before the other nodes."""
     others = [other for other in nodes if other != node]
     if not others:
         return 0.0
@@ -180,6 +185,7 @@ def _earliness(matrix, node, nodes):
 
 
 def _greedy_order(matrix, nodes):
+    """Start with the earliest sentence, then repeatedly take the next best."""
     nodes = list(nodes)
     if len(nodes) <= 1:
         return nodes
@@ -303,6 +309,7 @@ def order_sentences_tfidf(sentences):
 
 
 def kendall_tau(recovered, truth):
+    """Compare a recovered order with the true order (-1 to 1)."""
     if len(recovered) < 2:
         return float("nan")
     return float(kendalltau(recovered, truth).statistic)
