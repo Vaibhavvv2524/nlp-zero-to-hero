@@ -1,24 +1,173 @@
-# 0. How to use this guide
+# 0. The whole project in brief
 
 <div class="lead">
 
-**This is the map, not the manual.** Read it first. It tells you what to learn, in what order, what to skip, and how to stop studying when you know enough.
+**This guide is self-contained.** It gives you the complete project in brief: the problem, input/output contract, three models, data recipe, measured scores, what is actually committed, the code map, the commands, and the limitations. The two long PDFs are optional depth, not required reading.
 
 </div>
 
-The project has two long PDFs:
+## 0.1 Problem, input, and output
 
-| Document | Job | When to read it |
+You receive a Hindi article as a flat list of words. The assignment has removed punctuation, shuffled the sentences, and may have inserted the placeholder token `NULL`.
+
+The pipeline must produce:
+
+1. the same Hindi words, with punctuation and sentence boundaries restored;
+2. the sentences in a plausible original order;
+3. an English translation of each ordered sentence;
+4. Hindi and English output grouped five sentences at a time.
+
+The input contract is deliberately small:
+
+| Property | Requirement |
+| --- | --- |
+| Encoding | UTF-8 |
+| Separator | whitespace |
+| Placeholder | exact token `NULL`, removed before Stage 1 |
+| Punctuation | none expected |
+| Sentence order | shuffled |
+| Word rewriting | not allowed in Stage 1 |
+
+For each input stem, the pipeline writes four aligned files:
+
+| File | Contents | Alignment rule |
 | --- | --- | --- |
-| `assblasternlp.pdf` | Beginner study guide | First, to learn the project from scratch |
-| `holy-approach.pdf` | Detailed design dossier | Later, for depth, viva, or design defence |
-| **this guide** | Priority map | Before both, and again before the form/presentation |
+| `sample-N.sentences_hi.txt` | ordered Hindi sentences, one per line | line *i* is Hindi sentence *i* |
+| `sample-N.groups_hi.txt` | the same Hindi sentences, five per line | group `g` contains sentences `5g+1` to `5g+5` |
+| `sample-N.sentences_en.txt` | English translations, one per line | line *i* translates Hindi line *i* |
+| `sample-N.groups_en.txt` | the same English translations, five per line | same five-sentence grouping |
+
+The group count is always `ceil(n / 5)`; the last group may be shorter.
+
+## 0.2 The three stages at a glance
+
+| Stage | Job | Model and method | Output | Headline result |
+| --- | --- | --- | --- | --- |
+| **1. Punctuation** | Decide what follows each word | mBERT + LoRA, 5-class token classification | one label per word; rebuilt Hindi sentences | boundary F1 **0.8842** |
+| **2. Ordering** | Decide which sentence comes first | mBERT + LoRA, pairwise “A before B” classifier + Borda decoder | one permutation of the sentences | pair accuracy **0.6543**; Borda tau **0.2007** |
+| **3. Translation** | Turn each ordered Hindi sentence into English | IndicTrans2-200M, sentence-level beam search | aligned English sentences | BLEU **34.125**; chrF **59.686** on 100 IITB pairs |
+
+The stages are separate because there are no aligned triplets of `(unpunctuated shuffled Hindi, punctuated ordered Hindi, English)`, and because one large model would violate the no-LLM and 1.5GB constraints. Separate stages also give separate metrics and failure isolation.
+
+## 0.3 Data and training recipe
+
+| Item | Full recipe | Measured local run |
+| --- | --- | --- |
+| Source | Hindi Wikipedia (`wikimedia/wikipedia`, `20231101.hi`) | same |
+| Articles | 3,000, split 2,700 / 150 / 150 by article | same split |
+| Punctuation training | 25,000 windows | 4,000 windows |
+| Ordering training | 40,000 pairs | 4,000 pairs |
+| Punctuation window | target 64 words, stride 40, bounds 32–96 | same |
+| Sentence filter | 5–40 words | same |
+| Ordering pairs | consecutive sentences plus reversed pairs | same |
+| Shared backbone | `bert-base-multilingual-cased` | same |
+| LoRA | rank 16, alpha 32, dropout 0.1, `query`/`value`, classifier saved | same |
+| Punctuation training | default 3 epochs, batch 8, LR 3e-4 | 2 epochs, batch 16, LR 3e-4 |
+| Ordering training | default 2 epochs, batch 8, LR 2e-4 | 1 epoch, batch 16, LR 2e-4 |
+| Translation | IndicTrans2-200M, 4 beams, batch 4, max length 256 | local mirror, same inference |
+| Reproducibility | seed 42, article-level split, CUDA fp16, MPS fp32 | same |
+
+The article-level split is the important part: no article appears in two splits, so overlapping windows and sentence pairs cannot leak document context.
+
+## 0.4 What is actually committed
+
+| Path | Status | What it contains |
+| --- | --- | --- |
+| `outputs/` | committed | 28 files: 7 inputs × 4 aligned outputs |
+| `reports/` | committed | data-prep summary, evaluation metrics, run summary, training summaries |
+| `data/processed/` | git-ignored | generated JSONL datasets |
+| `models/` | git-ignored | LoRA adapters and local IndicTrans2 mirror |
+| `notebooks/pipeline_demo.ipynb` | committed | executed demo with visible outputs; read-only evidence |
+| `notebooks/colab_end_to_end.ipynb` | committed | 59-cell full build; clones the repo automatically |
+| `scripts/verify_colab_run.py` | committed | fail-fast checks for a full run |
+| `docs/*.pdf` | git-ignored | local study PDFs |
+
+The committed evidence is `outputs/` plus `reports/`. The demo notebook displays those saved results. The full Colab build retrains the two adapters and downloads the gated translation model.
+
+## 0.5 Repository map
+
+```text
+src/
+  constants.py          paths, labels, model ids, window sizes, 1.5GB cap
+  data_prep.py          Wikipedia -> punctuation windows + ordering pairs
+  punctuation/          token dataset, LoRA training, sliding-window prediction
+  ordering/             pair dataset, pair training, Borda/beam/cluster decoding
+  translation/          IndicTrans2 wrapper
+  pipeline.py           end-to-end orchestration
+  evaluate.py           per-stage metrics and reports
+notebooks/
+  colab_end_to_end.ipynb   full self-cloning Colab build
+  pipeline_demo.ipynb      executed local demo
+scripts/
+  colab_setup.sh           dependency installer
+  verify_colab_run.py      full-run verifier
+outputs/                   final sentence and group files
+reports/                   JSON metrics and run summaries
+```
+
+`baseline/` and `lessons/` are historical material. Skip them on the first pass.
+
+## 0.6 Commands worth knowing
+
+```bash
+# Full training recipe (long)
+python -m src.data_prep --num-articles 3000
+python -m src.punctuation.train --epochs 3 --batch-size 8 --learning-rate 3e-4
+python -m src.ordering.train    --epochs 2 --batch-size 8 --learning-rate 2e-4
+python -m src.evaluate
+python -m src.pipeline --strategy borda
+python scripts/verify_colab_run.py
+
+# Fast local check
+python -m src.pipeline --limit 1 --no-translate
+python -m src.evaluate --skip-translation
+```
+
+## 0.7 The scoreboard to remember
+
+| Group | Metric | Value |
+| --- | --- | ---: |
+| Punctuation | Word accuracy | 0.8724 |
+| Punctuation | **Boundary F1** | **0.8842** |
+| Punctuation | `sentence_end` F1 | 0.8838 |
+| Punctuation | `comma` F1 | 0.3161 |
+| Punctuation | `question` / `exclamation` F1 | 0.0 / 0.0 |
+| Ordering | Pair accuracy | 0.6543 |
+| Ordering | **Borda mean Kendall tau** | **0.2007** |
+| Ordering | TF-IDF ablation tau | 0.0631 |
+| Translation | **BLEU** | **34.125** |
+| Translation | **chrF** | **59.686** |
+
+All numbers are from the measured local subset adapters, not the full 25,000/40,000 recipe.
+
+## 0.8 Claims to make and claims to avoid
+
+| Say this | Not this |
+| --- | --- |
+| “Boundary F1 is 0.884; comma F1 is 0.316.” | “Punctuation accuracy is 87%, so it works.” |
+| “Borda tau is 0.201; ordering is the weak stage.” | “The ordering model works well.” |
+| “BLEU 34.1 / chrF 59.7 on 100 IITB pairs.” | “BLEU 34 measures the assignment output.” |
+| “The adapters are 4,000-example subsets.” | “It was trained on the full 25k/40k recipe.” |
+| “The 1.5GB CUDA cap is implemented.” | “The 1.5GB CUDA cap was measured locally.” |
+| “No LLM and no fallback translator are used.” | “An LLM cleans up the hard cases.” |
+
+## 0.9 The 60-second answer
+
+> This is a no-LLM, three-stage Hindi pipeline. Stage 1 uses mBERT+LoRA as a five-class token classifier to restore punctuation and sentence boundaries; boundary F1 is 0.884. Stage 2 uses a second mBERT+LoRA model to answer “does sentence A come before B?”, then Borda turns the pairwise score matrix into one order; pair accuracy is 0.654 but full-document Kendall tau is only 0.201. Stage 3 translates each ordered sentence with IndicTrans2-200M, preserving one-to-one alignment; BLEU is 34.1 and chrF 59.7 on 100 IITB pairs. Training data comes from Hindi Wikipedia by hiding punctuation and using consecutive/reversed sentence pairs, with article-level splits. Models load sequentially to respect the 1.5GB CUDA budget. The main weaknesses are global ordering, commas, rare punctuation, and dialogue.
+
+## 0.10 How to use the rest of this guide
 
 Three rules:
 
 1. **Story before detail.** If you cannot explain the three stages in 60 seconds, do not start memorising hyperparameters.
 2. **One stage at a time.** Learn punctuation, then ordering, then translation. Do not jump between them.
-3. **Know why, not every number.** Memorise a small scoreboard. Understand what each score proves and what it does not.
+3. **Know why, not every number.** Memorise the small scoreboard. Understand what each score proves and what it does not.
+
+| Document | Job | When to read it |
+| --- | --- | --- |
+| **this guide** | Complete brief + priority map | Read this first; it is enough for the form and most questions |
+| `assblasternlp.pdf` | Beginner study guide | Optional, for a slower from-scratch explanation |
+| `holy-approach.pdf` | Detailed design dossier | Optional, for a viva or design defence |
 
 <div class="callout">
 
@@ -618,21 +767,23 @@ If the form accepts one Colab link, use the **full build**, which clones the rep
 
 ## 13.3 Before submitting
 
-- [ ] Commit and push the updated notebooks and README.
-- [ ] Confirm the Colab link opens the updated notebook.
-- [ ] Add a clone-if-missing cell, or clone the repo manually in Colab.
-- [ ] Accept the IndicTrans2 licence and authenticate if the notebook is run.
-- [ ] If outputs are required, submit the executed demo or run the full notebook and save outputs.
+- [x] Commit and push the updated notebooks, guides, and README.
+- [x] Confirm the Colab links point at `main`.
+- [x] The full notebook clones the repo if missing and pulls the latest `main` if it already exists.
+- [x] The executed demo keeps its saved outputs visible.
+- [ ] Optional: accept the IndicTrans2 licence and add an `HF_TOKEN` Colab secret if you want to run translation.
+- [ ] If the form requires outputs, attach the executed demo or run the full notebook and save the outputs.
 - [ ] Keep PDFs local; they are git-ignored.
 
 ## 13.4 Which PDF should you read?
 
 | Situation | Read |
 | --- | --- |
-| First time learning the project | **`assblasternlp.pdf`** |
-| Preparing for a viva or design defence | **`holy-approach.pdf`**, especially sections 0–8, 11, 13–15 |
-| Only 30 minutes | This guide, P0–P3 |
-| Only 2 hours | This guide + `assblasternlp.pdf` stage sections |
+| Only enough time for one document | **This guide** — it now contains the complete brief |
+| First time learning the project slowly | `assblasternlp.pdf` |
+| Preparing for a viva or design defence | `holy-approach.pdf`, especially sections 0–8, 11, 13–15 |
+| Only 30 minutes | This guide, section 0 + P0–P3 |
+| Only 2 hours | This guide + the stage sections of `assblasternlp.pdf` |
 | Need every rejected alternative | `holy-approach.pdf`, section 13 |
 
-The short answer: **this guide first, `assblasternlp.pdf` second, `holy-approach.pdf` selectively.** You do not need to read both long PDFs cover to cover.
+The short answer: **this guide is the self-contained brief; the other two PDFs are optional depth.** You do not need to read both long PDFs cover to cover.

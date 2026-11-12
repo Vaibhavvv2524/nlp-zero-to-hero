@@ -227,7 +227,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
 <div class="toc">
 <ul>
-<li><a href="#0-how-to-use-this-guide">0. How to use this guide</a></li>
+<li><a href="#0-the-whole-project-in-brief">0. The whole project in brief</a></li>
 <li><a href="#1-p0-the-story-you-must-know-cold">1. P0: the story you must know cold</a></li>
 <li><a href="#2-the-priority-ladder">2. The priority ladder</a></li>
 <li><a href="#3-p1-stage-1-punctuation">3. P1: Stage 1 — punctuation</a></li>
@@ -243,11 +243,397 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <li><a href="#13-form-ready-answers">13. Form-ready answers</a></li>
 </ul>
 </div>
-<h1 id="0-how-to-use-this-guide">0. How to use this guide</h1>
+<h1 id="0-the-whole-project-in-brief">0. The whole project in brief</h1>
 <div class="lead">
-<p><strong>This is the map, not the manual.</strong> Read it first. It tells you what to learn, in what order, what to skip, and how to stop studying when you know enough.</p>
+<p><strong>This guide is self-contained.</strong> It gives you the complete project in brief: the problem, input/output contract, three models, data recipe, measured scores, what is actually committed, the code map, the commands, and the limitations. The two long PDFs are optional depth, not required reading.</p>
 </div>
-<p>The project has two long PDFs:</p>
+<h2 id="01-problem-input-and-output">0.1 Problem, input, and output</h2>
+<p>You receive a Hindi article as a flat list of words. The assignment has removed punctuation, shuffled the sentences, and may have inserted the placeholder token <code>NULL</code>.</p>
+<p>The pipeline must produce:</p>
+<ol>
+<li>the same Hindi words, with punctuation and sentence boundaries restored;</li>
+<li>the sentences in a plausible original order;</li>
+<li>an English translation of each ordered sentence;</li>
+<li>Hindi and English output grouped five sentences at a time.</li>
+</ol>
+<p>The input contract is deliberately small:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Encoding</td>
+<td>UTF-8</td>
+</tr>
+<tr>
+<td>Separator</td>
+<td>whitespace</td>
+</tr>
+<tr>
+<td>Placeholder</td>
+<td>exact token <code>NULL</code>, removed before Stage 1</td>
+</tr>
+<tr>
+<td>Punctuation</td>
+<td>none expected</td>
+</tr>
+<tr>
+<td>Sentence order</td>
+<td>shuffled</td>
+</tr>
+<tr>
+<td>Word rewriting</td>
+<td>not allowed in Stage 1</td>
+</tr>
+</tbody>
+</table>
+<p>For each input stem, the pipeline writes four aligned files:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Contents</th>
+<th>Alignment rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sample-N.sentences_hi.txt</code></td>
+<td>ordered Hindi sentences, one per line</td>
+<td>line <em>i</em> is Hindi sentence <em>i</em></td>
+</tr>
+<tr>
+<td><code>sample-N.groups_hi.txt</code></td>
+<td>the same Hindi sentences, five per line</td>
+<td>group <code>g</code> contains sentences <code>5g+1</code> to <code>5g+5</code></td>
+</tr>
+<tr>
+<td><code>sample-N.sentences_en.txt</code></td>
+<td>English translations, one per line</td>
+<td>line <em>i</em> translates Hindi line <em>i</em></td>
+</tr>
+<tr>
+<td><code>sample-N.groups_en.txt</code></td>
+<td>the same English translations, five per line</td>
+<td>same five-sentence grouping</td>
+</tr>
+</tbody>
+</table>
+<p>The group count is always <code>ceil(n / 5)</code>; the last group may be shorter.</p>
+<h2 id="02-the-three-stages-at-a-glance">0.2 The three stages at a glance</h2>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Job</th>
+<th>Model and method</th>
+<th>Output</th>
+<th>Headline result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Punctuation</strong></td>
+<td>Decide what follows each word</td>
+<td>mBERT + LoRA, 5-class token classification</td>
+<td>one label per word; rebuilt Hindi sentences</td>
+<td>boundary F1 <strong>0.8842</strong></td>
+</tr>
+<tr>
+<td><strong>2. Ordering</strong></td>
+<td>Decide which sentence comes first</td>
+<td>mBERT + LoRA, pairwise “A before B” classifier + Borda decoder</td>
+<td>one permutation of the sentences</td>
+<td>pair accuracy <strong>0.6543</strong>; Borda tau <strong>0.2007</strong></td>
+</tr>
+<tr>
+<td><strong>3. Translation</strong></td>
+<td>Turn each ordered Hindi sentence into English</td>
+<td>IndicTrans2-200M, sentence-level beam search</td>
+<td>aligned English sentences</td>
+<td>BLEU <strong>34.125</strong>; chrF <strong>59.686</strong> on 100 IITB pairs</td>
+</tr>
+</tbody>
+</table>
+<p>The stages are separate because there are no aligned triplets of <code>(unpunctuated shuffled Hindi, punctuated ordered Hindi, English)</code>, and because one large model would violate the no-LLM and 1.5GB constraints. Separate stages also give separate metrics and failure isolation.</p>
+<h2 id="03-data-and-training-recipe">0.3 Data and training recipe</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Full recipe</th>
+<th>Measured local run</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source</td>
+<td>Hindi Wikipedia (<code>wikimedia/wikipedia</code>, <code>20231101.hi</code>)</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Articles</td>
+<td>3,000, split 2,700 / 150 / 150 by article</td>
+<td>same split</td>
+</tr>
+<tr>
+<td>Punctuation training</td>
+<td>25,000 windows</td>
+<td>4,000 windows</td>
+</tr>
+<tr>
+<td>Ordering training</td>
+<td>40,000 pairs</td>
+<td>4,000 pairs</td>
+</tr>
+<tr>
+<td>Punctuation window</td>
+<td>target 64 words, stride 40, bounds 32–96</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Sentence filter</td>
+<td>5–40 words</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Ordering pairs</td>
+<td>consecutive sentences plus reversed pairs</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Shared backbone</td>
+<td><code>bert-base-multilingual-cased</code></td>
+<td>same</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>rank 16, alpha 32, dropout 0.1, <code>query</code>/<code>value</code>, classifier saved</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Punctuation training</td>
+<td>default 3 epochs, batch 8, LR 3e-4</td>
+<td>2 epochs, batch 16, LR 3e-4</td>
+</tr>
+<tr>
+<td>Ordering training</td>
+<td>default 2 epochs, batch 8, LR 2e-4</td>
+<td>1 epoch, batch 16, LR 2e-4</td>
+</tr>
+<tr>
+<td>Translation</td>
+<td>IndicTrans2-200M, 4 beams, batch 4, max length 256</td>
+<td>local mirror, same inference</td>
+</tr>
+<tr>
+<td>Reproducibility</td>
+<td>seed 42, article-level split, CUDA fp16, MPS fp32</td>
+<td>same</td>
+</tr>
+</tbody>
+</table>
+<p>The article-level split is the important part: no article appears in two splits, so overlapping windows and sentence pairs cannot leak document context.</p>
+<h2 id="04-what-is-actually-committed">0.4 What is actually committed</h2>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Status</th>
+<th>What it contains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>outputs/</code></td>
+<td>committed</td>
+<td>28 files: 7 inputs × 4 aligned outputs</td>
+</tr>
+<tr>
+<td><code>reports/</code></td>
+<td>committed</td>
+<td>data-prep summary, evaluation metrics, run summary, training summaries</td>
+</tr>
+<tr>
+<td><code>data/processed/</code></td>
+<td>git-ignored</td>
+<td>generated JSONL datasets</td>
+</tr>
+<tr>
+<td><code>models/</code></td>
+<td>git-ignored</td>
+<td>LoRA adapters and local IndicTrans2 mirror</td>
+</tr>
+<tr>
+<td><code>notebooks/pipeline_demo.ipynb</code></td>
+<td>committed</td>
+<td>executed demo with visible outputs; read-only evidence</td>
+</tr>
+<tr>
+<td><code>notebooks/colab_end_to_end.ipynb</code></td>
+<td>committed</td>
+<td>59-cell full build; clones the repo automatically</td>
+</tr>
+<tr>
+<td><code>scripts/verify_colab_run.py</code></td>
+<td>committed</td>
+<td>fail-fast checks for a full run</td>
+</tr>
+<tr>
+<td><code>docs/*.pdf</code></td>
+<td>git-ignored</td>
+<td>local study PDFs</td>
+</tr>
+</tbody>
+</table>
+<p>The committed evidence is <code>outputs/</code> plus <code>reports/</code>. The demo notebook displays those saved results. The full Colab build retrains the two adapters and downloads the gated translation model.</p>
+<h2 id="05-repository-map">0.5 Repository map</h2>
+<div class="codehilite"><pre><span></span><code>src/
+  constants.py          paths, labels, model ids, window sizes, 1.5GB cap
+  data_prep.py          Wikipedia -&gt; punctuation windows + ordering pairs
+  punctuation/          token dataset, LoRA training, sliding-window prediction
+  ordering/             pair dataset, pair training, Borda/beam/cluster decoding
+  translation/          IndicTrans2 wrapper
+  pipeline.py           end-to-end orchestration
+  evaluate.py           per-stage metrics and reports
+notebooks/
+  colab_end_to_end.ipynb   full self-cloning Colab build
+  pipeline_demo.ipynb      executed local demo
+scripts/
+  colab_setup.sh           dependency installer
+  verify_colab_run.py      full-run verifier
+outputs/                   final sentence and group files
+reports/                   JSON metrics and run summaries
+</code></pre></div>
+
+<p><code>baseline/</code> and <code>lessons/</code> are historical material. Skip them on the first pass.</p>
+<h2 id="06-commands-worth-knowing">0.6 Commands worth knowing</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Full training recipe (long)</span>
+python<span class="w"> </span>-m<span class="w"> </span>src.data_prep<span class="w"> </span>--num-articles<span class="w"> </span><span class="m">3000</span>
+python<span class="w"> </span>-m<span class="w"> </span>src.punctuation.train<span class="w"> </span>--epochs<span class="w"> </span><span class="m">3</span><span class="w"> </span>--batch-size<span class="w"> </span><span class="m">8</span><span class="w"> </span>--learning-rate<span class="w"> </span>3e-4
+python<span class="w"> </span>-m<span class="w"> </span>src.ordering.train<span class="w">    </span>--epochs<span class="w"> </span><span class="m">2</span><span class="w"> </span>--batch-size<span class="w"> </span><span class="m">8</span><span class="w"> </span>--learning-rate<span class="w"> </span>2e-4
+python<span class="w"> </span>-m<span class="w"> </span>src.evaluate
+python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--strategy<span class="w"> </span>borda
+python<span class="w"> </span>scripts/verify_colab_run.py
+
+<span class="c1"># Fast local check</span>
+python<span class="w"> </span>-m<span class="w"> </span>src.pipeline<span class="w"> </span>--limit<span class="w"> </span><span class="m">1</span><span class="w"> </span>--no-translate
+python<span class="w"> </span>-m<span class="w"> </span>src.evaluate<span class="w"> </span>--skip-translation
+</code></pre></div>
+
+<h2 id="07-the-scoreboard-to-remember">0.7 The scoreboard to remember</h2>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Metric</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Punctuation</td>
+<td>Word accuracy</td>
+<td style="text-align: right;">0.8724</td>
+</tr>
+<tr>
+<td>Punctuation</td>
+<td><strong>Boundary F1</strong></td>
+<td style="text-align: right;"><strong>0.8842</strong></td>
+</tr>
+<tr>
+<td>Punctuation</td>
+<td><code>sentence_end</code> F1</td>
+<td style="text-align: right;">0.8838</td>
+</tr>
+<tr>
+<td>Punctuation</td>
+<td><code>comma</code> F1</td>
+<td style="text-align: right;">0.3161</td>
+</tr>
+<tr>
+<td>Punctuation</td>
+<td><code>question</code> / <code>exclamation</code> F1</td>
+<td style="text-align: right;">0.0 / 0.0</td>
+</tr>
+<tr>
+<td>Ordering</td>
+<td>Pair accuracy</td>
+<td style="text-align: right;">0.6543</td>
+</tr>
+<tr>
+<td>Ordering</td>
+<td><strong>Borda mean Kendall tau</strong></td>
+<td style="text-align: right;"><strong>0.2007</strong></td>
+</tr>
+<tr>
+<td>Ordering</td>
+<td>TF-IDF ablation tau</td>
+<td style="text-align: right;">0.0631</td>
+</tr>
+<tr>
+<td>Translation</td>
+<td><strong>BLEU</strong></td>
+<td style="text-align: right;"><strong>34.125</strong></td>
+</tr>
+<tr>
+<td>Translation</td>
+<td><strong>chrF</strong></td>
+<td style="text-align: right;"><strong>59.686</strong></td>
+</tr>
+</tbody>
+</table>
+<p>All numbers are from the measured local subset adapters, not the full 25,000/40,000 recipe.</p>
+<h2 id="08-claims-to-make-and-claims-to-avoid">0.8 Claims to make and claims to avoid</h2>
+<table>
+<thead>
+<tr>
+<th>Say this</th>
+<th>Not this</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“Boundary F1 is 0.884; comma F1 is 0.316.”</td>
+<td>“Punctuation accuracy is 87%, so it works.”</td>
+</tr>
+<tr>
+<td>“Borda tau is 0.201; ordering is the weak stage.”</td>
+<td>“The ordering model works well.”</td>
+</tr>
+<tr>
+<td>“BLEU 34.1 / chrF 59.7 on 100 IITB pairs.”</td>
+<td>“BLEU 34 measures the assignment output.”</td>
+</tr>
+<tr>
+<td>“The adapters are 4,000-example subsets.”</td>
+<td>“It was trained on the full 25k/40k recipe.”</td>
+</tr>
+<tr>
+<td>“The 1.5GB CUDA cap is implemented.”</td>
+<td>“The 1.5GB CUDA cap was measured locally.”</td>
+</tr>
+<tr>
+<td>“No LLM and no fallback translator are used.”</td>
+<td>“An LLM cleans up the hard cases.”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="09-the-60-second-answer">0.9 The 60-second answer</h2>
+<blockquote>
+<p>This is a no-LLM, three-stage Hindi pipeline. Stage 1 uses mBERT+LoRA as a five-class token classifier to restore punctuation and sentence boundaries; boundary F1 is 0.884. Stage 2 uses a second mBERT+LoRA model to answer “does sentence A come before B?”, then Borda turns the pairwise score matrix into one order; pair accuracy is 0.654 but full-document Kendall tau is only 0.201. Stage 3 translates each ordered sentence with IndicTrans2-200M, preserving one-to-one alignment; BLEU is 34.1 and chrF 59.7 on 100 IITB pairs. Training data comes from Hindi Wikipedia by hiding punctuation and using consecutive/reversed sentence pairs, with article-level splits. Models load sequentially to respect the 1.5GB CUDA budget. The main weaknesses are global ordering, commas, rare punctuation, and dialogue.</p>
+</blockquote>
+<h2 id="010-how-to-use-the-rest-of-this-guide">0.10 How to use the rest of this guide</h2>
+<p>Three rules:</p>
+<ol>
+<li><strong>Story before detail.</strong> If you cannot explain the three stages in 60 seconds, do not start memorising hyperparameters.</li>
+<li><strong>One stage at a time.</strong> Learn punctuation, then ordering, then translation. Do not jump between them.</li>
+<li><strong>Know why, not every number.</strong> Memorise the small scoreboard. Understand what each score proves and what it does not.</li>
+</ol>
 <table>
 <thead>
 <tr>
@@ -258,28 +644,22 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </thead>
 <tbody>
 <tr>
+<td><strong>this guide</strong></td>
+<td>Complete brief + priority map</td>
+<td>Read this first; it is enough for the form and most questions</td>
+</tr>
+<tr>
 <td><code>assblasternlp.pdf</code></td>
 <td>Beginner study guide</td>
-<td>First, to learn the project from scratch</td>
+<td>Optional, for a slower from-scratch explanation</td>
 </tr>
 <tr>
 <td><code>holy-approach.pdf</code></td>
 <td>Detailed design dossier</td>
-<td>Later, for depth, viva, or design defence</td>
-</tr>
-<tr>
-<td><strong>this guide</strong></td>
-<td>Priority map</td>
-<td>Before both, and again before the form/presentation</td>
+<td>Optional, for a viva or design defence</td>
 </tr>
 </tbody>
 </table>
-<p>Three rules:</p>
-<ol>
-<li><strong>Story before detail.</strong> If you cannot explain the three stages in 60 seconds, do not start memorising hyperparameters.</li>
-<li><strong>One stage at a time.</strong> Learn punctuation, then ordering, then translation. Do not jump between them.</li>
-<li><strong>Know why, not every number.</strong> Memorise a small scoreboard. Understand what each score proves and what it does not.</li>
-</ol>
 <div class="callout">
 <p><strong>The 30-second version.</strong> A no-LLM, three-stage Hindi pipeline. mBERT+LoRA restores punctuation and sentence boundaries. A pairwise mBERT classifier plus Borda decoding orders sentences. IndicTrans2 translates each ordered sentence. Models load one at a time to respect the 1.5GB CUDA budget. Sentence alignment is preserved end to end.</p>
 </div>
@@ -1501,11 +1881,12 @@ python<span class="w"> </span>scripts/verify_colab_run.py
 </blockquote>
 <h2 id="133-before-submitting">13.3 Before submitting</h2>
 <ul>
-<li>[ ] Commit and push the updated notebooks and README.</li>
-<li>[ ] Confirm the Colab link opens the updated notebook.</li>
-<li>[ ] Add a clone-if-missing cell, or clone the repo manually in Colab.</li>
-<li>[ ] Accept the IndicTrans2 licence and authenticate if the notebook is run.</li>
-<li>[ ] If outputs are required, submit the executed demo or run the full notebook and save outputs.</li>
+<li>[x] Commit and push the updated notebooks, guides, and README.</li>
+<li>[x] Confirm the Colab links point at <code>main</code>.</li>
+<li>[x] The full notebook clones the repo if missing and pulls the latest <code>main</code> if it already exists.</li>
+<li>[x] The executed demo keeps its saved outputs visible.</li>
+<li>[ ] Optional: accept the IndicTrans2 licence and add an <code>HF_TOKEN</code> Colab secret if you want to run translation.</li>
+<li>[ ] If the form requires outputs, attach the executed demo or run the full notebook and save the outputs.</li>
 <li>[ ] Keep PDFs local; they are git-ignored.</li>
 </ul>
 <h2 id="134-which-pdf-should-you-read">13.4 Which PDF should you read?</h2>
@@ -1518,20 +1899,24 @@ python<span class="w"> </span>scripts/verify_colab_run.py
 </thead>
 <tbody>
 <tr>
-<td>First time learning the project</td>
-<td><strong><code>assblasternlp.pdf</code></strong></td>
+<td>Only enough time for one document</td>
+<td><strong>This guide</strong> — it now contains the complete brief</td>
+</tr>
+<tr>
+<td>First time learning the project slowly</td>
+<td><code>assblasternlp.pdf</code></td>
 </tr>
 <tr>
 <td>Preparing for a viva or design defence</td>
-<td><strong><code>holy-approach.pdf</code></strong>, especially sections 0–8, 11, 13–15</td>
+<td><code>holy-approach.pdf</code>, especially sections 0–8, 11, 13–15</td>
 </tr>
 <tr>
 <td>Only 30 minutes</td>
-<td>This guide, P0–P3</td>
+<td>This guide, section 0 + P0–P3</td>
 </tr>
 <tr>
 <td>Only 2 hours</td>
-<td>This guide + <code>assblasternlp.pdf</code> stage sections</td>
+<td>This guide + the stage sections of <code>assblasternlp.pdf</code></td>
 </tr>
 <tr>
 <td>Need every rejected alternative</td>
@@ -1539,6 +1924,6 @@ python<span class="w"> </span>scripts/verify_colab_run.py
 </tr>
 </tbody>
 </table>
-<p>The short answer: <strong>this guide first, <code>assblasternlp.pdf</code> second, <code>holy-approach.pdf</code> selectively.</strong> You do not need to read both long PDFs cover to cover.</p>
+<p>The short answer: <strong>this guide is the self-contained brief; the other two PDFs are optional depth.</strong> You do not need to read both long PDFs cover to cover.</p>
 </body>
 </html>
