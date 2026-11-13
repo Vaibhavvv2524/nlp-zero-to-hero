@@ -27,6 +27,26 @@ from ..constants import (
 )
 from ..utils import free_memory, get_device, gpu_memory, limit_gpu_memory
 
+_PRECOMPOSED_NUKTA = {
+    "\u0958": "\u0915\u093c",
+    "\u0959": "\u0916\u093c",
+    "\u095a": "\u0917\u093c",
+    "\u095b": "\u091c\u093c",
+    "\u095c": "\u0921\u093c",
+    "\u095d": "\u0922\u093c",
+    "\u095e": "\u092b\u093c",
+    "\u095f": "\u092f\u093c",
+}
+
+
+def _decompose_nukta(text):
+    """Split precomposed nukta letters into base letter + nukta sign.
+
+    IndicTrans2 otherwise decodes these letters as literal ``\\ u093C``
+    artifacts in the English output.
+    """
+    return "".join(_PRECOMPOSED_NUKTA.get(char, char) for char in text)
+
 
 def _import_indic_processor():
     """Import ``IndicProcessor`` across the transformers 4.x / 5.x split.
@@ -100,7 +120,7 @@ class IndicTrans2Translator:
         """Translate a list of Hindi strings, preserving order and empty items."""
         import torch
 
-        texts = list(texts)
+        texts = [_decompose_nukta(text) for text in texts]
         # Keep empty strings as empty outputs so the result list still lines up
         # with the caller's sentence indices.
         indexed = [
